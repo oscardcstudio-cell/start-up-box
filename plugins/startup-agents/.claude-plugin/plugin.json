@@ -1,0 +1,7 @@
+{
+  "name": "startup-agents",
+  "displayName": "Startup Agents",
+  "description": "9 méta-agents spécialisés pour créer une startup : stratégie, marketing, pricing, création DA, UX/conversion, UI/UX, rédaction, philosophie, gamification.",
+  "version": "1.0.0",
+  "agents": "./agents"
+}

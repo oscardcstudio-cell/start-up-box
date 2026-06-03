@@ -1,0 +1,44 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "start-up-box",
+  "description": "Toolkit IA open-source pour créer une startup de A à Z depuis Claude Code. 9 agents spécialisés + skills build-company et create-company.",
+  "owner": {
+    "name": "oscardcstudio-cell",
+    "email": "oscardcstudio@gmail.com"
+  },
+  "metadata": {
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "startup-agents",
+      "source": "./plugins/startup-agents",
+      "displayName": "Startup Agents",
+      "description": "9 méta-agents spécialisés : stratégie, marketing, pricing, création DA, UX/conversion, UI/UX, rédaction, philosophie, gamification.",
+      "version": "1.0.0",
+      "author": {
+        "name": "oscardcstudio-cell"
+      },
+      "homepage": "https://github.com/oscardcstudio-cell/start-up-box",
+      "repository": "https://github.com/oscardcstudio-cell/start-up-box",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": ["startup", "agents", "strategy", "marketing", "pricing", "brand"]
+    },
+    {
+      "name": "startup-skills",
+      "source": "./plugins/startup-skills",
+      "displayName": "Startup Skills",
+      "description": "Skills /build-company (orchestrateur 7 phases) et /create-company (scaffold dossier company/).",
+      "version": "1.0.0",
+      "author": {
+        "name": "oscardcstudio-cell"
+      },
+      "homepage": "https://github.com/oscardcstudio-cell/start-up-box",
+      "repository": "https://github.com/oscardcstudio-cell/start-up-box",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": ["startup", "build-company", "create-company", "scaffold"]
+    }
+  ]
+}

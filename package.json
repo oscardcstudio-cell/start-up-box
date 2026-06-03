@@ -1,0 +1,26 @@
+{
+  "name": "start-up-box",
+  "version": "1.0.0",
+  "description": "Toolkit IA open-source pour créer une startup de A à Z depuis Claude Code",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oscardcstudio-cell/start-up-box.git"
+  },
+  "scripts": {
+    "drain": "node scripts/drain-notes.js"
+  },
+  "devDependencies": {
+    "notes-backlog": "github:oscardcstudio-cell/notes-backlog"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "startup",
+    "claude-code",
+    "ai-agents",
+    "build-company",
+    "business-toolkit"
+  ]
+}

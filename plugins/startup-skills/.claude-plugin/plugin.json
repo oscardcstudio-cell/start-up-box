@@ -1,0 +1,7 @@
+{
+  "name": "startup-skills",
+  "displayName": "Startup Skills",
+  "description": "Skills /build-company et /create-company pour créer et piloter une startup phase par phase.",
+  "version": "1.0.0",
+  "skills": "./skills"
+}

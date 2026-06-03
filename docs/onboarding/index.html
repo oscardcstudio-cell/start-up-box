@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>start-up-box — Installe ton assistant startup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F8FAFC;
+      --surface: #FFFFFF;
+      --fg: #1E293B;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --muted-bg: #EAEFF3;
+      --accent: #2563EB;
+      --accent-light: #EFF6FF;
+      --accent-mid: #DBEAFE;
+      --font-body: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      --radius: 8px;
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 0 4rem;
+    }
+    .hero-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #16A34A;
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: 100px;
+      padding: 0.25rem 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      background: #16A34A;
+      border-radius: 50%;
+    }
+    .hero-actions {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+      align-items: flex-start;
+    }
+    .hero-cta {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+    .hero-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-link {
+      font-size: 0.875rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .hero-link:hover { text-decoration: underline; }
+    .hero-link-sep { color: var(--border); }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--fg);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-subtitle {
+      font-size: 1.0625rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 42ch;
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .hero-visual .line-label { color: var(--accent); font-weight: 500; }
+    .hero-visual .line-file { color: #16A34A; }
+    .hero-visual .line-arrow { color: var(--border); }
+    .hero-visual .line-comment { color: #94A3B8; }
+
+    /* ── STRIP ── */
+    .strip {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+    .strip-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .strip-item {
+      padding: 0.75rem 1.5rem;
+      border-right: 1px solid var(--border);
+    }
+    .strip-item:first-child { padding-left: 0; }
+    .strip-item:last-child { border-right: none; }
+    .strip-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .strip-label {
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+    .section:last-of-type { border-bottom: none; }
+    .section-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .section-lead {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 55ch;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── AGENTS GRID ── */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .agent-card {
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+    }
+    .agent-name {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+    .agent-role {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.25rem;
+    }
+    .agent-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── FLOW ── */
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .flow-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1.5rem;
+      position: relative;
+    }
+    .flow-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 48px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .flow-num {
+      width: 48px; height: 48px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--fg);
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .flow-step.active .flow-num {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+    .flow-content {
+      padding: 0.75rem 0 2.5rem;
+    }
+    .flow-content-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.375rem;
+    }
+    .flow-content-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .flow-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.375rem;
+      margin-top: 0.625rem;
+    }
+    .flow-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid var(--accent-mid);
+      border-radius: 4px;
+      padding: 0.125rem 0.5rem;
+    }
+
+    /* ── CTA ONBOARDING ── */
+    .section-cta { background: var(--surface); }
+    .onboarding-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .onboarding-step {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 2rem 2rem 2rem 1.5rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .onboarding-step:last-child { border-bottom: none; }
+    .onboarding-step--highlight { background: var(--accent-light); }
+    .onboarding-num {
+      width: 48px; height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--muted);
+      flex-shrink: 0;
+      margin-top: 2px;
+      background: var(--bg);
+    }
+    .onboarding-num--accent {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+    .onboarding-title {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.375rem;
+    }
+    .onboarding-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+      max-width: 52ch;
+    }
+    .onboarding-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 150ms var(--ease-out), border-color 150ms, transform 100ms;
+    }
+    .onboarding-btn:active { transform: scale(0.97); }
+    .onboarding-btn--outline {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--fg);
+    }
+    .onboarding-btn--outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    .onboarding-btn--primary {
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      color: white;
+    }
+    .onboarding-btn--primary:hover { background: #1D4ED8; border-color: #1D4ED8; }
+    .onboarding-btn--primary.copied { background: #16A34A; border-color: #16A34A; }
+    .onboarding-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      background: var(--muted-bg);
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+    }
+    footer p { font-size: 0.8125rem; color: var(--muted); }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-visual { display: none; }
+      .strip-inner { grid-template-columns: 1fr; gap: 0; }
+      .strip-item { border-right: none; border-bottom: 1px solid var(--border); padding: 0.75rem 0; }
+      .strip-item:last-child { border-bottom: none; }
+      .agents-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 3rem 0 2.5rem; }
+      .section { padding: 2.5rem 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Open-source — MIT
+        </div>
+        <h1>Crée ta startup<br>avec <span>l'IA.</span></h1>
+        <p class="hero-subtitle">9 agents spécialisés + un orchestrateur 7 phases. Tu décides, l'IA exécute. Un prompt et tu démarres.</p>
+        <div class="hero-actions">
+          <button class="onboarding-btn onboarding-btn--primary hero-cta" id="copy-btn-hero" onclick="copyPrompt('copy-btn-hero')">
+            Copier le prompt d'installation
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="hero-links">
+            <a href="https://claude.ai/download" target="_blank" rel="noopener" class="hero-link">Télécharger Claude Code</a>
+            <span class="hero-link-sep">·</span>
+            <a href="https://claude.ai/upgrade" target="_blank" rel="noopener" class="hero-link">Abonnement Max</a>
+            <span class="hero-link-sep">·</span>
+            <a href="https://github.com/oscardcstudio-cell/start-up-box" target="_blank" rel="noopener" class="hero-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual" role="img" aria-label="Exemple d'installation start-up-box">
+        <div><span class="line-label">$ claude</span></div>
+        <div class="line-comment">// installation en cours...</div>
+        <div>&nbsp;</div>
+        <div><span class="line-file">✓</span> startup-agents <span class="line-comment">— 9 agents installés</span></div>
+        <div><span class="line-file">✓</span> build-company <span class="line-comment">— skill installé</span></div>
+        <div><span class="line-file">✓</span> create-company <span class="line-comment">— skill installé</span></div>
+        <div>&nbsp;</div>
+        <div><span class="line-label">&gt;</span> Installation terminée ✓</div>
+        <div><span class="line-label">&gt;</span> Lance /build-company</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-inner">
+      <div class="strip-item">
+        <span class="strip-number">9</span>
+        <span class="strip-label">agents spécialisés inclus</span>
+      </div>
+      <div class="strip-item">
+        <span class="strip-number">7</span>
+        <span class="strip-label">phases avec gate humaine</span>
+      </div>
+      <div class="strip-item">
+        <span class="strip-number">1</span>
+        <span class="strip-label">prompt pour tout installer</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1 : Les agents -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Ce qui est inclus</p>
+      <h2 class="section-title">9 agents, chacun dans son domaine</h2>
+      <p class="section-lead">Chaque agent est un spécialiste. L'orchestrateur `/build-company` les appelle dans le bon ordre, à la bonne phase.</p>
+
+      <div class="agents-grid">
+        <div class="agent-card">
+          <span class="agent-name">meta-business</span>
+          <div class="agent-role">Stratégie & Finance</div>
+          <div class="agent-desc">Business plan, pitch deck, prévisionnel, subventions, analyse concurrentielle.</div>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">meta-offre-pricing</span>
+          <div class="agent-role">Offre & Pricing</div>
+          <div class="agent-desc">Structurer l'offre, fixer le prix, choisir freemium vs one-shot vs credits.</div>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">meta-marketing</span>
+          <div class="agent-role">Marketing & Com</div>
+          <div class="agent-desc">Plan marketing, calendrier éditorial, copy, posts, emails, SEO.</div>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">meta-creation</span>
+          <div class="agent-role">Direction Artistique</div>
+          <div class="agent-desc">Identité visuelle, deck, charte graphique, direction artistique.</div>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">meta-redacteur</span>
+          <div class="agent-role">Rédaction</div>
+          <div class="agent-desc">Textes humains, vivants, anti-IA. Copy landing, emails, manifesto, taglines.</div>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">meta-ux-conversion</span>
+          <div class="agent-role">UX & Conversion</div>
+          <div class="agent-desc">Landing pages, funnels, pricing page, onboarding freemium.</div>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">meta-ui-ux</span>
+          <div class="agent-role">Dashboards & UI</div>
+          <div class="agent-desc">Interfaces internes, dashboards, design system (Tufte/Nielsen/WCAG).</div>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">meta-philosophe</span>
+          <div class="agent-role">Validation philo</div>
+          <div class="agent-desc">Vérifie citations, concepts, cohérence de courant. Garde-fou intellectuel.</div>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">meta-gamification</span>
+          <div class="agent-role">Engagement produit</div>
+          <div class="agent-desc">Gamification web/produit. Boucles d'engagement, feel, progression.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 : Les 7 phases -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Le déroulé</p>
+      <h2 class="section-title">7 phases, une gate à chaque étape</h2>
+      <p class="section-lead">L'IA exécute, toi tu valides. On ne passe pas à la phase suivante sans ton feu vert.</p>
+
+      <div class="flow">
+        <div class="flow-step active">
+          <div class="flow-num">0</div>
+          <div class="flow-content">
+            <div class="flow-content-title">Cadrage — Formuler le problème</div>
+            <div class="flow-content-desc">On écrit l'hypothèse de problème et la cible pressentie. Pas encore de solution.</div>
+            <div class="flow-tags"><span class="flow-tag">meta-business</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <div class="flow-content">
+            <div class="flow-content-title">Validation — Confirmer par du signal externe</div>
+            <div class="flow-content-desc">Interviews, fake-door, pré-inscriptions. On ne passe pas sans signal réel.</div>
+            <div class="flow-tags"><span class="flow-tag">meta-business</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <div class="flow-content">
+            <div class="flow-content-title">Stratégie — Modèle économique + North Star</div>
+            <div class="flow-content-desc">Business model cohérent, unit economics, North Star Metric définie.</div>
+            <div class="flow-tags"><span class="flow-tag">meta-business</span><span class="flow-tag">meta-offre-pricing</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <div class="flow-content">
+            <div class="flow-content-title">Marque — Identité, ton, DA</div>
+            <div class="flow-content-desc">Plateforme de marque, guide éditorial, charte graphique, direction artistique.</div>
+            <div class="flow-tags"><span class="flow-tag">meta-creation</span><span class="flow-tag">meta-redacteur</span><span class="flow-tag">meta-philosophe</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">4</div>
+          <div class="flow-content">
+            <div class="flow-content-title">Offre & GTM — Packager et tester</div>
+            <div class="flow-content-desc">Offre packagée, canal prioritaire, landing de test, calendrier éditorial.</div>
+            <div class="flow-tags"><span class="flow-tag">meta-offre-pricing</span><span class="flow-tag">meta-marketing</span><span class="flow-tag">meta-ux-conversion</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">5</div>
+          <div class="flow-content">
+            <div class="flow-content-title">Build — MVP qui mesure l'hypothèse</div>
+            <div class="flow-content-desc">Pas "feature-complete", "hypothèse-testable". Le code vient après la valeur.</div>
+            <div class="flow-tags"><span class="flow-tag">GSD</span><span class="flow-tag">meta-ui-ux</span></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">6</div>
+          <div class="flow-content">
+            <div class="flow-content-title">Lancement — Mise en marché + mesure</div>
+            <div class="flow-content-desc">Campagne, dossier presse, posts, séquences email. Tracking en place avant de lancer.</div>
+            <div class="flow-tags"><span class="flow-tag">meta-marketing</span><span class="flow-tag">meta-redacteur</span><span class="flow-tag">meta-creation</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 : CTA installation -->
+  <section class="section section-cta">
+    <div class="container">
+      <p class="section-label">Démarrage</p>
+      <h2 class="section-title">3 étapes, c'est tout.</h2>
+      <p class="section-lead">Pas besoin de savoir coder. Suis ces 3 étapes dans l'ordre.</p>
+
+      <div class="onboarding-steps">
+
+        <div class="onboarding-step">
+          <div class="onboarding-num">1</div>
+          <div class="onboarding-body">
+            <div class="onboarding-title">Installe Claude Code</div>
+            <div class="onboarding-desc">Claude Code est l'application qui va piloter les agents sur ta machine. Télécharge et installe — comme n'importe quelle app de bureau. Prends l'abonnement Max pour déverrouiller les agents multi-étapes.</div>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+              <a href="https://claude.ai/download" target="_blank" rel="noopener" class="onboarding-btn onboarding-btn--outline">
+                Télécharger Claude Code
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+              <a href="https://claude.ai/upgrade" target="_blank" rel="noopener" class="onboarding-btn onboarding-btn--outline">
+                Abonnement Max
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="onboarding-divider" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+
+        <div class="onboarding-step onboarding-step--highlight">
+          <div class="onboarding-num onboarding-num--accent">2</div>
+          <div class="onboarding-body">
+            <div class="onboarding-title">Colle ce prompt dans Claude Code</div>
+            <div class="onboarding-desc">Ouvre Claude Code dans n'importe quel dossier et colle ce prompt. Il clone le repo, installe les agents et les skills automatiquement. Tu n'as rien d'autre à faire.</div>
+            <button class="onboarding-btn onboarding-btn--primary" id="copy-btn" onclick="copyPrompt('copy-btn')">
+              Copier le prompt d'installation
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+            <div id="install-prompt" hidden>Installe start-up-box sur cette machine. C'est un toolkit IA pour créer une startup de A à Z.
+
+Exécute ces étapes dans l'ordre avec tes outils bash :
+
+1. Clone le repo :
+   git clone https://github.com/oscardcstudio-cell/start-up-box.git ~/.start-up-box
+
+2. Installe les agents :
+   mkdir -p ~/.claude/agents
+   cp ~/.start-up-box/plugins/startup-agents/agents/*.md ~/.claude/agents/
+
+3. Installe les skills :
+   mkdir -p ~/.claude/skills/build-company
+   cp -r ~/.start-up-box/plugins/startup-skills/skills/build-company/. ~/.claude/skills/build-company/
+   mkdir -p ~/.claude/skills/create-company
+   cp -r ~/.start-up-box/plugins/startup-skills/skills/create-company/. ~/.claude/skills/create-company/
+
+4. Vérifie que ces fichiers existent :
+   ~/.claude/agents/meta-business.md
+   ~/.claude/skills/build-company/SKILL.md
+
+5. Dis-moi "Installation terminée ✓" et explique-moi les deux prochaines commandes à lancer.</div>
+          </div>
+        </div>
+
+        <div class="onboarding-divider" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+
+        <div class="onboarding-step">
+          <div class="onboarding-num">3</div>
+          <div class="onboarding-body">
+            <div class="onboarding-title">Lance /build-company</div>
+            <div class="onboarding-desc">Dans le dossier de ton projet, tape <code style="font-family:var(--font-mono);font-size:0.875rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0.125rem 0.375rem;">/create-company</code> puis <code style="font-family:var(--font-mono);font-size:0.875rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0.125rem 0.375rem;">/build-company</code>. Claude pose des questions, écrit dans tes fichiers, et te demande de valider à chaque étape.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>
+        <a href="https://github.com/oscardcstudio-cell/start-up-box" target="_blank" rel="noopener">start-up-box</a>
+        — open-source MIT ·
+        <a href="https://github.com/oscardcstudio-cell/start-up-box/blob/main/INSTALL.md" target="_blank" rel="noopener">INSTALL.md</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const ICON_COPY = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'
+    const ICON_CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>'
+
+    function copyPrompt(btnId) {
+      const text = document.getElementById('install-prompt').textContent.trim()
+      navigator.clipboard.writeText(text).then(() => {
+        ['copy-btn-hero', 'copy-btn'].forEach(id => {
+          const b = document.getElementById(id)
+          if (!b) return
+          const label = id === 'copy-btn-hero' ? 'Copier le prompt d\'installation' : 'Copier le prompt d\'installation'
+          b.innerHTML = 'Copié ! ' + ICON_CHECK
+          b.classList.add('copied')
+          setTimeout(() => { b.innerHTML = label + ' ' + ICON_COPY; b.classList.remove('copied') }, 2500)
+        })
+      })
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# start-up-box — inventaire fichiers critiques pour LLM
+
+## Priorité 1 — architecture
+
+- INSTALL.md : prompt-installeur (le prompt copy-paste unique)
+- .claude-plugin/marketplace.json : marketplace Claude Code officiel
+- plugins/startup-agents/.claude-plugin/plugin.json : manifest agents
+- plugins/startup-skills/.claude-plugin/plugin.json : manifest skills
+
+## Priorité 2 — agents packagés
+
+- plugins/startup-agents/agents/meta-business.md
+- plugins/startup-agents/agents/meta-marketing.md
+- plugins/startup-agents/agents/meta-creation.md
+- plugins/startup-agents/agents/meta-offre-pricing.md
+- plugins/startup-agents/agents/meta-ux-conversion.md
+- plugins/startup-agents/agents/meta-ui-ux.md
+- plugins/startup-agents/agents/meta-redacteur.md
+- plugins/startup-agents/agents/meta-philosophe.md
+- plugins/startup-agents/agents/meta-gamification.md
+
+## Priorité 3 — skills
+
+- plugins/startup-skills/skills/build-company/SKILL.md
+- plugins/startup-skills/skills/create-company/SKILL.md
+
+## Priorité 4 — onboarding
+
+- docs/onboarding/index.html : page d'accueil pour les utilisateurs de la box
