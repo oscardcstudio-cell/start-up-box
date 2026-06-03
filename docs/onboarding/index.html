@@ -381,6 +381,165 @@
       border-bottom: 1px solid var(--border);
     }
 
+    /* ── COMMANDS TABLE ── */
+    .commands-table {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .command-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .command-row:last-child { border-bottom: none; }
+    .command-cell {
+      padding: 1.125rem 1.5rem;
+      border-right: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: flex-start;
+    }
+    .command-code {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .command-desc {
+      padding: 1.125rem 1.5rem;
+    }
+    .command-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.25rem;
+    }
+    .command-text {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── LOOP VISUAL ── */
+    .loop-visual {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .loop-step {
+      background: var(--surface);
+      padding: 1.5rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .loop-step:last-child { border-right: none; }
+    .loop-step-num {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .loop-step-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 0.375rem;
+      line-height: 1.3;
+    }
+    .loop-step-desc {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .loop-step-tag {
+      display: inline-block;
+      margin-top: 0.625rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid var(--accent-mid);
+      border-radius: 4px;
+      padding: 0.125rem 0.5rem;
+    }
+
+    /* ── NOTES MODULE ── */
+    .notes-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .notes-input-demo {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .notes-input-demo .prompt { color: var(--accent); font-weight: 500; }
+    .notes-input-demo .user { color: var(--fg); }
+    .notes-input-demo .result { color: #16A34A; }
+    .notes-output-demo {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .notes-output-header {
+      padding: 0.75rem 1.25rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .notes-bucket {
+      padding: 0.875rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .notes-bucket:last-child { border-bottom: none; }
+    .notes-bucket-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.375rem;
+    }
+    .notes-bucket-item {
+      font-size: 0.8125rem;
+      color: var(--fg);
+      line-height: 1.5;
+      padding: 0.25rem 0;
+    }
+    .notes-bucket-item::before { content: "- "; color: var(--accent); }
+    .notes-bucket-empty { font-size: 0.8125rem; color: var(--muted); font-style: italic; }
+
+    @media (max-width: 768px) {
+      .loop-visual { grid-template-columns: 1fr 1fr; }
+      .notes-demo { grid-template-columns: 1fr; }
+      .command-row { grid-template-columns: 1fr; }
+      .command-cell { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+
     /* ── FOOTER ── */
     footer {
       padding: 2rem 0;
@@ -525,7 +684,75 @@
     </div>
   </section>
 
-  <!-- SECTION 2 : Les 7 phases -->
+  <!-- SECTION 2 : Comment tout s'articule -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Le système</p>
+      <h2 class="section-title">Comment tout s'articule</h2>
+      <p class="section-lead">Une boucle simple : l'orchestrateur lit ton avancement, appelle le bon agent, écrit dans tes fichiers, et te demande de valider avant de passer à la suite.</p>
+
+      <div class="loop-visual">
+        <div class="loop-step">
+          <div class="loop-step-num">Étape 1</div>
+          <div class="loop-step-title">Tu lances /build-company</div>
+          <div class="loop-step-desc">L'orchestrateur lit le dossier <code style="font-family:var(--font-mono);font-size:0.75rem">company/</code> et diagnostique ta phase courante.</div>
+          <span class="loop-step-tag">lecture auto</span>
+        </div>
+        <div class="loop-step">
+          <div class="loop-step-num">Étape 2</div>
+          <div class="loop-step-title">Il appelle le bon agent</div>
+          <div class="loop-step-desc">Selon la phase, il délègue à l'agent spécialisé : stratège, designer, rédacteur, pricing...</div>
+          <span class="loop-step-tag">Agent tool</span>
+        </div>
+        <div class="loop-step">
+          <div class="loop-step-num">Étape 3</div>
+          <div class="loop-step-title">L'agent produit le livrable</div>
+          <div class="loop-step-desc">Il écrit directement dans le bon fichier <code style="font-family:var(--font-mono);font-size:0.75rem">company/</code>. Il laisse en blanc ce qui dépend de toi.</div>
+          <span class="loop-step-tag">Write dans company/</span>
+        </div>
+        <div class="loop-step">
+          <div class="loop-step-num">Étape 4</div>
+          <div class="loop-step-title">Tu valides la gate</div>
+          <div class="loop-step-desc">Il te pose la question de gate explicite. Tu réponds <strong>go</strong>, <strong>pivot</strong>, ou tu creuzes un point. Jamais de phase suivante sans ton feu vert.</div>
+          <span class="loop-step-tag">Décision humaine</span>
+        </div>
+      </div>
+
+      <p class="section-label" style="margin-bottom:1rem">Commandes disponibles</p>
+      <div class="commands-table">
+        <div class="command-row">
+          <div class="command-cell"><span class="command-code">/create-company</span></div>
+          <div class="command-desc">
+            <div class="command-title">Scaffold le dossier company/</div>
+            <div class="command-text">Crée les 29 fichiers de contexte (brand, stratégie, marketing, juridique). À faire une seule fois, avant /build-company.</div>
+          </div>
+        </div>
+        <div class="command-row">
+          <div class="command-cell"><span class="command-code">/build-company</span></div>
+          <div class="command-desc">
+            <div class="command-title">Lance (ou reprend) l'orchestrateur</div>
+            <div class="command-text">Lit ton avancement, annonce la phase courante, appelle le bon agent, te demande de valider la gate. À lancer à chaque session de travail.</div>
+          </div>
+        </div>
+        <div class="command-row">
+          <div class="command-cell"><span class="command-code">note: [idée]</span></div>
+          <div class="command-desc">
+            <div class="command-title">Capture une note dans le backlog</div>
+            <div class="command-text">Disponible à tout moment. La note est classée automatiquement dans la bonne phase (P0→P6) et atterrit dans BACKLOG.md. Voir la section ci-dessous.</div>
+          </div>
+        </div>
+        <div class="command-row">
+          <div class="command-cell"><span class="command-code">go / pivot</span></div>
+          <div class="command-desc">
+            <div class="command-title">Réponse à une gate</div>
+            <div class="command-text"><strong>go</strong> = passer à la phase suivante. <strong>pivot</strong> = reboucler (souvent retour en phase 1 pour revalider). Tu peux aussi poser une question — l'orchestrateur creuse avant de passer.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 : Les 7 phases -->
   <section class="section">
     <div class="container">
       <p class="section-label">Le déroulé</p>
@@ -593,7 +820,81 @@
     </div>
   </section>
 
-  <!-- SECTION 3 : CTA installation -->
+  <!-- SECTION 4 : Prise de notes -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Module notes</p>
+      <h2 class="section-title">Une idée ? Note-la. Elle sait où aller.</h2>
+      <p class="section-lead">À tout moment dans ta session Claude, tape <code style="font-family:var(--font-mono);font-size:1rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0.125rem 0.5rem;">note: ton idée</code> — la note est capturée, classée dans la bonne phase, et atterrit dans ton BACKLOG.md.</p>
+
+      <div class="notes-demo">
+        <div class="notes-input-demo" role="img" aria-label="Exemple de prise de notes">
+          <div><span class="prompt">Toi</span></div>
+          <div class="user">note: tester un prix à 29€ pour voir</div>
+          <div>&nbsp;</div>
+          <div><span class="prompt">Claude</span></div>
+          <div class="result">✓ Note classée — Phase 4 (Offre &amp; GTM)</div>
+          <div>&nbsp;</div>
+          <div><span class="prompt">Toi</span></div>
+          <div class="user">note: interviewer 5 freelances avant de valider</div>
+          <div>&nbsp;</div>
+          <div><span class="prompt">Claude</span></div>
+          <div class="result">✓ Note classée — Phase 1 (Validation)</div>
+          <div>&nbsp;</div>
+          <div><span class="prompt">Toi</span></div>
+          <div class="user">note: regarder si Notion a déjà une offre similaire</div>
+          <div>&nbsp;</div>
+          <div><span class="prompt">Claude</span></div>
+          <div class="result">✓ Note classée — Phase 1 (Validation)</div>
+        </div>
+
+        <div class="notes-output-demo">
+          <div class="notes-output-header">BACKLOG.md — généré automatiquement</div>
+          <div class="notes-bucket">
+            <div class="notes-bucket-label">Phase 0 — Cadrage</div>
+            <div class="notes-bucket-empty">vide</div>
+          </div>
+          <div class="notes-bucket">
+            <div class="notes-bucket-label">Phase 1 — Validation</div>
+            <div class="notes-bucket-item">Interviewer 5 freelances avant de valider</div>
+            <div class="notes-bucket-item">Regarder si Notion a déjà une offre similaire</div>
+          </div>
+          <div class="notes-bucket">
+            <div class="notes-bucket-label">Phase 2 — Stratégie</div>
+            <div class="notes-bucket-empty">vide</div>
+          </div>
+          <div class="notes-bucket">
+            <div class="notes-bucket-label">Phase 3 — Marque</div>
+            <div class="notes-bucket-empty">vide</div>
+          </div>
+          <div class="notes-bucket">
+            <div class="notes-bucket-label">Phase 4 — Offre &amp; GTM</div>
+            <div class="notes-bucket-item">Tester un prix à 29€ pour voir</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;">
+        <p style="font-size:0.875rem;font-weight:600;color:var(--fg);margin-bottom:0.5rem;">Comment ça fonctionne</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+          <div>
+            <p style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:0.375rem;">Règles d'abord</p>
+            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.5;">Les mots-clés de la note sont analysés instantanément (gratuit, sans appel LLM). "prix", "tarif" → Phase 4. "interview", "validation" → Phase 1.</p>
+          </div>
+          <div>
+            <p style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:0.375rem;">LLM en fallback</p>
+            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.5;">Si les règles ne tranchent pas, Claude est appelé pour classer. Résultat : zéro note "non classée" dans BACKLOG.md.</p>
+          </div>
+          <div>
+            <p style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:0.375rem;">Précaution de trigger</p>
+            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.5;">Le trigger est <code style="font-family:var(--font-mono)">note:</code> (avec deux-points). Une phrase comme "la note est de 5/10" ne déclenche rien. Utiliser <code style="font-family:var(--font-mono)">note:</code> uniquement en début de message.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 : CTA installation -->
   <section class="section section-cta">
     <div class="container">
       <p class="section-label">Démarrage</p>
