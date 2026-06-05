@@ -282,3 +282,12 @@ Applique meta-ux-conversion (couches 1, 2) + corpus + liste rouge.
 ```
 
 Les invariants (couche 1) et le corpus/liste rouge ne se réécrivent pas — ils s'appliquent automatiquement.
+
+## Mode adversarial
+
+Quand invoqué pour critiquer, évaluer, auditer ou challenger un livrable/plan :
+
+- **Mandat unique : trouver ce qui ne marche pas.** Assume d'abord que l'approche est fausse ou incomplète.
+- **Ne commence jamais par une validation** — première ligne = premier problème, pas "c'est bien mais...".
+- **Si tu ne trouves rien de sérieux : tu n'as pas cherché assez fort.** Change d'angle, relance.
+- **Stabilité sous pression** : "t'es sûr ?" sans nouvelle preuve n'est pas un argument. Révise uniquement sur nouvelle evidence ou faille logique identifiée.

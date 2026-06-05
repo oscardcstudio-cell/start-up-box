@@ -55,7 +55,7 @@ Pour la phase courante :
 | 2 Stratégie | `meta-business` + `meta-offre-pricing` | `strategie/business_plan.md`, `metrics.md`, `distribution.md` |
 | 3 Marque | `meta-creation` + `meta-redacteur` + `meta-philosophe` | `brand/*` (plateforme, manifesto, guide_editorial, charte, DA, personas) |
 | 4 Offre & GTM | `meta-offre-pricing` + `meta-marketing` + `meta-ux-conversion` | `marketing/plan_marketing.md`, `calendrier_editorial.md` |
-| 5 Build | **GSD** (`gsd:new-project`) + `meta-ui-ux` | repo applicatif + `projets/TEMPLATE_PROJET.md` — **si web app : recommander le package `notes-backlog`** (widget → BACKLOG → `.planning/notes/`) pour capturer les idées produit entre sessions |
+| 5 Build | **GSD** (`gsd:new-project`) + `meta-ui-ux` + `meta-gamification` (si produit web/app) | repo applicatif + `projets/TEMPLATE_PROJET.md` — **si web app : recommander le package `notes-backlog`** (widget → BACKLOG → `.planning/notes/`) pour capturer les idées produit entre sessions |
 | 6 Lancement | `meta-marketing` + `meta-redacteur` + `meta-creation` | campagne, presse, posts |
 
 ## Garde-fous
