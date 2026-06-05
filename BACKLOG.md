@@ -61,6 +61,22 @@ Probablement Phase 2 (Validation) ou Phase 4 (Offre&GTM) — financement avant l
 
 ---
 
+## Test E2E installation depuis machine fraîche
+
+**Etat** : à faire — critique avant toute distribution publique.
+**Contexte** : le prompt-installeur n'a jamais été testé sur une vraie machine fraîche. Plusieurs points de friction potentiels non vérifiés.
+
+Check-list à valider :
+- Git présent → `git clone` fonctionne
+- Chemins Unix `~/` résolus correctement sur Windows (Claude Code + Git Bash / WSL)
+- Les agents apparaissent bien dans `~/.claude/agents/` et sont chargés par Claude Code
+- `/create-company` et `/build-company` se déclenchent sans erreur
+- Phase 5 : gh CLI → repo créé ; Railway → déploiement ; OpenRouter → API connectée
+
+**Attention particulière** : tester sur Windows (chemins `~/` problématiques), macOS et Linux. Idéalement via une VM propre ou un compte machine sans Claude Code préinstallé.
+
+---
+
 ## Remplacer "Oscar" par variable utilisateur
 
 **Etat** : à faire — important pour la distribution publique du package.

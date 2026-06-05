@@ -1,8 +1,17 @@
 # Prompt-installeur start-up-box
 
-**Prérequis** : Claude Code doit être installé et actif.
-→ Télécharge Claude Code : https://claude.ai/download
-→ Abonnement Max : https://claude.ai/upgrade
+**Prérequis immédiats** (avant de lancer le prompt) :
+- **Git** → https://git-scm.com/downloads (`git --version` pour vérifier)
+- **Claude Code** → https://claude.ai/download
+- **Abonnement Max** → https://claude.ai/upgrade
+
+**Prérequis Phase 5 — Build** (tu n'en as pas besoin maintenant) :
+- **Node.js ≥18** → https://nodejs.org (si app web)
+- **GitHub CLI (gh)** → https://cli.github.com (pour créer et versionner le repo)
+- **Railway** → https://railway.app (déploiement, si app web)
+- **OpenRouter** → https://openrouter.ai (optionnel — si tu veux changer de modèle IA)
+
+⚠ **Windows** : le prompt utilise des chemins Unix (`~/`). Claude Code les résout automatiquement via WSL ou Git Bash. Si ça échoue, lancer Claude Code depuis Git Bash.
 
 ---
 
