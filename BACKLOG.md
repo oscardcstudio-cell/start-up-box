@@ -52,12 +52,12 @@ Objectif : que les agents utilisent les bonnes skills et les bons outils automat
 
 ---
 
-## Audit mécène → intégration en cours de route
+## Intégrer subvention_match dans le déroulé build-company
 
-**Etat** : à clarifier puis planifier.
-**Question ouverte** : "mécène" = programme de mécénat, financement alternatif, partenariat culturel ? Clarifier avec Oscar avant de lancer l'audit.
+**Etat** : à planifier.
+**Contexte** : `subvention_match` (repo oscardcstudio) est un outil de matching de subventions. L'intégrer dans le playbook start-up-box pour que les fondateurs soient automatiquement guidés vers la recherche de subventions au bon moment.
 
-Une fois clarifié : analyser comment l'intégrer dans le déroulé de fabrication (probablement Phase 2 Validation ou Phase 4 Offre&GTM — financement avant lancement).
+Probablement Phase 2 (Validation) ou Phase 4 (Offre&GTM) — financement avant lancement. À confirmer : moment optimal dans le parcours, et comment appeler l'outil depuis `/build-company`.
 
 ---
 
