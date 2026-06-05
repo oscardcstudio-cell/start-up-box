@@ -63,11 +63,50 @@ Crée la structure complète en écrivant les fichiers suivants avec des placeho
 **projets/**
 - `TEMPLATE_PROJET.md` — template pour les projets à venir
 
+**.planning/notes/** — réservoir d'idées transverse, capturées entre sessions (widget ou conversation). 6 sujets fixes + inbox. Une idée jetée ici est invoquée au bon moment quand la phase correspondante démarre dans `/build-company`.
+- `README.md` — mode d'emploi : comment déposer ("note produit: …"), comment revoir ("on revoit offre")
+- `produit.md` — UX, features, design, parcours utilisateur
+- `offre.md` — packaging, pricing, paliers, modèle one-shot vs abonnement
+- `acquisition.md` — marketing, SEO, canaux, réseaux, partenariats
+- `marque.md` — identité, naming, ton de voix, manifesto, DA
+- `tech-ops.md` — infra, RGPD, légal, facturation, support, monitoring
+- `vision.md` — cap long terme, nouveaux marchés, pivots, B2B, expansion
+- `INBOX.md` — notes sans sujet clair, à trier
+
 ### Étape 4 — Récap
 
 Affiche la liste des fichiers créés, puis :
 
 > "Dossier company/ créé avec [N] fichiers. Lance `/build-company` pour démarrer la phase 0 : je vais t'aider à formuler ton problème et ta cible."
+
+## Contenu du README.md `.planning/notes/` à créer
+
+```markdown
+# Répertoire de notes
+
+Réservoir d'idées permanent, classé par sujet. Dépose une idée quand elle vient ; elle ressort quand la phase correspondante démarre dans `/build-company`.
+
+- **Déposer** : dis "note produit: …" ou "note offre: …" — Claude range dans le bon fichier, daté.
+- **Revoir** : dis "on revoit [sujet]" — Claude rassemble toutes les notes du sujet.
+- **Format** : `- [AAAA-MM-JJ] <idée telle quelle> — _(source: session)_`
+- **Sujet ambigu** → va dans `INBOX.md`.
+
+| Fichier | Contenu |
+|---|---|
+| produit.md | UX, features, design, parcours |
+| offre.md | Pricing, packaging, paliers, modèle |
+| acquisition.md | Marketing, canaux, SEO, réseaux |
+| marque.md | Identité, naming, manifesto, DA |
+| tech-ops.md | Infra, RGPD, légal, facturation |
+| vision.md | Cap long terme, pivots, expansion |
+```
+
+Crée aussi les 6 fichiers sujets + INBOX.md avec ce header minimal :
+```markdown
+# Notes — [sujet]
+
+<!-- Format : - [AAAA-MM-JJ] idée telle quelle — _(source: session)_ -->
+```
 
 ## Contenu du COMPANY_PLAYBOOK.md à créer
 

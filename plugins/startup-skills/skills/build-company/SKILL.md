@@ -24,6 +24,20 @@ L'IA baisse la barrière d'**exécution**, pas celle du **jugement**. Donc :
 
 Pour la phase courante :
 
+0. **Lis le réservoir de notes** : avant de dispatcher l'agent, consulte les fichiers `.planning/notes/` liés à cette phase. S'ils contiennent des idées, décisions ou blockers → les mentionner au fondateur ET les inclure dans le prompt de l'agent. Une note jamais surfacée n'existe pas.
+
+   | Phase | Fichiers notes à lire |
+   |---|---|
+   | 0 Cadrage | `vision.md`, `offre.md` |
+   | 1 Validation | `vision.md`, `acquisition.md` |
+   | 2 Stratégie | `offre.md`, `acquisition.md`, `tech-ops.md` |
+   | 3 Marque | `marque.md`, `produit.md` |
+   | 4 Offre & GTM | `offre.md`, `acquisition.md` |
+   | 5 Build | `produit.md`, `tech-ops.md` |
+   | 6 Lancement | `acquisition.md`, `marque.md` |
+
+   Si `.planning/notes/` est absent : skip silencieux (projet initialisé avant cette feature).
+
 1. **Rappelle l'objectif + la gate** de la phase (depuis le playbook).
 2. **Appelle l'agent pilote** via l'outil Agent, avec un prompt qui précise :
    - le contexte (lui faire lire les fichiers `company/` amont déjà remplis) ;
@@ -41,7 +55,7 @@ Pour la phase courante :
 | 2 Stratégie | `meta-business` + `meta-offre-pricing` | `strategie/business_plan.md`, `metrics.md`, `distribution.md` |
 | 3 Marque | `meta-creation` + `meta-redacteur` + `meta-philosophe` | `brand/*` (plateforme, manifesto, guide_editorial, charte, DA, personas) |
 | 4 Offre & GTM | `meta-offre-pricing` + `meta-marketing` + `meta-ux-conversion` | `marketing/plan_marketing.md`, `calendrier_editorial.md` |
-| 5 Build | **GSD** (`gsd:new-project`) + `meta-ui-ux` | repo applicatif + `projets/TEMPLATE_PROJET.md` |
+| 5 Build | **GSD** (`gsd:new-project`) + `meta-ui-ux` | repo applicatif + `projets/TEMPLATE_PROJET.md` — **si web app : recommander le package `notes-backlog`** (widget → BACKLOG → `.planning/notes/`) pour capturer les idées produit entre sessions |
 | 6 Lancement | `meta-marketing` + `meta-redacteur` + `meta-creation` | campagne, presse, posts |
 
 ## Garde-fous
