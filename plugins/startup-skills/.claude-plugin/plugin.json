@@ -1,7 +1,7 @@
 {
   "name": "startup-skills",
   "displayName": "Startup Skills",
-  "description": "Skills /build-company et /create-company pour créer et piloter une startup phase par phase.",
+  "description": "4 skills : /build-company (orchestrateur 7 phases), /create-company (scaffold company/), /design-director (direction artistique), /autoresearch (optimisation landing/copy Karpathy-style).",
   "version": "1.0.0",
   "skills": "./skills"
 }
