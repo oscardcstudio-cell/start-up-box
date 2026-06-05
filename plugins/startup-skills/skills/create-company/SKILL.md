@@ -151,4 +151,10 @@ Quand ce dossier est présent, charger ses fichiers pour tout contexte business 
 - Avant tout texte → charger brand/guide_editorial.md
 - Avant tout visuel → charger brand/charte.md + brand/direction_artistique.md
 - Avant toute décision stratégique → charger strategie/hypotheses.md + strategie/metrics.md
+
+## Notes entre sessions
+
+- Quand le fondateur dit **"note X: …"** (produit/offre/acquisition/marque/tech-ops/vision) → ranger dans `.planning/notes/<X>.md`, daté, garder sa formulation, confirmer où c'est rangé.
+- Quand le fondateur dit **"on revoit [sujet]"** → rassembler toutes les notes du sujet, décider ensemble, logger la décision.
+- **Avant tout chantier** : `/build-company` lit les notes pertinentes pour la phase — elles sont injectées dans le prompt de l'agent. Une note capturée ici EST invoquée au bon moment.
 ```
