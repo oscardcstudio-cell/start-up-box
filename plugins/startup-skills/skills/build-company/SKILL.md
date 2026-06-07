@@ -1,6 +1,6 @@
 ---
 name: build-company
-description: "Orchestrateur de création d'entreprise — pilote le déroulé d'une boîte phase par phase (cadrage → validation → stratégie → marque → offre/GTM → build → lancement, juridique transverse), appelle le bon agent à chaque étape, écrit dans le dossier company/, et impose une gate de validation humaine avant de passer. Use quand tu veux lancer/structurer une boîte, savoir 'par où commencer', 'quelle est la prochaine étape', faire avancer une startup de bout en bout, ou orchestrer business+marketing+créatif+juridique dans le bon ordre. Auto-triggers : créer une boîte, lancer une startup, déroulé entreprise, par où commencer, prochaine étape de la boîte, build-company, gamme de fabrication, phase suivante, où en est la boîte. NE PAS utiliser pour une tâche métier isolée (un seul pitch, un seul post) — dans ce cas appeler directement l'agent métier."
+description: "Orchestrateur de création d'entreprise — pilote le déroulé d'une boîte phase par phase (cadrage → validation → stratégie+red-team → marque minimale → offre/GTM+willingness-to-pay → identité complète → build → lancement, juridique transverse), appelle le bon agent à chaque étape, écrit dans le dossier company/, et impose une gate de validation humaine avant de passer. Use quand tu veux lancer/structurer une boîte, savoir 'par où commencer', 'quelle est la prochaine étape', faire avancer une startup de bout en bout, ou orchestrer business+marketing+créatif+juridique dans le bon ordre. Auto-triggers : créer une boîte, lancer une startup, déroulé entreprise, par où commencer, prochaine étape de la boîte, build-company, gamme de fabrication, phase suivante, où en est la boîte. NE PAS utiliser pour une tâche métier isolée (un seul pitch, un seul post) — dans ce cas appeler directement l'agent métier."
 ---
 
 # Build Company — l'orchestrateur du déroulé
@@ -17,7 +17,7 @@ L'IA baisse la barrière d'**exécution**, pas celle du **jugement**. Donc :
 
 1. Cherche le dossier `company/` dans le repo courant (ou demande où il est). S'il n'existe pas → lance `/create-company` pour le scaffolder d'abord.
 2. **Lis `company/COMPANY_PLAYBOOK.md`** — c'est la gamme de fabrication source de vérité (phases, agents, livrables, gates). Ce skill l'exécute, le playbook le définit.
-3. **Diagnostique la phase courante** : pour chaque phase 0→6, regarde si ses livrables `company/` sont remplis (vs placeholders `<!-- À fournir -->`). La première phase aux livrables incomplets = la phase courante.
+3. **Diagnostique la phase courante** : pour chaque phase 0→7, regarde si ses livrables `company/` sont remplis (vs placeholders `<!-- À fournir -->`). La première phase aux livrables incomplets = la phase courante.
 4. Annonce : "Tu es en phase X. Gate de la phase précédente : [validée / à valider]. Prochaine action : [...]."
 
 ## Boucle d'orchestration (par phase)
@@ -31,10 +31,11 @@ Pour la phase courante :
    | 0 Cadrage | `vision.md`, `offre.md` |
    | 1 Validation | `vision.md`, `acquisition.md` |
    | 2 Stratégie | `offre.md`, `acquisition.md`, `tech-ops.md` |
-   | 3 Marque | `marque.md`, `produit.md` |
+   | 3 Marque minimale | `marque.md` |
    | 4 Offre & GTM | `offre.md`, `acquisition.md` |
-   | 5 Build | `produit.md`, `tech-ops.md` |
-   | 6 Lancement | `acquisition.md`, `marque.md` |
+   | 5 Identité complète | `marque.md`, `produit.md` |
+   | 6 Build | `produit.md`, `tech-ops.md` |
+   | 7 Lancement | `acquisition.md`, `marque.md` |
 
    Si `.planning/notes/` est absent : skip silencieux (projet initialisé avant cette feature).
 
@@ -51,21 +52,23 @@ Pour la phase courante :
 | Phase | Agent pilote (Agent tool) | Livrables `company/` |
 |---|---|---|
 | 0 Cadrage | `meta-business` | `strategie/hypotheses.md`, `brand/founder.md` |
-| 1 Validation | `meta-business` | `brand/cibles.md`, `brand/concurrence.md`, `hypotheses.md` |
-| 2 Stratégie | `meta-business` + `meta-offre-pricing` | `strategie/business_plan.md`, `metrics.md`, `distribution.md` |
-| 3 Marque | `meta-creation` + `meta-redacteur` + `meta-philosophe` | `brand/*` (plateforme, manifesto, guide_editorial, charte, DA, personas) |
-| 4 Offre & GTM | `meta-offre-pricing` + `meta-marketing` + `meta-ux-conversion` | `marketing/plan_marketing.md`, `calendrier_editorial.md` |
-| 5 Build | **GSD** (`gsd:new-project`) + `meta-ui-ux` + `meta-gamification` (si produit web/app) | repo applicatif + `projets/TEMPLATE_PROJET.md` — **si web app : recommander le package `notes-backlog`** (widget → BACKLOG → `.planning/notes/`) pour capturer les idées produit entre sessions |
-| 6 Lancement | `meta-marketing` + `meta-redacteur` + `meta-creation` | campagne, presse, posts |
+| 1 Validation | `meta-business` + `market-competitive` + skill `deep-research` | `brand/cibles.md`, `brand/concurrence.md`, `hypotheses.md` |
+| 2 Stratégie (+ red-team) | `meta-business` + `meta-offre-pricing` | `strategie/business_plan.md`, `metrics.md`, `distribution.md` |
+| 3 Marque minimale | `meta-business` + `meta-redacteur` | `brand/plateforme.md`, `brand/guide_editorial.md` |
+| 4 Offre & GTM (+ gate willingness-to-pay) | `meta-offre-pricing` + `meta-marketing` + `meta-ux-conversion` | `marketing/plan_marketing.md`, `calendrier_editorial.md` + landing de test |
+| 5 Identité complète | `meta-creation` + skill `design-director` + `meta-redacteur` + `meta-philosophe` | `brand/manifesto`, `fondations`, `charte`, `direction_artistique`, `personas` |
+| 6 Build | **GSD** (`gsd:new-project`) + `meta-ui-ux` + `meta-gamification` (si produit web/app) | repo applicatif + `projets/TEMPLATE_PROJET.md` — **si web app : recommander le package `notes-backlog`** (widget → BACKLOG → `.planning/notes/`) pour capturer les idées produit entre sessions |
+| 7 Lancement | `meta-marketing` + `meta-redacteur` + `meta-creation` + skill `autoresearch` | campagne, presse, posts |
 
 ## Garde-fous
 
 - **Une phase à la fois.** Ne propose pas de "tout faire d'un coup" : c'est l'anti-pattern n°1.
-- **Recadrage fondateur** : si le fondateur propose de sauter une phase, d'aller "directement à la marque" ou de "faire le legal plus tard" → ne pas refuser sec. Expliquer en 2 phrases le coût concret de l'ordre inversé. Exemples : "une marque sans validation = 3 jours sur un positionnement à jeter si la cible est fausse en P1" / "encaisser sans forme juridique = responsabilité personnelle illimitée". Puis rappeler où on en est et proposer la prochaine action dans l'ordre.
+- **Recadrage fondateur** : si le fondateur propose de sauter une phase, d'aller "directement à la marque complète" ou de "faire le legal plus tard" → ne pas refuser sec. Expliquer en 2 phrases le coût concret de l'ordre inversé. Exemples : "la charte/DA avant la validation de l'offre (P4) = 2-3 jours de design à jeter si le prix/positionnement bouge" / "encaisser sans forme juridique = responsabilité personnelle illimitée". Puis rappeler où on en est et proposer la prochaine action dans l'ordre.
+- **Marque en deux temps** : la P3 ne produit que plateforme + guide éditorial (de quoi tester) ; la charte, la DA et les personas attendent la P5, après le signal willingness-to-pay de la P4. Ne jamais lancer l'identité visuelle complète avant que la P4 ait validé l'offre.
 - **Juridique transverse** : à chaque fin de phase, rappelle les gates juridiques échelonnées (forme avant 1er euro, RGPD/CGU avant collecte data) — alerte si on s'apprête à les violer. Recommander un avocat startup spécialisé pour statuts, pacte, RGPD — aucun agent IA ne remplace un juriste sur ces points.
 - **Charge la voix du projet** : avant tout texte au nom de la boîte, l'agent rédacteur doit lire `brand/guide_editorial.md` (gate de phase 3).
 - Tu n'inventes pas de données business. Si une info manque pour avancer, tu poses la question plutôt que d'halluciner un chiffre.
 
 ## Fin de session
 
-Quand le fondateur s'arrête, résume : phase courante, dernière gate validée, prochaine action, fichiers `company/` modifiés.
+Quand le fondateur s'arrête, résume : phase courante, dernière gate validée, prochaine action, fichiers `company/` modifiés. Pas de NEXT.md — juste un récap clair dans la réponse.

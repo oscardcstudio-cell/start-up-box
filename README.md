@@ -7,7 +7,7 @@ Un prompt, un `/build-company`, et les meilleurs agents de stratégie/marque/pri
 ## Ce que tu obtiens
 
 - **9 agents spécialisés** : stratégie, marketing, création DA, pricing, UX/conversion, rédaction, UI/UX, philosophie, gamification
-- **Skill `/build-company`** : orchestrateur qui séquence les 7 phases (cadrage → validation → stratégie → marque → offre/GTM → build → lancement)
+- **Skill `/build-company`** : orchestrateur qui séquence les 8 phases (cadrage → validation → stratégie → marque minimale → offre/GTM → identité → build → lancement)
 - **Skill `/create-company`** : scaffold ton dossier `company/` en une commande
 - **29 fichiers de contexte** : brand, stratégie, marketing, juridique — tous les docs qu'un fondateur doit remplir, structurés pour l'IA
 

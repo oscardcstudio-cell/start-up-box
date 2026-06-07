@@ -29,7 +29,7 @@ Crée la structure complète en écrivant les fichiers suivants avec des placeho
 - `CLAUDE.md` — règles de chargement IA
 - `AGENTS.md` — cross-tool
 - `llms.txt` — inventaire fichiers critiques
-- `COMPANY_PLAYBOOK.md` — gamme de fabrication (7 phases + gates)
+- `COMPANY_PLAYBOOK.md` — gamme de fabrication (8 phases + gates)
 - `info.json` — infos légales `{"name": "", "forme": "", "siren": "", "founded": "", "email": ""}`
 - `team.json` — équipe `{"founders": [{"name": "", "role": "", "email": ""}]}`
 
@@ -115,7 +115,7 @@ Crée `company/COMPANY_PLAYBOOK.md` avec ce contenu minimal :
 ```markdown
 # COMPANY_PLAYBOOK.md — Gamme de fabrication
 
-7 phases de création, pilotées par `/build-company`. Gate humaine à chaque étape.
+8 phases de création, pilotées par `/build-company`. Gate humaine à chaque étape.
 
 | Phase | Objectif | Gate |
 |---|---|---|
