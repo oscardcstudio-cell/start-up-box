@@ -21,7 +21,7 @@
 Ouvre Claude Code (dans n'importe quel dossier), copie le bloc ci-dessous et colle-le :
 
 ```
-Installe start-up-box sur cette machine. C'est un toolkit IA pour créer une startup de A à Z.
+Installe start-up-box sur cette machine. C'est un toolkit IA pour créer une startup de A à Z. Je ne suis pas développeur : fais TOUT toi-même, ne me demande aucune commande.
 
 Exécute ces étapes dans l'ordre avec tes outils bash :
 
@@ -32,15 +32,30 @@ Exécute ces étapes dans l'ordre avec tes outils bash :
    mkdir -p ~/.claude/agents
    cp ~/.start-up-box/plugins/startup-agents/agents/*.md ~/.claude/agents/
 
-3. Installe les skills (les 4 : build-company, create-company, design-director, autoresearch) :
+3. Installe les compétences :
    mkdir -p ~/.claude/skills
    cp -r ~/.start-up-box/plugins/startup-skills/skills/* ~/.claude/skills/
 
-4. Vérifie que ces fichiers existent :
-   ~/.claude/agents/meta-business.md
-   ~/.claude/skills/build-company/SKILL.md
+4. Installe la couche meta (harness fondateur + doctrines) — c'est ce qui te dit comment me parler :
+   mkdir -p ~/.claude/startup-box
+   cp -r ~/.start-up-box/meta-rules/* ~/.claude/startup-box/
 
-5. Dis-moi "Installation terminée ✓" et explique-moi les deux prochaines commandes à lancer.
+5. Installe le mécanisme de mise à jour automatique :
+   mkdir -p ~/.claude/hooks
+   cp ~/.start-up-box/hooks/*.js ~/.claude/hooks/
+   cp ~/.start-up-box/hooks/VERSION ~/.claude/startup-box/.hooks-version
+
+6. Branche le harness au-dessus de tous mes projets, SANS écraser un CLAUDE.md perso existant :
+   - Si ~/.claude/CLAUDE.md n'existe pas → crée-le avec, sur une ligne : @startup-box/HARNESS.md
+   - S'il existe déjà et ne contient pas cette ligne → ajoute @startup-box/HARNESS.md à la fin.
+
+7. Active la mise à jour auto à chaque conversation : ajoute (en fusionnant, sans casser l'existant) ce hook dans ~/.claude/settings.json :
+   { "hooks": { "SessionStart": [ { "hooks": [ { "type": "command", "command": "node ~/.claude/hooks/startup-box-update.js" } ] } ] } }
+   Si settings.json existe déjà, parse-le, ajoute cette entrée à hooks.SessionStart (crée les clés manquantes), et ne crée pas de doublon si elle est déjà là.
+
+8. Vérifie que ces fichiers existent : ~/.claude/agents/meta-business.md, ~/.claude/skills/build-company/SKILL.md, ~/.claude/startup-box/HARNESS.md, ~/.claude/hooks/startup-box-update.js.
+
+9. Dis-moi "Installation terminée ✓", puis propose de démarrer tout de suite : dès que je réponds (oui / "je veux lancer ma boîte" / etc.), lance toi-même la skill build-company (phase 0 : cadrage). Je n'ai aucune commande à taper — si le dossier company/ manque, tu le crées tout seul avant de continuer.
 ```
 
 ---

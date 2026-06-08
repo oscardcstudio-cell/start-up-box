@@ -24,6 +24,14 @@
 - plugins/startup-skills/skills/build-company/SKILL.md
 - plugins/startup-skills/skills/create-company/SKILL.md
 
+## Priorité 3 bis — couche meta (livrée chez le fondateur)
+
+- meta-rules/HARNESS.md : harness fondateur non-technique (box-only, authoré ici)
+- meta-rules/{CONTEXT_ENGINEERING,CLAUDE_HEALTH_RULES,CLAUDE_BUG_DOCTRINE,NEW_PROJECT,NEW_COMPANY}.md : doctrines, synchronisées depuis C:\dev\claude\public-rules\ via publish-rules.mjs (NE PAS éditer ici)
+- meta-rules/VERSION : version du bundle meta
+- hooks/startup-box-update.js : hook SessionStart auto-update (ff-only, fail-silent, hooks gatés par hooks/VERSION)
+- hooks/VERSION : version du code des hooks (bumper à chaque modif de hook)
+
 ## Priorité 4 — onboarding
 
 - Page publique d'onboarding = repo séparé déployé `oscardcstudio-cell/start-up-box-architecture` (live : https://start-up-box-onboarding-production.up.railway.app). Prompt d'install = div `#install-prompt` de son index.html.
