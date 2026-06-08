@@ -27,10 +27,15 @@
 ## Priorité 3 bis — couche meta (livrée chez le fondateur)
 
 - meta-rules/HARNESS.md : harness fondateur non-technique (box-only, authoré ici)
-- meta-rules/{CONTEXT_ENGINEERING,CLAUDE_HEALTH_RULES,CLAUDE_BUG_DOCTRINE,NEW_PROJECT,NEW_COMPANY}.md : doctrines, synchronisées depuis C:\dev\claude\public-rules\ via publish-rules.mjs (NE PAS éditer ici)
+- meta-rules/{CONTEXT_ENGINEERING,CLAUDE_HEALTH_RULES,CLAUDE_BUG_DOCTRINE,NEW_PROJECT,NEW_COMPANY}.md : doctrines, synchronisées depuis la source par le gate côté mainteneur (NE PAS éditer ici)
 - meta-rules/VERSION : version du bundle meta
 - hooks/startup-box-update.js : hook SessionStart auto-update (ff-only, fail-silent, hooks gatés par hooks/VERSION)
 - hooks/VERSION : version du code des hooks (bumper à chaque modif de hook)
+
+## Priorité 4 — sûreté / mise à jour à distance
+
+- scripts/scan-gate.mjs : scanner anti-fuite (perso + secrets + chemins internes) auto-contenu
+- .github/workflows/scan-gate.yml : CI qui bloque toute fuite à chaque push (rend l'édition à distance sûre)
 
 ## Priorité 4 — onboarding
 

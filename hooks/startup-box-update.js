@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // startup-box-update — hook SessionStart installé chez le fondateur.
 // But : à chaque début de conversation, récupérer la dernière version de start-up-box
-// (agents, skills, harness, doctrines) pour que les updates d'Oscar arrivent tout seuls.
+// (agents, skills, harness, doctrines) pour que les mises à jour du mainteneur arrivent seules.
 //
 // SÛRETÉ (non négociable — ce code tourne seul chez quelqu'un qui n'est pas dev) :
 //  1. NON BLOQUANT : quoi qu'il arrive, exit 0. Jamais d'erreur rouge au démarrage.

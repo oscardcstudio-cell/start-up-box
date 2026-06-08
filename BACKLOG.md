@@ -52,7 +52,7 @@ Le `/build-company` orchestre les phases mais le mapping agents×phases n'est pa
 - quelles skills et quels modules utiliser
 - quels fichiers `company/` lire en entrée + écrire en sortie
 
-Objectif : que les agents utilisent les bonnes skills et les bons outils automatiquement, sans qu'Oscar ait à le spécifier à chaque fois.
+Objectif : que les agents utilisent les bonnes skills et les bons outils automatiquement, sans avoir à le spécifier à chaque fois.
 
 ---
 

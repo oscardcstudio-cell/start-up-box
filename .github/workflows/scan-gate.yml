@@ -1,0 +1,23 @@
+name: scan-gate
+
+# Garde-fou anti-fuite : tourne à chaque push (y compris édition web/mobile GitHub),
+# sur chaque pull request, et sur déclenchement manuel ("Run workflow" — bouton dispo
+# depuis l'app mobile GitHub). Échoue si une fuite perso/secret/chemin interne est
+# introduite → rien n'atteint les fondateurs tant que ce n'est pas corrigé.
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Scan anti-fuite
+        run: node scripts/scan-gate.mjs

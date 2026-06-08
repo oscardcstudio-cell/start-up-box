@@ -13,10 +13,14 @@ Il ne s'applique PAS au projet startup de l'utilisateur final — celui-ci a son
 La box livre **3 choses** chez le fondateur : les agents, les skills, et la **couche meta** (`meta-rules/`).
 
 - `meta-rules/HARNESS.md` — **harness fondateur** (mode non-technique : zéro jargon, Claude fait le technique lui-même, raccourci `ctv`). Installé en `~/.claude/startup-box/HARNESS.md`, branché via un `@import` dans le `~/.claude/CLAUDE.md` du fondateur → c'est **le meta au-dessus de tous ses projets**. **Authoré ici** (box-only).
-- `meta-rules/{CONTEXT_ENGINEERING,CLAUDE_HEALTH_RULES,CLAUDE_BUG_DOCTRINE,NEW_PROJECT,NEW_COMPANY}.md` — doctrines. **NE PAS les éditer ici** : elles sont synchronisées depuis `C:\dev\claude\public-rules\` par le gate `scripts/publish-rules.mjs` (channel 2). Source unique = `public-rules/`.
+- `meta-rules/{CONTEXT_ENGINEERING,CLAUDE_HEALTH_RULES,CLAUDE_BUG_DOCTRINE,NEW_PROJECT,NEW_COMPANY}.md` — doctrines. **NE PAS les éditer ici** : elles sont synchronisées depuis la source de doctrines par le gate de publication (côté mainteneur). Toute édition ici sera écrasée à la prochaine sync.
 - `hooks/startup-box-update.js` — hook SessionStart installé chez le fondateur : `git pull` de la box + resync à chaque conversation. **Sûr** : ff-only, fail-silent, contenu `.md` auto, hooks exécutables mis à jour SEULEMENT si `hooks/VERSION` distante > installée. **Bumper `hooks/VERSION`** à chaque modif d'un hook, sinon les fondateurs ne le reçoivent pas.
 
-Pipeline complet : `meta-claude-dev` (privé) → `public-rules/` (curé) → `publish-rules.mjs` (scan-gate) → channel 1 `claude-meta-rules` (DEV) + channel 2 `start-up-box/meta-rules/` (FONDATEUR) → pull auto chez le fondateur.
+## Mise à jour à distance (sans poste de dev)
+
+Le repo est public et les fondateurs le pullent à chaque conversation. Tu peux donc le mettre à jour **depuis n'importe où** (interface web/mobile GitHub) : édite un fichier de `meta-rules/` (sauf doctrines, gérées par le gate) ou un agent/skill, commit sur `main`.
+
+Filet : le workflow **`.github/workflows/scan-gate.yml`** (`scripts/scan-gate.mjs`) tourne à chaque push et sur déclenchement manuel (bouton « Run workflow », accessible depuis le mobile GitHub). Il échoue si une fuite perso/secret est introduite → build rouge visible au téléphone, rien n'atteint les fondateurs tant que ce n'est pas corrigé.
 
 ## Règles de développement
 
