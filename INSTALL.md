@@ -6,7 +6,8 @@
 - **Abonnement Max** → https://claude.ai/upgrade
 
 **Prérequis Phase 6 — Build** (tu n'en as pas besoin maintenant — et tu n'auras rien à configurer seul : à la phase Build, l'assistant te prend par la main pour chacun, avec les URLs) :
-- **Node.js ≥18** → https://nodejs.org (si app web)
+- **GSD** (moteur de build par phases) → `npx get-shit-done-cc --global` — l'assistant détecte s'il manque et l'installe pour toi ([repo](https://github.com/glittercowboy/get-shit-done))
+- **Node.js ≥18** → https://nodejs.org (si app web ; requis aussi par GSD/Railway)
 - **GitHub CLI (gh)** → https://cli.github.com (pour créer et versionner le repo)
 - **Railway** → https://railway.app (déploiement, si app web)
 - **Clé API IA** → Anthropic https://console.anthropic.com/settings/keys ou OpenRouter https://openrouter.ai/keys (si le produit appelle un LLM)
@@ -31,11 +32,9 @@ Exécute ces étapes dans l'ordre avec tes outils bash :
    mkdir -p ~/.claude/agents
    cp ~/.start-up-box/plugins/startup-agents/agents/*.md ~/.claude/agents/
 
-3. Installe les skills :
-   mkdir -p ~/.claude/skills/build-company
-   cp -r ~/.start-up-box/plugins/startup-skills/skills/build-company/. ~/.claude/skills/build-company/
-   mkdir -p ~/.claude/skills/create-company
-   cp -r ~/.start-up-box/plugins/startup-skills/skills/create-company/. ~/.claude/skills/create-company/
+3. Installe les skills (les 4 : build-company, create-company, design-director, autoresearch) :
+   mkdir -p ~/.claude/skills
+   cp -r ~/.start-up-box/plugins/startup-skills/skills/* ~/.claude/skills/
 
 4. Vérifie que ces fichiers existent :
    ~/.claude/agents/meta-business.md
@@ -86,4 +85,6 @@ rm -rf ~/.start-up-box
 rm ~/.claude/agents/meta-*.md
 rm -rf ~/.claude/skills/build-company
 rm -rf ~/.claude/skills/create-company
+rm -rf ~/.claude/skills/design-director
+rm -rf ~/.claude/skills/autoresearch
 ```

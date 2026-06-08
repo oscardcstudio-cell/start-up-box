@@ -116,16 +116,18 @@ Crée `company/COMPANY_PLAYBOOK.md` avec ce contenu minimal :
 # COMPANY_PLAYBOOK.md — Gamme de fabrication
 
 8 phases de création, pilotées par `/build-company`. Gate humaine à chaque étape.
+La marque est en **deux temps** (minimale en P3 pour tester, complète en P5 après le signal de conversion) — ne jamais figer l'identité visuelle avant que l'offre ait validé (P4).
 
 | Phase | Objectif | Gate |
 |---|---|---|
 | 0 — Cadrage | Formuler le problème et la cible | Hypothèse problème + cible écrits |
 | 1 — Validation | Confirmer le problème par du signal externe | Problème confirmé (interviews, fake-door...) |
-| 2 — Stratégie | Modèle économique + North Star | Unit economics tiennent + North Star définie |
-| 3 — Marque | Identité, ton, DA | guide_editorial.md + charte.md posés |
-| 4 — Offre & GTM | Offre packagée + canal prioritaire | 1 canal + offre testable |
-| 5 — Build | MVP qui mesure l'hypothèse de valeur | MVP hypothèse-testable |
-| 6 — Lancement | Mise en marché + mesure active | Tracking en place + RGPD/CGU OK |
+| 2 — Stratégie & business model | Modèle économique + North Star (+ red-team) | Unit economics tiennent + North Star définie |
+| 3 — Marque minimale | Plateforme + guide éditorial (de quoi tester) | `plateforme.md` + `guide_editorial.md` posés |
+| 4 — Offre & GTM | Offre packagée + canal prioritaire + **landing testée** | Signal de **willingness-to-pay** réel (pas juste "testable") |
+| 5 — Identité de marque complète | Charte, DA, manifesto, personas | `charte.md` + `direction_artistique.md` posés, cohérents avec ce qui a converti en P4 |
+| 6 — Build / MVP | MVP qui mesure l'hypothèse de valeur | MVP hypothèse-testable. *Au début : onboarding infra pris par la main — GSD (`npx get-shit-done-cc --global` si absent), GitHub, clé API IA, Railway, avec les URLs* |
+| 7 — Lancement | Mise en marché + mesure active | Tracking en place + RGPD/CGU OK |
 | ∥ Juridique | Structure légale propre | Forme avant 1er euro ; RGPD avant collecte data |
 
 Détail complet : https://github.com/oscardcstudio-cell/start-up-box

@@ -25,13 +25,17 @@ Alimenté par le widget notes-backlog (preset `company-phases`).
 
 <!-- notes P4 -->
 
-## À faire — Phase 5 : Build
+## À faire — Phase 5 : Identité complète
 
 <!-- notes P5 -->
 
-## À faire — Phase 6 : Lancement
+## À faire — Phase 6 : Build
 
 <!-- notes P6 -->
+
+## À faire — Phase 7 : Lancement
+
+<!-- notes P7 -->
 
 ## À faire — Non classé
 
@@ -41,7 +45,7 @@ Alimenté par le widget notes-backlog (preset `company-phases`).
 
 ## Agents × COMPANY_PLAYBOOK — mapping complet
 
-**Etat** : à faire — Phase 5 (Build) / transverse.
+**Etat** : à faire — Phase 6 (Build) / transverse.
 
 Le `/build-company` orchestre les phases mais le mapping agents×phases n'est pas complet. Pour chaque phase du playbook, définir explicitement :
 - quel meta-agent appeler (business / marketing / creation / ux-conversion / offre-pricing / redacteur / philosophe / gamification…)

@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "start-up-box",
-  "description": "Toolkit IA open-source pour créer une startup de A à Z depuis Claude Code. 21 agents (9 méta-agents + 12 GSD Phase 5 Build) + 4 skills (build-company, create-company, design-director, autoresearch).",
+  "description": "Toolkit IA open-source pour créer une startup de A à Z depuis Claude Code. 8 phases (cadrage → validation → stratégie → marque minimale → offre/GTM → identité complète → build → lancement). 9 méta-agents + 4 skills (build-company, create-company, design-director, autoresearch). GSD (moteur de build par phases) s'installe séparément en P6 via npx — l'assistant s'en charge.",
   "owner": {
     "name": "oscardcstudio-cell",
     "email": "oscardcstudio@gmail.com"
@@ -29,7 +29,7 @@
       "name": "startup-skills",
       "source": "./plugins/startup-skills",
       "displayName": "Startup Skills",
-      "description": "Skills /build-company (orchestrateur 7 phases) et /create-company (scaffold dossier company/).",
+      "description": "4 skills : /build-company (orchestrateur 8 phases), /create-company (scaffold dossier company/), /design-director (direction artistique), /autoresearch (optimisation landing/copy).",
       "version": "1.0.0",
       "author": {
         "name": "oscardcstudio-cell"

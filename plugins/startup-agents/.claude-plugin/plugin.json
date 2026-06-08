@@ -1,7 +1,7 @@
 {
   "name": "startup-agents",
   "displayName": "Startup Agents",
-  "description": "21 agents pour créer une startup : 9 méta-agents (stratégie, marketing, pricing, création DA, UX/conversion, UI/UX, rédaction, philosophie, gamification) + 12 agents GSD pour la Phase 5 Build (roadmap, planification, exécution, vérification).",
+  "description": "9 méta-agents pour créer une startup : stratégie, marketing, pricing, création DA, UX/conversion, UI/UX, rédaction, philosophie, gamification. (Le moteur de build GSD s'installe séparément en phase 6 via npx — il fournit ses propres agents.)",
   "version": "1.0.0",
   "agents": "./agents"
 }
