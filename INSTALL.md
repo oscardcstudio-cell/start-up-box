@@ -47,14 +47,15 @@ Exécute ces étapes dans l'ordre avec tes outils bash :
 
 ## Ce qui se passe ensuite
 
-Une fois l'install terminée, ouvre Claude Code **dans le dossier de ton projet** et lance :
+Une fois l'install terminée, ouvre Claude Code **dans le dossier de ton projet** et lance **une seule** commande :
 
 ```
-/create-company     ← crée le dossier company/ (structure complète)
-/build-company      ← démarre la phase 0 : cadrage de ton idée
+/build-company      ← démarre tout : cadrage de ton idée (phase 0)
 ```
 
-Claude te posera des questions, écrira dans tes fichiers, et te demandera de valider chaque étape avant de passer à la suivante.
+Ou écris-le en langage normal — par ex. _« je veux lancer ma boîte »_. C'est le seul truc à taper.
+
+Le reste, Claude l'enchaîne tout seul : s'il manque le dossier `company/`, il le crée automatiquement avant de continuer (tu n'as pas à taper de commande pour ça). Il te posera des questions, écrira dans tes fichiers, et te demandera de valider chaque étape avant de passer à la suivante.
 
 ---
 

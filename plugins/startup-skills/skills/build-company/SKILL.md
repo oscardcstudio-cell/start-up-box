@@ -15,7 +15,7 @@ L'IA baisse la barrière d'**exécution**, pas celle du **jugement**. Donc :
 
 ## Avant tout — localise l'état
 
-1. Cherche le dossier `company/` dans le repo courant (ou demande où il est). S'il n'existe pas → lance `/create-company` pour le scaffolder d'abord.
+1. Cherche le dossier `company/` dans le repo courant (ou demande où il est). S'il n'existe pas → **scaffolde-le toi-même** en invoquant la skill `create-company` (outil Skill), puis enchaîne. **Ne demande jamais au fondateur de taper une commande** (`/create-company` ou autre) : il n'est pas technique, c'est TOI qui chaînes les skills. Une fois le dossier créé, continue directement la localisation d'état.
 2. **Lis `company/COMPANY_PLAYBOOK.md`** — c'est la gamme de fabrication source de vérité (phases, agents, livrables, gates). Ce skill l'exécute, le playbook le définit.
 3. **Diagnostique la phase courante** : pour chaque phase 0→7, regarde si ses livrables `company/` sont remplis (vs placeholders `<!-- À fournir -->`). La première phase aux livrables incomplets = la phase courante.
 4. Annonce : "Tu es en phase X. Gate de la phase précédente : [validée / à valider]. Prochaine action : [...]."

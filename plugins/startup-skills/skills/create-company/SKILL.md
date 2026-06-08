@@ -1,11 +1,11 @@
 ---
 name: create-company
-description: "Scaffolde un dossier company/ complet dans le repo courant — brand, stratégie, marketing, juridique, projets. Lance /create-company pour initialiser ta boîte avant de démarrer /build-company. Triggers : créer le dossier company, initialiser ma startup, scaffold company, create-company."
+description: "Scaffolde un dossier company/ complet dans le repo courant — brand, stratégie, marketing, juridique, projets. Normalement invoquée AUTOMATIQUEMENT par build-company quand le dossier company/ manque — le fondateur n'a pas à la lancer lui-même. Triggers : créer le dossier company, initialiser ma startup, scaffold company, create-company."
 ---
 
 # Create Company — scaffold du dossier company/
 
-Tu scaffoldes un dossier `company/` complet dans le répertoire courant. C'est la première action avant de lancer `/build-company`.
+Tu scaffoldes un dossier `company/` complet dans le répertoire courant. C'est l'étape d'initialisation que `build-company` déclenche tout seul quand le dossier manque. **Le fondateur ne tape jamais cette commande** : soit tu es invoquée automatiquement par `build-company`, soit le fondateur a exprimé l'envie de créer la structure en langage normal. À la fin, tu enchaînes toi-même sur `build-company` (outil Skill) — jamais "tape /build-company".
 
 ## Mode opératoire
 
@@ -75,9 +75,9 @@ Crée la structure complète en écrivant les fichiers suivants avec des placeho
 
 ### Étape 4 — Récap
 
-Affiche la liste des fichiers créés, puis :
+Affiche la liste des fichiers créés, puis **enchaîne directement** (invoque la skill `build-company` via l'outil Skill — ne demande pas au fondateur de la lancer) :
 
-> "Dossier company/ créé avec [N] fichiers. Lance `/build-company` pour démarrer la phase 0 : je vais t'aider à formuler ton problème et ta cible."
+> "Dossier company/ créé avec [N] fichiers. J'enchaîne sur la phase 0 : je vais t'aider à formuler ton problème et ta cible."
 
 ## Contenu du README.md `.planning/notes/` à créer
 

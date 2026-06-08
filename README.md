@@ -7,8 +7,8 @@ Un prompt, un `/build-company`, et les meilleurs agents de stratégie/marque/pri
 ## Ce que tu obtiens
 
 - **9 agents spécialisés** : stratégie, marketing, création DA, pricing, UX/conversion, rédaction, UI/UX, philosophie, gamification
-- **Skill `/build-company`** : orchestrateur qui séquence les 8 phases (cadrage → validation → stratégie → marque minimale → offre/GTM → identité → build → lancement)
-- **Skill `/create-company`** : scaffold ton dossier `company/` en une commande
+- **Skill `/build-company`** : orchestrateur qui séquence les 8 phases (cadrage → validation → stratégie → marque minimale → offre/GTM → identité → build → lancement) — le seul truc à lancer
+- **Skill `create-company`** : scaffold ton dossier `company/`, déclenché automatiquement par `/build-company` (tu ne la tapes pas toi-même)
 - **29 fichiers de contexte** : brand, stratégie, marketing, juridique — tous les docs qu'un fondateur doit remplir, structurés pour l'IA
 
 ## Installation (30 secondes)
@@ -45,10 +45,13 @@ start-up-box/
 
 ## Démarrer
 
+Une seule commande (ou la même chose en langage normal, _« je veux lancer ma boîte »_) :
+
 ```
-/create-company     ← scaffold ton dossier company/
-/build-company      ← démarre la phase 0 : cadrage de ton idée
+/build-company      ← démarre tout : cadrage de ton idée (phase 0)
 ```
+
+S'il manque le dossier `company/`, Claude le crée automatiquement avant de continuer — tu n'as pas à taper de commande pour ça.
 
 ## Philosophie
 
