@@ -5,11 +5,11 @@
 - **Claude Code** → https://claude.ai/download
 - **Abonnement Max** → https://claude.ai/upgrade
 
-**Prérequis Phase 5 — Build** (tu n'en as pas besoin maintenant) :
+**Prérequis Phase 6 — Build** (tu n'en as pas besoin maintenant — et tu n'auras rien à configurer seul : à la phase Build, l'assistant te prend par la main pour chacun, avec les URLs) :
 - **Node.js ≥18** → https://nodejs.org (si app web)
 - **GitHub CLI (gh)** → https://cli.github.com (pour créer et versionner le repo)
 - **Railway** → https://railway.app (déploiement, si app web)
-- **OpenRouter** → https://openrouter.ai (optionnel — si tu veux changer de modèle IA)
+- **Clé API IA** → Anthropic https://console.anthropic.com/settings/keys ou OpenRouter https://openrouter.ai/keys (si le produit appelle un LLM)
 
 ⚠ **Windows** : le prompt utilise des chemins Unix (`~/`). Claude Code les résout automatiquement via WSL ou Git Bash. Si ça échoue, lancer Claude Code depuis Git Bash.
 
@@ -71,11 +71,11 @@ Si tu préfères utiliser le système de plugin officiel Claude Code :
 
 ---
 
-## GitHub (optionnel — recommandé mais pas bloquant)
+## GitHub, Railway, clés API (optionnel — recommandé mais pas bloquant)
 
-GitHub n'est **pas nécessaire pour commencer**. Tu peux travailler en local.
+Rien à installer ni configurer **pour commencer** : tu peux travailler en local.
 
-Si tu veux versionner ton projet, lance `/build-company` : à la phase 5 (build), il t'expliquera comment créer ton repo.
+Quand tu arrives à la **phase 6 (Build)**, `/build-company` te **prend par la main** : pour chaque outil nécessaire à TON projet (GitHub + gh, clé API IA, Railway), il t'explique à quoi ça sert, te donne l'URL exacte, te dit ce que tu fais toi-même (créer le compte, copier une clé) — et fait **tout le reste à ta place** en ligne de commande (`gh auth login`, créer le repo, déployer). Tu n'as pas à chercher quoi que ce soit.
 
 ---
 
