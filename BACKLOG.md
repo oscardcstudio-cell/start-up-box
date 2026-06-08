@@ -85,4 +85,4 @@ Check-list à valider :
 
 **Etat** : à faire — important pour la distribution publique du package.
 
-Dans tous les fichiers templates du package (company/, INSTALL.md, docs/onboarding/index.html, COMPANY_PLAYBOOK.md), remplacer les occurrences hardcodées "Oscar" par une variable neutre (ex. `{{founder}}`, "l'utilisateur", "le fondateur"). Configurable lors du scaffold via `/create-company`.
+Dans tous les fichiers templates du package (company/, INSTALL.md, COMPANY_PLAYBOOK.md), remplacer les occurrences hardcodées "Oscar" par une variable neutre (ex. `{{founder}}`, "l'utilisateur", "le fondateur"). Configurable lors du scaffold via `/create-company`.

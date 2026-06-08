@@ -26,4 +26,4 @@
 
 ## Priorité 4 — onboarding
 
-- docs/onboarding/index.html : page d'accueil pour les utilisateurs de la box
+- Page publique d'onboarding = repo séparé déployé `oscardcstudio-cell/start-up-box-architecture` (live : https://start-up-box-onboarding-production.up.railway.app). Prompt d'install = div `#install-prompt` de son index.html.

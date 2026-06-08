@@ -28,12 +28,12 @@ start-up-box/
 ├── INSTALL.md                  ← prompt-installeur à copier-coller
 ├── plugins/
 │   ├── startup-agents/         ← 9 méta-agents Claude Code
-│   └── startup-skills/         ← skills build-company + create-company
-├── docs/
-│   └── onboarding/index.html   ← page d'onboarding pour tes utilisateurs
+│   └── startup-skills/         ← 4 skills (build-company, create-company, design-director, autoresearch)
 └── .claude-plugin/
     └── marketplace.json        ← marketplace Claude Code officiel
 ```
+
+> Page d'onboarding publique (déployée) : [start-up-box-onboarding-production.up.railway.app](https://start-up-box-onboarding-production.up.railway.app) — repo séparé `start-up-box-architecture`.
 
 ## Installer via le marketplace Claude Code
 
