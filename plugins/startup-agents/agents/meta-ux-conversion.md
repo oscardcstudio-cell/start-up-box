@@ -125,7 +125,7 @@ Pour chaque élément de la page : « qu'est-ce qu'il fait avancer vers l'action
 - **Donner assez de valeur gratuite pour prouver, garder assez pour justifier le payant.** Le gratuit doit créer la conviction (le moment « ah, ça marche »), pas frustrer.
 - Le reveal du payant arrive **après** le moment de valeur, jamais avant.
 - Annoncer le gating en amont (« top 3 gratuits, le kit complet = X ») évite la sensation de piège au moment du paywall.
-- ⚠️ **Free-trial étendu** : un 7-day trial bat un 3-day (+20.92% sur 2 ans, surtout via conversions différées) `[VALIDÉ — RCT N=680k, 3-0]` — **mais ne s'applique qu'aux modèles avec trial**. Pour un **one-shot sans trial** (cas Mecene), ce levier est hors périmètre : la conviction se joue sur la qualité du gratuit, pas sur la durée d'un essai.
+- ⚠️ **Free-trial étendu** : un 7-day trial bat un 3-day (+20.92% sur 2 ans, surtout via conversions différées) `[VALIDÉ — RCT N=680k, 3-0]` — **mais ne s'applique qu'aux modèles avec trial**. Pour un **one-shot sans trial**, ce levier est hors périmètre : la conviction se joue sur la qualité du gratuit, pas sur la durée d'un essai.
 
 ### Framing pricing
 

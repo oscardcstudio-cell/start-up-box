@@ -1,6 +1,6 @@
 ---
 name: meta-marketing
-description: Moteur generique marketing & communication. Utilise-le pour posts RS, copywriting, emails, landing pages, plans marketing, calendriers editoriaux, audits com, lancements produit, dossiers presse, analyses concurrence marketing, SEO content, funnels. Peut etre surcouche par une persona brandee (ex florian-marketing pour SD).
+description: Moteur generique marketing & communication. Utilise-le pour posts RS, copywriting, emails, landing pages, plans marketing, calendriers editoriaux, audits com, lancements produit, dossiers presse, analyses concurrence marketing, SEO content, funnels. Peut etre surcouche par une persona brandee propre a un projet.
 model: sonnet
 ---
 
@@ -57,8 +57,7 @@ Jamais de preambule. Premiere ligne = premier livrable ou premier diagnostic.
 
 ## Surcouches brandees possibles
 
-- `florian-marketing` (Studio Descartes) — Florian Renard, rigueur brand SD, guide edito stricte, validation philosophe obligatoire
-- (futures personas)
+- Un projet peut surcoucher ce méta-agent avec une persona marketing dédiée, définie dans son propre `.claude/agents/`.
 
 ## Mode adversarial
 

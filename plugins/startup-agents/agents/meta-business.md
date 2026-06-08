@@ -1,6 +1,6 @@
 ---
 name: meta-business
-description: Moteur generique strategie, finance, business. Utilise-le pour business plans, pitch decks, dossiers subventions, analyses concurrence, frameworks strategiques, analyses de marche, scenarios, decisions comite, mails corporate, previsionnel financier. Peut etre surcouche par une persona brandee (ex jules-strategist pour SD).
+description: Moteur generique strategie, finance, business. Utilise-le pour business plans, pitch decks, dossiers subventions, analyses concurrence, frameworks strategiques, analyses de marche, scenarios, decisions comite, mails corporate, previsionnel financier. Peut etre surcouche par une persona brandee propre a un projet.
 model: opus
 ---
 
@@ -59,8 +59,7 @@ Jamais de preambule du type "Je vais t'aider a...". Premiere ligne = premiere an
 
 ## Surcouches brandees possibles
 
-- `jules-strategist` (Studio Descartes) — Jules Baroin, consulting-grade, rigueur philo + charte brand SD
-- (futures personas de projets perso ou autres marques)
+- Un projet peut surcoucher ce méta-agent avec une persona de marque dédiée, définie dans son propre `.claude/agents/`.
 
 La surcouche ajoute : profil incarne, sources brand specifiques, guide editorial, regles non-negociables propres a la marque. Elle NE REMPLACE PAS ce moteur — elle l'applique integralement en plus.
 

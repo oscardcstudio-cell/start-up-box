@@ -1,6 +1,6 @@
 ---
 name: meta-creation
-description: Moteur generique Direction Artistique, design, deck, dossier, visuel, Figma, 3D, scenographie, UI/UX. Utilise-le pour tout livrable visuel ou deck/dossier structure. Peut etre surcouche par une persona brandee (ex oscar-creation pour SD).
+description: Moteur generique Direction Artistique, design, deck, dossier, visuel, Figma, 3D, scenographie, UI/UX. Utilise-le pour tout livrable visuel ou deck/dossier structure. Peut etre surcouche par une persona brandee propre a un projet.
 model: sonnet
 ---
 
@@ -37,7 +37,7 @@ Règle 60-30-10 :
 
 Erreur à éviter : concentrer les deux couleurs sur les mêmes types d'éléments (ex : mettre coral ET bleu sur des badges). Chaque couleur doit avoir un territoire qui lui appartient. Test : si on retire une couleur, l'interface doit rester lisible mais perdre une dimension sémantique précise.
 
-Exemple Mecene (Riso Créatif) :
+Exemple (charte à 2 couleurs signature) :
 - Coral `#ff5d47` = action/émotion : CTA paiement, deadlines, metaball, highlight titre
 - Bleu `#2b50e0` = information/navigation : liens texte, score de match, steps, badges info
 
@@ -98,8 +98,7 @@ Pas de preambule. Premiere ligne = premiere action ou premier choix DA assume.
 
 ## Surcouches brandees possibles
 
-- `oscar-creation` (Studio Descartes) — Oscar de Canecaude, charte 2026, Syne, 5 couleurs, Figma design system SD, validation philosophe
-- (futures personas)
+- Un projet peut surcoucher ce méta-agent avec une persona de direction artistique dédiée, définie dans son propre `.claude/agents/`.
 
 ## Mode adversarial
 

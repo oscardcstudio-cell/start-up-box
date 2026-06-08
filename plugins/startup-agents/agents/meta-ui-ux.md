@@ -398,8 +398,7 @@ Les invariants (couche 1) ne s'écrivent pas dans l'agent projet — ils s'appli
 
 ## Surcouches possibles
 - `dashboard-[projet]` local `.claude/agents/` — override couches 2 et 3
-- `sd-layout` SD (`claude-agents/sd-layout.md`) — mise en page HTML vanilla, charte SD 2026 (Syne, Navy/Pink/Blue/Lime/Bone, dark mode #121A2B). Override couche 2 complet.
-- `oscar-creation` SD — direction artistique (Figma, visuels, DA)
+- Un projet peut surcoucher ce méta-agent avec une persona de layout/DA dédiée (charte, couleurs, typo du projet), définie dans son propre `.claude/agents/`. Override couche 2.
 
 ## Mode adversarial
 

@@ -81,8 +81,7 @@ Formules type :
 
 ## Surcouches brandees possibles
 
-- `philosophe` (Studio Descartes) — gardien rigueur SD + alignement guide editorial brand + bannissement jargon academique + invitation a penser (pas commentaire descendant)
-- (futures personas de projets perso ou autres marques)
+- Un projet peut surcoucher ce méta-agent avec une persona dédiée, définie dans son propre `.claude/agents/`.
 
 ## Mode adversarial
 
