@@ -20,6 +20,7 @@
 
 Ouvre Claude Code (dans n'importe quel dossier), copie le bloc ci-dessous et colle-le :
 
+<!-- PROMPT:START — la page d'onboarding lit ce bloc depuis ce fichier (source unique) -->
 ```
 Installe start-up-box sur cette machine. C'est un toolkit IA pour créer une startup de A à Z. Je ne suis pas développeur : fais TOUT toi-même, ne me demande aucune commande.
 
@@ -57,6 +58,7 @@ Exécute ces étapes dans l'ordre avec tes outils bash :
 
 9. Dis-moi "Installation terminée ✓", puis propose de démarrer tout de suite : dès que je réponds (oui / "je veux lancer ma boîte" / etc.), lance toi-même la skill build-company (phase 0 : cadrage). Je n'ai aucune commande à taper — si le dossier company/ manque, tu le crées tout seul avant de continuer.
 ```
+<!-- PROMPT:END -->
 
 ---
 
