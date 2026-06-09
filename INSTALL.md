@@ -82,6 +82,7 @@ Si tu as installé la box **avant** que la mise à jour automatique existe, fais
 
 Ouvre Claude Code (n'importe quel dossier), colle ce prompt :
 
+<!-- UPDATE_PROMPT:START — la page d'onboarding lit ce bloc depuis ce fichier (source unique) -->
 ```
 Mets à jour start-up-box sur cette machine. Je ne suis pas développeur : fais tout toi-même, ne me demande aucune commande.
 
@@ -94,6 +95,7 @@ Mets à jour start-up-box sur cette machine. Je ne suis pas développeur : fais 
 7. Active la mise à jour à chaque conversation : fusionne dans ~/.claude/settings.json (sans créer de doublon, sans casser l'existant) : { "hooks": { "SessionStart": [ { "hooks": [ { "type": "command", "command": "node ~/.claude/hooks/startup-box-update.js" } ] } ] } }
 8. Dis "Mise à jour terminée ✓" et résume ce qui a changé. À partir de maintenant, les mises à jour se font toutes seules à chaque conversation — je n'aurai plus rien à coller.
 ```
+<!-- UPDATE_PROMPT:END -->
 
 > Une fois ce prompt passé, tu n'auras **plus jamais** à le refaire : le hook installé à l'étape 5+7 récupère les nouveautés à chaque démarrage de conversation.
 
