@@ -49,15 +49,19 @@ try {
   // git dispo ?
   try { execFileSync('git', ['--version'], { timeout: 5000, stdio: 'ignore' }) } catch { ok() }
 
-  // 1. Pull ff-only (fail-silent). On retient si quelque chose a bougé.
-  let upToDate = false
+  // 1. Pull ff-only (fail-silent). Détection de changement par HEAD avant/après :
+  //    `git pull -q` n'écrit RIEN sur stdout même quand il met à jour → se fier à la
+  //    sortie ferait sauter la resync (bug réel). On compare donc les commits.
+  let changed = false
   try {
-    const out = git(['pull', '--ff-only', '-q'])
-    upToDate = /already up to date|déjà à jour/i.test(out) || out.trim() === ''
+    const before = git(['rev-parse', 'HEAD']).trim()
+    git(['pull', '--ff-only', '-q'])
+    const after = git(['rev-parse', 'HEAD']).trim()
+    changed = before !== after
   } catch { ok() } // offline / conflit / pas de remote → on garde la copie locale, silencieux
 
-  // 2. Resync du CONTENU seulement si nécessaire (changement distant OU install incomplète).
-  if (!upToDate || !healthy()) {
+  // 2. Resync du CONTENU si quelque chose a bougé distant OU si l'install est incomplète.
+  if (changed || !healthy()) {
     copyInto(path.join(SRC, 'plugins', 'startup-agents', 'agents'), path.join(CLAUDE_DIR, 'agents'))
     copyInto(path.join(SRC, 'plugins', 'startup-skills', 'skills'), path.join(CLAUDE_DIR, 'skills'))
     copyInto(path.join(SRC, 'meta-rules'), MANAGED)
