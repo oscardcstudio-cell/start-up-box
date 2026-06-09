@@ -2,10 +2,7 @@
 
 ## Priorité 1 — architecture
 
-- INSTALL.md : prompt-installeur (le prompt copy-paste unique)
-- .claude-plugin/marketplace.json : marketplace Claude Code officiel
-- plugins/startup-agents/.claude-plugin/plugin.json : manifest agents
-- plugins/startup-skills/.claude-plugin/plugin.json : manifest skills
+- INSTALL.md : prompt-installeur (le SEUL chemin d'install — clone + copie + hook auto-update)
 
 ## Priorité 2 — agents packagés
 

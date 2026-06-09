@@ -25,21 +25,19 @@ Copie le bloc dans `INSTALL.md` et colle-le dans une session Claude Code :
 
 ```
 start-up-box/
-├── INSTALL.md                  ← prompt-installeur à copier-coller
+├── INSTALL.md                  ← prompt-installeur à copier-coller (le seul chemin)
 ├── plugins/
-│   ├── startup-agents/         ← 9 méta-agents Claude Code
-│   └── startup-skills/         ← 4 skills (build-company, create-company, design-director, autoresearch)
-└── .claude-plugin/
-    └── marketplace.json        ← marketplace Claude Code officiel
+│   ├── startup-agents/agents/  ← 9 méta-agents Claude Code
+│   └── startup-skills/skills/  ← 4 skills (build-company, create-company, design-director, autoresearch)
+├── meta-rules/                 ← harness fondateur + doctrines (couche meta installée chez l'user)
+└── hooks/                      ← mise à jour automatique (SessionStart)
 ```
 
 > Page d'onboarding publique (déployée) : [start-up-box-onboarding-production.up.railway.app](https://start-up-box-onboarding-production.up.railway.app) — repo séparé `start-up-box-architecture`.
 
 ## Installer
 
-Un seul chemin : le **prompt-installeur** (copier-coller dans Claude Code) → voir [INSTALL.md](INSTALL.md). Il installe tout : agents, compétences, **harness fondateur** et **mise à jour automatique**.
-
-> ⚠️ N'installe pas via `/plugin` / le marketplace : ça ne pose que les agents et les skills, **sans** le harness ni les mises à jour automatiques (install incomplet). Utilise le prompt.
+Un seul chemin : le **prompt-installeur** (copier-coller dans Claude Code) → voir [INSTALL.md](INSTALL.md). Il installe tout : agents, compétences, **harness fondateur** et **mise à jour automatique** (clone + petit hook, pas de plugin ni de marketplace).
 
 ## Démarrer
 

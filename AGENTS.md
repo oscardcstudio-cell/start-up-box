@@ -10,7 +10,7 @@ start-up-box est un toolkit IA open-source pour créer une startup. Ce repo cont
 - `meta-rules/` : harness fondateur + doctrines (couche meta installée chez l'utilisateur)
 - `hooks/` : mise à jour automatique (SessionStart)
 
-Install unique = prompt-installeur de `INSTALL.md`. Le marketplace (`.claude-plugin/marketplace.json`) existe encore mais n'est PAS le chemin recommandé : il donne un install incomplet (sans harness ni auto-update).
+Install unique = prompt-installeur de `INSTALL.md` (clone + copie + hook d'auto-update). Pas de plugin ni de marketplace : ça ne saurait pas livrer le harness ni l'auto-update silencieux.
 
 ## Fichiers clés
 
