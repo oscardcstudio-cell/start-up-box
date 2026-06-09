@@ -86,6 +86,29 @@ Si tu préfères utiliser le système de plugin officiel Claude Code :
 
 ---
 
+## Mettre à jour (une seule fois, ensuite c'est automatique)
+
+Si tu as installé la box **avant** que la mise à jour automatique existe, fais cette mise à jour **une fois** : elle installe le mécanisme qui fera toutes les suivantes tout seul, à chaque conversation.
+
+Ouvre Claude Code (n'importe quel dossier), colle ce prompt :
+
+```
+Mets à jour start-up-box sur cette machine. Je ne suis pas développeur : fais tout toi-même, ne me demande aucune commande.
+
+1. Mets ~/.start-up-box sur la dernière version distante : si le dossier existe, fais un git pull (ou, en cas de conflit local, un reset --hard sur la version distante) ; s'il n'existe pas, clone https://github.com/oscardcstudio-cell/start-up-box.git dans ~/.start-up-box.
+2. Recopie les agents : cp ~/.start-up-box/plugins/startup-agents/agents/*.md ~/.claude/agents/
+3. Recopie les compétences : cp -r ~/.start-up-box/plugins/startup-skills/skills/* ~/.claude/skills/
+4. Installe la couche meta : mkdir -p ~/.claude/startup-box && cp -r ~/.start-up-box/meta-rules/* ~/.claude/startup-box/
+5. Installe la mise à jour automatique : mkdir -p ~/.claude/hooks && cp ~/.start-up-box/hooks/*.js ~/.claude/hooks/ && cp ~/.start-up-box/hooks/VERSION ~/.claude/startup-box/.hooks-version
+6. Branche le harness sans écraser mon CLAUDE.md perso : si ~/.claude/CLAUDE.md ne contient pas la ligne @startup-box/HARNESS.md, ajoute-la à la fin (crée le fichier s'il manque).
+7. Active la mise à jour à chaque conversation : fusionne dans ~/.claude/settings.json (sans créer de doublon, sans casser l'existant) : { "hooks": { "SessionStart": [ { "hooks": [ { "type": "command", "command": "node ~/.claude/hooks/startup-box-update.js" } ] } ] } }
+8. Dis "Mise à jour terminée ✓" et résume ce qui a changé. À partir de maintenant, les mises à jour se font toutes seules à chaque conversation — je n'aurai plus rien à coller.
+```
+
+> Une fois ce prompt passé, tu n'auras **plus jamais** à le refaire : le hook installé à l'étape 5+7 récupère les nouveautés à chaque démarrage de conversation.
+
+---
+
 ## GitHub, Railway, clés API (optionnel — recommandé mais pas bloquant)
 
 Rien à installer ni configurer **pour commencer** : tu peux travailler en local.
