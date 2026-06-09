@@ -6,8 +6,11 @@ Fichier cross-tool : pointer Codex, Cursor, Gemini CLI, Copilot CLI vers ce repo
 
 start-up-box est un toolkit IA open-source pour créer une startup. Ce repo contient :
 - 9 méta-agents Claude Code spécialisés (stratégie, marketing, pricing, création, rédaction...)
-- 2 skills : `/build-company` (orchestrateur 8 phases) et `/create-company` (scaffold)
-- Le marketplace Claude Code officiel (`.claude-plugin/marketplace.json`)
+- 4 skills : `/build-company` (orchestrateur 8 phases), `create-company` (scaffold, auto-invoquée), `design-director`, `autoresearch`
+- `meta-rules/` : harness fondateur + doctrines (couche meta installée chez l'utilisateur)
+- `hooks/` : mise à jour automatique (SessionStart)
+
+Install unique = prompt-installeur de `INSTALL.md`. Le marketplace (`.claude-plugin/marketplace.json`) existe encore mais n'est PAS le chemin recommandé : il donne un install incomplet (sans harness ni auto-update).
 
 ## Fichiers clés
 

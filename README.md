@@ -35,13 +35,11 @@ start-up-box/
 
 > Page d'onboarding publique (déployée) : [start-up-box-onboarding-production.up.railway.app](https://start-up-box-onboarding-production.up.railway.app) — repo séparé `start-up-box-architecture`.
 
-## Installer via le marketplace Claude Code
+## Installer
 
-```
-/plugin marketplace add https://github.com/oscardcstudio-cell/start-up-box
-/plugin install startup-agents@start-up-box
-/plugin install startup-skills@start-up-box
-```
+Un seul chemin : le **prompt-installeur** (copier-coller dans Claude Code) → voir [INSTALL.md](INSTALL.md). Il installe tout : agents, compétences, **harness fondateur** et **mise à jour automatique**.
+
+> ⚠️ N'installe pas via `/plugin` / le marketplace : ça ne pose que les agents et les skills, **sans** le harness ni les mises à jour automatiques (install incomplet). Utilise le prompt.
 
 ## Démarrer
 

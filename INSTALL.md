@@ -74,18 +74,6 @@ Le reste, Claude l'enchaîne tout seul : s'il manque le dossier `company/`, il l
 
 ---
 
-## Installer via le marketplace (alternative)
-
-Si tu préfères utiliser le système de plugin officiel Claude Code :
-
-```
-/plugin marketplace add https://github.com/oscardcstudio-cell/start-up-box
-/plugin install startup-agents@start-up-box
-/plugin install startup-skills@start-up-box
-```
-
----
-
 ## Mettre à jour (une seule fois, ensuite c'est automatique)
 
 Si tu as installé la box **avant** que la mise à jour automatique existe, fais cette mise à jour **une fois** : elle installe le mécanisme qui fera toutes les suivantes tout seul, à chaque conversation.
