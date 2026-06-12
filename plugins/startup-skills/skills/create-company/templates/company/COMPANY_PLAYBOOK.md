@@ -160,6 +160,22 @@ Repère officiel du bon outil selon le stade :
 - [ ] **P7** — tracking en place + RGPD/CGU OK
 - [ ] **∥** — forme juridique avant 1er euro ; RGPD/CGU avant collecte data
 
+## Stops durs — prérequis non négociables (auto-appliqués par les agents)
+
+La checklist ci-dessus, c'est **toi** qui la valides. En plus, les **agents de production refusent d'eux-mêmes** de livrer si leur prérequis amont manque — même invoqués directement, hors `/build-company`. Le refus EST le garde-fou, pas un bug. Ordre = qualité, pas bureaucratie.
+
+| Livrable demandé | Prérequis dur | Agent qui refuse | Renvoi |
+|---|---|---|---|
+| Interface / UI produit | charte (couleurs+typo) ou `design.md` | `meta-ui-ux` | P5 / refero |
+| Charte, DA, identité visuelle | offre validée P4 (signal willingness-to-pay) | `meta-creation` | P4 |
+| Visuel au nom de la boîte | `brand/charte.md` | `meta-creation` | P5 |
+| Campagne / lancement / plan marketing | stratégie + canal (`business_plan` + `distribution`) | `meta-marketing` | P2 |
+| Tout texte signé de la boîte | `brand/guide_editorial.md` | `meta-marketing` / `meta-redacteur` | P3 |
+| Landing / funnel définitif | cible validée + offre figée | `meta-ux-conversion` | P0-1 / P4 |
+| Gamification | produit / funnel qui marche | `meta-gamification` | amont |
+
+Échappatoire encadrée : un brouillon **explicitement jetable** est possible si le fondateur l'assume (marqué « à refaire »). Une landing de **test** (fake-door P4) est légitime avant l'offre figée. Les agents ne cèdent pas sur « t'es sûr ? » seul — uniquement sur le choix assumé du jetable.
+
 ## Packages d'infrastructure (par phase)
 
 Modules cross-projets (`C:\dev\claude\packages\`) à invoquer aux moments indiqués.
