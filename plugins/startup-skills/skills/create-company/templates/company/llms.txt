@@ -1,0 +1,41 @@
+# company/ — inventaire pour LLM
+
+## Pilotage (déroulé de fabrication)
+- COMPANY_PLAYBOOK.md — les 7 phases (cadrage→validation→stratégie→marque→offre/GTM→build→lancement), agent pilote + livrable + gate de chacune. Orchestré par la skill /build-company.
+- DOCUMENT_RECIPES.md — fiches-recettes par livrable (12 archétypes) : intrants à charger, protocole de recherche (taxonomie R0-R3 anti-deep-search-réflexe), brief-clé, pièges connus, gate. À ouvrir AVANT de (re)produire tout livrable. Couche anti-redécouverte sous le playbook.
+
+## Identité & équipe
+- info.json — infos légales (SIRET, capital, adresse, contacts)
+- team.json — équipe (fondateur + salariés/freelances)
+
+## Brand (OBLIGATOIRE avant tout contenu)
+- brand/plateforme.md — WHY/WHAT/HOW, valeurs, positionnement
+- brand/manifesto.md — texte fondateur, tagline
+- brand/fondations.md — mythe fondateur, origine du nom
+- brand/founder.md — le fondateur comme marque (solo founder)
+- brand/guide_editorial.md — ton, vocabulaire, interdits (OBLIGATOIRE avant tout texte)
+- brand/cibles.md — segments prioritaires
+- brand/personas.md — portraits clients
+- brand/concurrence.md — mapping concurrentiel
+- brand/charte.md — couleurs, typo, logo
+- brand/direction_artistique.md — univers visuel
+
+## Stratégie
+- strategie/business_plan.md — résumé exécutif, modèle éco, roadmap
+- strategie/pitch_deck.md — structure narrative pitch
+- strategie/plan_financier.md — prévisionnel 3 ans
+- strategie/hypotheses.md — croyances à valider (codifier tôt)
+- strategie/distribution.md — canaux d'acquisition
+- strategie/metrics.md — North Star + tableau de bord
+- strategie/subventions.md — aides obtenues / en cours / à cibler
+
+## Marketing
+- marketing/plan_marketing.md — objectifs, canaux, campagnes
+- marketing/calendrier_editorial.md — piliers contenu, rythme
+
+## Juridique
+- juridique/statuts.md — gouvernance, actionnariat
+- juridique/checklist_solo.md — checklist solo founder (forme juridique, RGPD, CGU, assurances)
+
+## Projets
+- projets/TEMPLATE_PROJET.md — à dupliquer par projet

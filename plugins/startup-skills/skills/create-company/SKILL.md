@@ -21,21 +21,22 @@ Pose une seule question : **solo founder ou avec associés ?**
 - `solo` → crée `juridique/checklist_solo.md`, supprime `juridique/pacte_associes.md`
 - `associés` → crée `juridique/statuts.md` + `juridique/pacte_associes.md`, supprime `juridique/checklist_solo.md`
 
-### Étape 3 — Scaffold
+### Étape 3 — Scaffold (COPIE des templates prêts à l'emploi — tu n'improvises pas)
 
-Crée la structure complète en écrivant les fichiers suivants avec des placeholders `<!-- À fournir -->`.
+La box embarque l'arbre `company/` **déjà rédigé, commenté et branché sur le plan** : chaque fichier porte sous son titre un en-tête `<!-- COMPANY-FILE <chemin> -->` + `> Rôle` + `> Plan (phase · agent)`. Ton job est de **copier cet arbre**, pas de réécrire les fichiers de mémoire (ils seraient plus pauvres et sans en-tête).
 
-**En-tête obligatoire sur CHAQUE fichier `.md` de contenu** (brand/, strategie/, marketing/, juridique/, projets/) — juste après le titre H1 :
+1. **Localise l'arbre de templates** — prends le premier chemin qui existe :
+   - `~/.start-up-box/plugins/startup-skills/skills/create-company/templates/company/` (clone de la box, le plus à jour)
+   - `~/.claude/skills/create-company/templates/company/` (copie locale du skill)
+2. **Copie tout l'arbre** dans `./company/` (récursif — `cp -r <source>/. ./company/` ou équivalent). Ça pose les 31 fichiers d'un coup, en-têtes inclus.
+3. **Nettoyage juridique** selon l'étape 2 :
+   - `solo` → supprime `company/juridique/statuts.md` + `company/juridique/pacte_associes.md` (garde `checklist_solo.md`)
+   - `associés` → supprime `company/juridique/checklist_solo.md` (garde `statuts.md` + `pacte_associes.md`)
+4. **Crée `company/.planning/notes/`** (réservoir d'idées — non inclus dans l'arbre, voir plus bas).
 
-```
-<!-- COMPANY-FILE <chemin relatif> — ce fichier existe déjà : un agent l'ÉDITE, il n'en crée jamais un nouveau -->
-> **Rôle** — <une phrase : à quoi sert ce fichier>
-> **Plan** — Phase <n> · <nom de phase> · rempli par <agent>. Vue d'ensemble : `COMPANY_PLAYBOOK.md`.
-```
+> Si **aucun** chemin de templates n'existe (box non clonée / installeur incomplet) : **ne reconstruis pas les fichiers à la main**. Signale-le au fondateur et propose de relancer l'installeur — un scaffold improvisé perdrait la structure et les en-têtes qui branchent les agents.
 
-Cet en-tête est ce qui « branche » les agents métier sur le bon fichier : il situe le fichier dans le plan ET interdit la création de doublons (`charte_graphique.md`, `-v2`…). Phase + agent par fichier : `charte`/`direction_artistique`/`manifesto`/`fondations`/`personas` → P5 `meta-creation` ; `plateforme`/`guide_editorial` → P3 ; `cibles`/`concurrence` → P1 ; `founder` → P0 ; `hypotheses`/`metrics`/`business_plan`/`distribution` → P0-2 `meta-business` ; `plan_marketing`/`calendrier_editorial` → P4 `meta-marketing` ; juridique → transverse (avocat).
-
-**Racine company/**
+**Contenu de l'arbre copié (carte de référence) — racine company/**
 - `CLAUDE.md` — règles de chargement IA
 - `AGENTS.md` — cross-tool
 - `llms.txt` — inventaire fichiers critiques
@@ -118,55 +119,6 @@ Crée aussi les 6 fichiers sujets + INBOX.md avec ce header minimal :
 <!-- Format : - [AAAA-MM-JJ] idée telle quelle — _(source: session)_ -->
 ```
 
-## Contenu du COMPANY_PLAYBOOK.md à créer
+## COMPANY_PLAYBOOK.md et CLAUDE.md company/
 
-Crée `company/COMPANY_PLAYBOOK.md` avec ce contenu minimal :
-
-```markdown
-# COMPANY_PLAYBOOK.md — Gamme de fabrication
-
-8 phases de création, pilotées par `/build-company`. Gate humaine à chaque étape.
-La marque est en **deux temps** (minimale en P3 pour tester, complète en P5 après le signal de conversion) — ne jamais figer l'identité visuelle avant que l'offre ait validé (P4).
-
-| Phase | Objectif | Gate |
-|---|---|---|
-| 0 — Cadrage | Formuler le problème et la cible | Hypothèse problème + cible écrits |
-| 1 — Validation | Confirmer le problème par du signal externe | Problème confirmé (interviews, fake-door...) |
-| 2 — Stratégie & business model | Modèle économique + North Star (+ red-team) | Unit economics tiennent + North Star définie |
-| 3 — Marque minimale | Plateforme + guide éditorial (de quoi tester) | `plateforme.md` + `guide_editorial.md` posés |
-| 4 — Offre & GTM | Offre packagée + canal prioritaire + **landing testée** | Signal de **willingness-to-pay** réel (pas juste "testable") |
-| 5 — Identité de marque complète | Charte, DA, manifesto, personas | `charte.md` + `direction_artistique.md` posés, cohérents avec ce qui a converti en P4 |
-| 6 — Build / MVP | MVP qui mesure l'hypothèse de valeur | MVP hypothèse-testable. *Au début : onboarding infra pris par la main — GSD (`npx get-shit-done-cc --global` si absent), GitHub, clé API IA, Railway, avec les URLs* |
-| 7 — Lancement | Mise en marché + mesure active | Tracking en place + RGPD/CGU OK |
-| ∥ Juridique | Structure légale propre | Forme avant 1er euro ; RGPD avant collecte data |
-
-Détail complet : https://github.com/oscardcstudio-cell/start-up-box
-```
-
-## Contenu du CLAUDE.md company/ à créer
-
-```markdown
-# Contexte entreprise — company/
-
-Quand ce dossier est présent, charger ses fichiers pour tout contexte business ou brand.
-
-## Priorité de chargement
-
-1. info.json + team.json
-2. brand/plateforme.md
-3. brand/founder.md
-4. brand/guide_editorial.md — OBLIGATOIRE avant tout texte
-5. strategie/hypotheses.md + strategie/metrics.md
-
-## Règles
-
-- Avant tout texte → charger brand/guide_editorial.md
-- Avant tout visuel → charger brand/charte.md + brand/direction_artistique.md
-- Avant toute décision stratégique → charger strategie/hypotheses.md + strategie/metrics.md
-
-## Notes entre sessions
-
-- Quand le fondateur dit **"note X: …"** (produit/offre/acquisition/marque/tech-ops/vision) → ranger dans `.planning/notes/<X>.md`, daté, garder sa formulation, confirmer où c'est rangé.
-- Quand le fondateur dit **"on revoit [sujet]"** → rassembler toutes les notes du sujet, décider ensemble, logger la décision.
-- **Avant tout chantier** : `/build-company` lit les notes pertinentes pour la phase — elles sont injectées dans le prompt de l'agent. Une note capturée ici EST invoquée au bon moment.
-```
+**Déjà dans l'arbre de templates copié à l'étape 3** — ne les réécris pas ici. Le `COMPANY_PLAYBOOK.md` bundlé est la version complète (8 phases détaillées, gates, agents, onboarding infra P6) ; le `CLAUDE.md` company/ porte les priorités de chargement et les règles « note X / on revoit ». Si tu as dû basculer en mode reconstruction manuelle (templates introuvables — cas dégradé signalé à l'étape 3), récupère leur contenu depuis le repo : https://github.com/oscardcstudio-cell/start-up-box
