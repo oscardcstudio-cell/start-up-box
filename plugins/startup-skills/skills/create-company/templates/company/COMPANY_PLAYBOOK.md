@@ -178,7 +178,7 @@ La checklist ci-dessus, c'est **toi** qui la valides. En plus, les **agents de p
 
 ## Packages d'infrastructure (par phase)
 
-Modules cross-projets (`C:\dev\claude\packages\`) à invoquer aux moments indiqués.
+Modules réutilisables du toolkit (dossier `packages/` du dépôt start-up-box) à invoquer aux moments indiqués.
 
 | Package | Phases | Usage |
 |---|---|---|

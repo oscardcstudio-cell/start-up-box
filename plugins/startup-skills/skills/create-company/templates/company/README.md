@@ -81,4 +81,4 @@ Le classeur ci-dessus stocke les livrables. Pour les **produire dans le bon ordr
 
 ## Pour créer une nouvelle boîte
 
-Voir [`C:\dev\claude\NEW_COMPANY.md`](../NEW_COMPANY.md) — protocole d'init complet (clone du template + prompt d'audit à coller dans Claude).
+Voir `NEW_COMPANY.md` (livré dans `~/.claude/startup-box/`) — protocole d'init complet (clone du template + prompt d'audit à coller dans Claude).
