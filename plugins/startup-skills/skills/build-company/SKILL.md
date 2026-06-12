@@ -42,8 +42,8 @@ Pour la phase courante :
 1. **Rappelle l'objectif + la gate** de la phase (depuis le playbook).
 2. **Appelle l'agent pilote** via l'outil Agent, avec un prompt qui précise :
    - le contexte (lui faire lire les fichiers `company/` amont déjà remplis) ;
-   - le livrable attendu (le(s) fichier(s) `company/` exact(s) de cette phase) ;
-   - **consigne d'écriture** : écrire le résultat dans le bon fichier `company/`, garder les `<!-- À fournir -->` pour ce qui dépend d'une décision du fondateur.
+   - le livrable attendu — **le(s) chemin(s) exact(s)** du/des fichier(s) `company/` de cette phase (ex : `company/brand/charte.md`), pas juste le nom du livrable ;
+   - **consigne d'écriture (dure)** : « ÉDITE le fichier existant à ce chemin, ne crée JAMAIS un nouveau fichier parallèle (`charte_graphique.md`, `-v2`, etc.). Lis-le d'abord, remplace ses placeholders, garde sa structure et son en-tête `<!-- COMPANY-FILE -->`. Garde les `<!-- À fournir -->` pour ce qui dépend d'une décision du fondateur. »
 3. **Restitue** le livrable produit + **la question de gate** explicite ("La gate de phase X est : [critère]. Est-ce atteint ? go / pivot / je creuse ?").
 4. **Attends le go du fondateur.** S'il dit go → phase suivante. S'il dit pivot → reboucle la phase (souvent retour en P1 validation). Sinon, creuse ce qu'il demande.
 

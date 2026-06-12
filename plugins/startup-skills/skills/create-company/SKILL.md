@@ -25,6 +25,16 @@ Pose une seule question : **solo founder ou avec associés ?**
 
 Crée la structure complète en écrivant les fichiers suivants avec des placeholders `<!-- À fournir -->`.
 
+**En-tête obligatoire sur CHAQUE fichier `.md` de contenu** (brand/, strategie/, marketing/, juridique/, projets/) — juste après le titre H1 :
+
+```
+<!-- COMPANY-FILE <chemin relatif> — ce fichier existe déjà : un agent l'ÉDITE, il n'en crée jamais un nouveau -->
+> **Rôle** — <une phrase : à quoi sert ce fichier>
+> **Plan** — Phase <n> · <nom de phase> · rempli par <agent>. Vue d'ensemble : `COMPANY_PLAYBOOK.md`.
+```
+
+Cet en-tête est ce qui « branche » les agents métier sur le bon fichier : il situe le fichier dans le plan ET interdit la création de doublons (`charte_graphique.md`, `-v2`…). Phase + agent par fichier : `charte`/`direction_artistique`/`manifesto`/`fondations`/`personas` → P5 `meta-creation` ; `plateforme`/`guide_editorial` → P3 ; `cibles`/`concurrence` → P1 ; `founder` → P0 ; `hypotheses`/`metrics`/`business_plan`/`distribution` → P0-2 `meta-business` ; `plan_marketing`/`calendrier_editorial` → P4 `meta-marketing` ; juridique → transverse (avocat).
+
 **Racine company/**
 - `CLAUDE.md` — règles de chargement IA
 - `AGENTS.md` — cross-tool
