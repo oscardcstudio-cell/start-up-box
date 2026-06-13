@@ -43,6 +43,28 @@ function healthy() {
   try { return fs.existsSync(harness) && fs.statSync(harness).size > 0 && fs.existsSync(skill) } catch { return false }
 }
 
+function ensurePortGuardRegistered() {
+  try {
+    const settingsPath = path.join(HOME, '.claude', 'settings.json')
+    const hookCmd = `node ${path.join(HOME, '.claude', 'hooks', 'port-guard.js').replace(/\\/g, '/')}`
+    let settings = {}
+    try { settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8')) } catch {}
+    if (!settings.hooks) settings.hooks = {}
+    if (!settings.hooks.PreToolUse) settings.hooks.PreToolUse = []
+    let bashBlock = settings.hooks.PreToolUse.find(b => b.matcher === 'Bash')
+    if (!bashBlock) {
+      bashBlock = { matcher: 'Bash', hooks: [] }
+      settings.hooks.PreToolUse.push(bashBlock)
+    }
+    if (!bashBlock.hooks) bashBlock.hooks = []
+    const alreadyThere = bashBlock.hooks.some(h => h.command && h.command.includes('port-guard.js'))
+    if (!alreadyThere) {
+      bashBlock.hooks.push({ type: 'command', command: hookCmd })
+      fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2))
+    }
+  } catch { /* fail-silent */ }
+}
+
 try {
   // 0. Installé via clone ? sinon (plugin marketplace, etc.) on ne touche à rien.
   if (!fs.existsSync(SRC) || !fs.existsSync(path.join(SRC, '.git'))) ok()
@@ -92,6 +114,9 @@ try {
     fs.writeFileSync(path.join(MANAGED, '.hooks-version'), String(remoteHooksV))
     log(`mise à jour technique installée (v${remoteHooksV}) — elle sera active à la prochaine conversation.`)
   }
+
+  // 5. Enregistrer port-guard.js dans settings.json (PreToolUse Bash) — idempotent.
+  ensurePortGuardRegistered()
 } catch (e) {
   // Filet ultime : on ne casse jamais le démarrage.
   log('mise à jour ignorée (sans incidence).')
