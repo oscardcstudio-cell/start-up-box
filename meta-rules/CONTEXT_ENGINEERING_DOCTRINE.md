@@ -2,7 +2,7 @@
 
 Le **context engineering** est la discipline de rendre le codebase navigable et lisible pour les agents Claude, afin de réduire les erreurs, les lectures inutiles, et les régressions silencieuses.
 
-Origine : audit de lisibilité sur un projet réel. Standards adoptés par Anthropic, Cloudflare, Stripe. Proposé par Answer.AI (sept. 2024).
+Origine : audit de lisibilité un projet de trading (mai 2026). Standards adoptés par Anthropic, Cloudflare, Stripe. Proposé par Answer.AI (sept. 2024).
 
 ## Les 7 standards
 
@@ -29,13 +29,14 @@ Template minimal :
 ```
 
 **3. Index de sections dans les fichiers > 2000 lignes**
-Tout fichier > 2000 lignes avec plusieurs responsabilités → bloc de commentaires en tête avec numéros de lignes approximatifs et rôle de chaque bloc.
+Tout fichier > 2000 lignes avec plusieurs responsabilités → bloc de commentaires en tête avec numéros de lignes approximatifs et rôle de chaque bloc. Voir `src/logic/shadowTrading.js` dans un projet de trading comme modèle.
 
 **4. Commentaires sur code désactivé intentionnellement**
 Tout bloc désactivé en dur (`if (false)`, feature flag off, dead branch) → commentaire visible expliquant POURQUOI et qui décide de le réactiver. Sans ça Claude peut le lire comme actif et baser une modification dessus.
 
 **5. Audit de lisibilité périodique**
 Routine schedulée hebdomadaire sur les projets actifs qui détecte : nouveaux fichiers > 300 lignes non documentés, fichiers > 2000 lignes sans index, descriptions obsolètes.
+Modèle de routine : un projet de trading `<routine>` (lundi 8h Paris).
 
 **6. Où placer une règle (séquence obligatoire avant tout ajout à un CLAUDE.md)**
 
@@ -48,7 +49,7 @@ Avant d'écrire quoi que ce soit dans un CLAUDE.md projet, classer d'abord :
 
 Test final : *"Si je supprime cette ligne, Claude ferait-il des erreurs sur des tâches routinières ?"* Si non → ça n'appartient pas au CLAUDE.md.
 
-Règles techniques : CLAUDE.md < 200 lignes. Un hook PreToolUse peut rappeler ce framework à chaque édition ; un hook PostToolUse peut bloquer en cas de dépassement. `@import` n'est PAS du chargement conditionnel (même coût token qu'inline, chargé au lancement, max 4 hops — confirmé doc Anthropic). Vraiment à la demande : **skills** (`.claude/skills/`), **`.claude/rules/` path-scopés** (frontmatter `paths:`), **CLAUDE.md de sous-dossier**. Détail + correction dans `CLAUDE_HEALTH_RULES.md` §3.
+Règles techniques : CLAUDE.md < 200 lignes. Hook PreToolUse rappelle ce framework à chaque édition. Hook PostToolUse bloque si dépassement. `@import` n'est PAS du chargement conditionnel (même coût token qu'inline, chargé au lancement, max 4 hops — confirmé doc Anthropic). Vraiment à la demande : **skills** (`.claude/skills/`), **`.claude/rules/` path-scopés** (frontmatter `paths:`), **CLAUDE.md de sous-dossier**. Détail + correction dans `CLAUDE_HEALTH_RULES.md` §3.
 
 **7. Signal de dette documentaire en session**
 Quand Claude est contraint de lire un fichier source pour comprendre un comportement qui aurait dû être documenté, il doit :
@@ -56,7 +57,7 @@ Quand Claude est contraint de lire un fichier source pour comprendre un comporte
 2. Spawner une tâche (chip) pour ajouter le commentaire/gotcha au bon endroit
 3. Ne pas absorber silencieusement : chaque lecture forcée = dette à rembourser dans le même commit ou le suivant
 
-Exemple : une fonction de configuration qui ne fonctionne pas comme son nom le laisse penser (il faut modifier le fichier de config directement). Non documenté → lecture de fichier à mi-session → tokens perdus.
+Exemple : `dischargeStrategy()` dans un projet de trading ne fonctionne pas — il faut modifier `config.js` directement. Non documenté → lecture de fichier à mi-session → tokens perdus.
 
 ## Propagation vers les projets existants
 

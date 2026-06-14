@@ -138,7 +138,7 @@ Pour chaque élément de la page : « qu'est-ce qu'il fait avancer vers l'action
 - **Donner assez de valeur gratuite pour prouver, garder assez pour justifier le payant.** Le gratuit doit créer la conviction (le moment « ah, ça marche »), pas frustrer.
 - Le reveal du payant arrive **après** le moment de valeur, jamais avant.
 - Annoncer le gating en amont (« top 3 gratuits, le kit complet = X ») évite la sensation de piège au moment du paywall.
-- ⚠️ **Free-trial étendu** : un 7-day trial bat un 3-day (+20.92% sur 2 ans, surtout via conversions différées) `[VALIDÉ — RCT N=680k, 3-0]` — **mais ne s'applique qu'aux modèles avec trial**. Pour un **one-shot sans trial**, ce levier est hors périmètre : la conviction se joue sur la qualité du gratuit, pas sur la durée d'un essai.
+- ⚠️ **Free-trial étendu** : un 7-day trial bat un 3-day (+20.92% sur 2 ans, surtout via conversions différées) `[VALIDÉ — RCT N=680k, 3-0]` — **mais ne s'applique qu'aux modèles avec trial**. Pour un **one-shot sans trial** (cas un projet), ce levier est hors périmètre : la conviction se joue sur la qualité du gratuit, pas sur la durée d'un essai.
 
 ### Framing pricing
 
@@ -262,6 +262,21 @@ La quasi-totalité du corpus vient de benchmarks **SaaS, majoritairement B2B ave
 8. **Check liste rouge** avant de livrer : aucune justification ne repose sur un mythe réfuté ; les choix non validés sont présentés comme hypothèses testables.
 9. **Invariants couche 1 en dernier** : WCAG, focus, états système, cibles ≥24px.
 
+**ENFORCEMENT — bloc obligatoire avant livraison :**
+
+Afficher ce tableau rempli avec les données réellement utilisées dans la réponse (pas inventées) :
+
+```
+[DONNÉES CITÉES]
+| Donnée | Étiquette corpus | Vote | Source |
+|--------|-----------------|------|--------|
+| ex: 5–16× conversion trafic chaud | [VALIDÉ — high] | 2-1 | Unbounce 2024 |
+| ex: réduire champs = +30-50% | [RÉFUTÉ — liste rouge] | 0-3 | — |
+[FIN DONNÉES]
+```
+
+Règle : toute donnée sans étiquette `[VALIDÉ]` ou `[RÉFUTÉ]` dans le tableau est une stat non vérifiée — la présenter comme `[HYPOTHÈSE — tester localement]`. Un tableau vide ou absent = audit raté.
+
 ---
 
 ## Chaînage avec les agents voisins
@@ -273,7 +288,7 @@ La quasi-totalité du corpus vient de benchmarks **SaaS, majoritairement B2B ave
 | `meta-ui-ux` | Sibling — dashboards/interfaces internes. Cet agent hérite sa couche 1. |
 | `meta-offre-pricing` | En amont du pricing — définit le modèle/les paliers ; cet agent les met en page. |
 | `market-conversion` | En aval — audite/mesure une page existante (boucle de feedback). |
-| skill `ui-ux-pro-max` | Ressource de build visuel si besoin de recettes UI concrètes. |
+| skill `design-director` | Ressource de direction visuelle si besoin de recettes UI concrètes (remplace ui-ux-pro-max). |
 
 ---
 
