@@ -47,6 +47,13 @@ export const ALLOWLIST = [
 // de doctrine. Le filet final reste scan-gate (RULES) après écriture.
 // Pour ajouter un projet : ajoute une ligne ici.
 export const NEUTRALIZE = [
+  // Remplacements STRUCTURELS (clause entière, pas juste un token) — à passer EN PREMIER,
+  // avant les règles de chemin/identité qui transformeraient le motif sous-jacent.
+  // meta-redacteur : la « voix perso d'Oscar » charge un fichier perso inexistant chez le
+  // fondateur → guidance générique utile à sa place.
+  [/charge `C:[\\/]Users[\\/]oscar[\\/]\.claude[\\/]agents[\\/]oscar_tone_of_voice\.md`/gi,
+   "demande au fondateur 2-3 exemples de sa façon d'écrire (ou charge son guide de voix s'il en a un)"],
+
   // Projets perso d'Oscar → générique
   [/Auto[-_]?Polymarket/gi, 'un projet de trading'],
   [/subvention[-_ ]?match/gi, 'un outil de matching'],
@@ -72,6 +79,7 @@ export const NEUTRALIZE = [
   // de persona ; oscardcstudio = compte public, conservé via le lookahead).
   [/\bCanecaude\b/gi, ''],
   [/\b(Jules|Florian|Cynthia)\b/gi, 'un collaborateur'],
+  [/\bd'Oscar\b/gi, 'du fondateur'],  // contraction : évite « d'le fondateur »
   [/\bOscar(?!dcstudio)\b/gi, 'le fondateur'],
 ];
 

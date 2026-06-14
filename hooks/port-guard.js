@@ -3,7 +3,9 @@
 // Bloque toute commande qui démarre un serveur dev sur un port déjà occupé.
 // Fournit le premier port libre pour que Claude relance immédiatement sans collision.
 // Couverture : Vite, Next.js, Astro, Nuxt, Express/Node, Flask, serve, http-server…
-// Cross-platform : Windows (netstat), macOS/Linux (lsof).
+// Cross-platform : Windows (netstat), macOS/Linux (lsof). FORK VOLONTAIRE — NE PAS
+// auto-synchroniser depuis la version perso du mainteneur (Windows-only = régression
+// sur Mac). Réconcilier à la main si besoin (cf. scripts/publish-manifest.mjs).
 
 const fs = require('fs');
 const { execSync } = require('child_process');
@@ -98,9 +100,10 @@ const pid = occupied.get(intendedPort);
 
 function buildSuggestion(cmd, freePort) {
   if (!freePort) return 'Libère un port avant de relancer.';
+  const first = cmd.split('\n')[0].slice(0, 60).replace(/\s*$/, '');
   if (/next|nuxt|flask|uvicorn|deno|node\b|tsx?\b/.test(cmd))
-    return `Relance avec PORT=${freePort} devant la commande.`;
-  return `Relance avec --port ${freePort}.`;
+    return `Relance avec PORT=${freePort} devant la commande. Ex: PORT=${freePort} ${first}`;
+  return `Relance avec --port ${freePort}. Ex: ${first} --port ${freePort}`;
 }
 
 const allBusy = [...occupied.keys()].filter(p => p >= 3000).sort((a, b) => a - b);

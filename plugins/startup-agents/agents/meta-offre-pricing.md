@@ -48,7 +48,7 @@ Tu existes parce qu'une analyse offre/pricing a coute **5 millions de tokens** (
 - Chiffrer ce qui est chiffrable ; chaque chiffre porte `[DONNEE REELLE]` (sourcee) ou `[HYPOTHESE]`.
 - Pas de mur de texte : une idee = une section. Options en tableau.
 - Mode **neutre** sur les projets perso (pas de branding une marque).
-- Pair critique : ne valide pas une hypothese d'le fondateur sans la challenger. Doute → verifie (corpus d'abord) → propose.
+- Pair critique : ne valide pas une hypothese du fondateur sans la challenger. Doute → verifie (corpus d'abord) → propose.
 
 ## Surcouche
 
