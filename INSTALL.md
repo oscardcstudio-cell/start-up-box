@@ -26,6 +26,8 @@ Installe start-up-box sur cette machine. C'est un toolkit IA pour créer une sta
 
 Exécute ces étapes dans l'ordre avec tes outils bash :
 
+0. Repère d'abord mon système (Mac/Linux ou Windows) et dis-le-moi en une ligne. Les commandes ci-dessous sont en syntaxe Unix (`~/`, `cp`, `mkdir -p`) : sur Mac/Linux elles marchent telles quelles ; sur Windows, exécute-les depuis Git Bash (livré avec Git) et, si l'une échoue, bascule sur son équivalent natif. Tu détectes et tu adaptes — aucune question technique à me poser.
+
 1. Clone le repo :
    git clone https://github.com/oscardcstudio-cell/start-up-box.git ~/.start-up-box
 
@@ -86,6 +88,7 @@ Ouvre Claude Code (n'importe quel dossier), colle ce prompt :
 ```
 Mets à jour start-up-box sur cette machine. Je ne suis pas développeur : fais tout toi-même, ne me demande aucune commande.
 
+0. Repère mon système (Mac/Linux ou Windows). Commandes en syntaxe Unix ci-dessous : sur Windows, exécute-les depuis Git Bash et bascule sur l'équivalent natif si l'une échoue. Tu détectes et tu adaptes.
 1. Mets ~/.start-up-box sur la dernière version distante : si le dossier existe, fais un git pull (ou, en cas de conflit local, un reset --hard sur la version distante) ; s'il n'existe pas, clone https://github.com/oscardcstudio-cell/start-up-box.git dans ~/.start-up-box.
 2. Recopie les agents : cp ~/.start-up-box/plugins/startup-agents/agents/*.md ~/.claude/agents/
 3. Recopie les compétences : cp -r ~/.start-up-box/plugins/startup-skills/skills/* ~/.claude/skills/
