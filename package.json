@@ -8,7 +8,7 @@
     "url": "https://github.com/oscardcstudio-cell/start-up-box.git"
   },
   "scripts": {
-    "drain": "node scripts/drain-notes.js"
+    "drain": "node scripts/drain-notes.mjs"
   },
   "devDependencies": {
     "notes-backlog": "github:oscardcstudio-cell/notes-backlog#v1.4.0"
