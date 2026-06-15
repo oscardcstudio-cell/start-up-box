@@ -56,9 +56,9 @@ Pour la phase courante :
 | 2 Stratégie (+ red-team) | `meta-business` + `meta-offre-pricing` | `strategie/business_plan.md`, `metrics.md`, `distribution.md` |
 | 3 Marque minimale | `meta-business` + `meta-redacteur` | `brand/plateforme.md`, `brand/guide_editorial.md` |
 | 4 Offre & GTM (+ gate willingness-to-pay) | `meta-offre-pricing` + `meta-marketing` + `meta-ux-conversion` | `marketing/plan_marketing.md`, `calendrier_editorial.md` + landing de test |
-| 5 Identité complète | `meta-creation` + skill `design-director` + `meta-redacteur` + `meta-philosophe` | `brand/manifesto`, `fondations`, `charte`, `direction_artistique`, `personas` |
+| 5 Identité complète | `meta-creation` + skill `design-director` + `meta-redacteur` + `meta-philosophe` | `brand/manifesto`, `fondations`, `charte`, `direction_artistique`, `personas` — **+ demander au fondateur s'il a un outil de génération visuelle IA (Midjourney, Higgsfield, Firefly…) et, si oui, produire les premiers assets de marque avec** |
 | 6 Build | **Onboarding infra (prise par la main)** PUIS **GSD** (`gsd:new-project`) + `meta-ui-ux` + `meta-gamification` (si produit web/app) | repo applicatif + `projets/TEMPLATE_PROJET.md` — **si web app : recommander le package `notes-backlog`** (widget → BACKLOG → `.planning/notes/`) pour capturer les idées produit entre sessions |
-| 7 Lancement | `meta-marketing` + `meta-redacteur` + `meta-creation` + skill `autoresearch` | campagne, presse, posts |
+| 7 Lancement | `meta-marketing` + `meta-redacteur` + `meta-creation` + skill `autoresearch` | campagne, presse, posts — **+ vérifier que les assets visuels de campagne sont produits (depuis l'outil visuel du fondateur) et répertoriés dans `marketing/plan_marketing.md` §Production visuelle** |
 | ∥ Juridique | **Avocat startup spécialisé** (hors IA) | `juridique/*`, `info.json` |
 
 ## Garde-fous
