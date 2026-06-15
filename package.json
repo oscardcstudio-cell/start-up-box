@@ -11,7 +11,7 @@
     "drain": "node scripts/drain-notes.js"
   },
   "devDependencies": {
-    "notes-backlog": "file:../../packages/notes-backlog"
+    "notes-backlog": "github:oscardcstudio-cell/notes-backlog#v1.4.0"
   },
   "engines": {
     "node": ">=18"
