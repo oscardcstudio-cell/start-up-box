@@ -133,16 +133,39 @@ if (doctrineChanged) bump('meta-rules/VERSION');
 if (hookChanged) bump('hooks/VERSION');
 console.log(`\n  ${written} fichier(s) écrit(s).`);
 
-// ---- Garde FINAL : scan-gate ----
-console.log(`\n  ${C.b}scan-gate${C.x} (garde anti-fuite final)…`);
-try {
-  const out = execFileSync('node', [join(BOX, 'scripts', 'scan-gate.mjs')], { cwd: BOX, encoding: 'utf8' });
-  console.log(out.trim().split('\n').map(l => '  ' + l).join('\n'));
+// ---- Gardes FINAUX : scan-gate (fuites perso/secret/chemin) + unicode-safety (smuggling) ----
+function runGate(label, cmd, args) {
+  console.log(`\n  ${C.b}${label}${C.x}…`);
+  try {
+    const out = execFileSync(cmd, args, { cwd: BOX, encoding: 'utf8' });
+    console.log(out.trim().split('\n').map(l => '  ' + l).join('\n'));
+    return true;
+  } catch (e) {
+    console.log(((e.stdout || '') + (e.stderr || '')).toString().trim().split('\n').map(l => '  ' + l).join('\n'));
+    return false;
+  }
+}
+
+const okScan = runGate('scan-gate (fuites perso/secret/chemin)', 'node', [join(BOX, 'scripts', 'scan-gate.mjs')]);
+
+// unicode-safety vit dans le repo meta (package security-scan) — invoqué EN DÉPENDANCE
+// (jamais copié, règle no-vendoring). Couvre le manque de scan-gate : caractères invisibles
+// dangereux / ASCII smuggling (tag block, zero-width, bidi) dans le contenu publié.
+// --smuggling-only : ne bloque PAS sur les sélecteurs de variation des emojis légitimes ;
+// --no-emoji : la présence d'emojis n'est pas une fuite de sécurité ici.
+const uniScript = join(MAINTAINER.META, 'packages', 'security-scan', 'unicode-safety.js');
+let okUni = true;
+if (existsSync(uniScript)) {
+  okUni = runGate('unicode-safety (ASCII smuggling / invisibles)', 'node', [uniScript, BOX, '--smuggling-only', '--no-emoji']);
+} else {
+  console.log(`\n  ${C.y}⚠ unicode-safety introuvable (${uniScript}) — gate smuggling SAUTÉE.${C.x}`);
+}
+
+if (okScan && okUni) {
   console.log(`\n${C.g}✓ Publié. Bump VERSION fait → les fondateurs recevront la màj au prochain SessionStart.${C.x}`);
   console.log(`  ${C.d}Pense à committer + push la box pour que le git pull des fondateurs la voie.${C.x}\n`);
-} catch (e) {
-  console.log((e.stdout || '').toString().trim().split('\n').map(l => '  ' + l).join('\n'));
-  console.log(`\n${C.r}✗ scan-gate a DÉTECTÉ une fuite après écriture — NE PAS committer la box.${C.x}`);
-  console.log(`  Corrige NEUTRALIZE et relance --write.\n`);
+} else {
+  console.log(`\n${C.r}✗ Une gate finale a DÉTECTÉ un problème après écriture — NE PAS committer la box.${C.x}`);
+  console.log(`  Fuite → corrige NEUTRALIZE ; caractère invisible → retire-le à la source, puis relance --write.\n`);
   process.exit(1);
 }
