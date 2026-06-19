@@ -16,6 +16,7 @@ Stack actuelle : `user (5K) + meta (6K) + bucket (2K) + projet (8K cible)` = ~21
 |----------|------|----------|
 | `CLAUDE.md` projet (taille brute) | > 8 KB | > 12 KB |
 | Hierarchie totale (user + meta + bucket + projet) | > 20 KB | > 30 KB |
+| Instructions imperatives **cumulees** sur la chaine chargee (user+meta+bucket+repo) | > 150 | > 200 |
 | Residus racine projet (`*.bak`, `*_backup_*.json` multiples, `local_screenshot.png`) | > 2 fichiers | > 5 fichiers |
 | Fichier > 5 MB a la racine projet **sans** `.claudeignore` | warn | critical |
 | `MEMORY.md` absent dans `memory/` | warn | - |
@@ -39,6 +40,8 @@ Le hook `claude-md-health-check.js` (SessionStart, user-level) mesure ces seuils
 
 Pour vraiment décharger un gros bloc d'un CLAUDE.md : le sortir en **skill** ou en **rule path-scopée**, pas en `@import`.
 
+⚠️ **`<important if="…">` n'est PAS une feature de Claude Code** (vérifié doc officielle `code.claude.com/docs/en/memory`, juin 2026 — folklore de prompt-engineering popularisé par HumanLayer). Le harness ne parse aucune balise conditionnelle : elle est injectée en texte brut, la condition n'est jamais évaluée (saillance probabiliste au mieux). Pour un chargement **conditionnel réel** d'une règle qui ne vaut que pour certains fichiers : `.claude/rules/*.md` avec frontmatter `paths:` (glob) → chargée par le harness **uniquement quand Claude ouvre un fichier matchant**, déterministe, et retirée du contexte de toutes les autres sessions. Pour de l'**enforcement dur** : un hook PreToolUse, pas une instruction.
+
 ### Trigger tables au lieu de prose
 
 ```markdown
@@ -54,6 +57,8 @@ Plus dense et plus actionnable que des paragraphes.
 
 Une regle qui fait > 20 lignes : la transformer en skill (`description` triggerante + `SKILL.md` charge a la demande). Plus jamais dans le CLAUDE.md de base.
 
+**Description = conditions de declenchement SEULEMENT, jamais le workflow** (HumanLayer / obra writing-skills). Si la `description` d'une skill ou d'un agent resume ce qu'il *fait*, le modele suit ce raccourci au lieu de charger la skill — donc la description ne porte que le **QUAND** (triggers, mots-cles, contexte), jamais le **COMMENT**. Conditions etroites (« quand tu ecris des tests »), jamais larges (« quand tu codes »).
+
 ### Path-scoped frontmatter (YAML)
 
 Pour des regles qui ne concernent qu'un sous-dossier, utiliser le frontmatter YAML qui scope par chemin. Reduit la pollution cross-projet du meme repo.
@@ -61,6 +66,18 @@ Pour des regles qui ne concernent qu'un sous-dossier, utiliser le frontmatter YA
 ### Regle "two strikes"
 
 N'ajouter une instruction au `CLAUDE.md` que **la deuxieme fois** ou Claude se trompe dessus. Premier echec = exception, deuxieme = pattern qui justifie une regle.
+
+### Compter les INSTRUCTIONS, pas seulement les lignes (HumanLayer, 2026-06)
+
+Le vrai budget n'est pas le nombre de lignes mais le nombre d'**instructions imperatives** que le modele doit suivre — et il est **cumulatif sur toute la chaine chargee** (user + meta + bucket + repo), pas par fichier isole. Les modeles frontier suivent ~150-200 instructions « avec une coherence raisonnable » (Claude Code en injecte deja ~50 via son system prompt) ; au-dela, la qualite de suivi decroit **uniformement** (toutes les regles trinquent, pas seulement les nouvelles). Un fichier de 195 lignes peut etre sain (90 instructions) ou sature (300 directives conditionnelles empilees) : la metrique « lignes » ne le voit pas.
+
+- Une puce qui enchaine 3 conditions = 3 instructions, pas 1.
+- Auditer la **stack resolue** pour un repo donne (somme des CLAUDE.md effectivement charges), pas chaque fichier isolement — c'est la que la saturation se cache. Le `doc-auditor` mesure desormais ce cumul (`--stack`).
+- Court en lignes ≠ leger : un fichier dense en directives imbriquees est le piege classique. Moins de regles mieux placees > plus de regles « pour etre complet ».
+
+### Non-negociables en peripherie, jamais au centre (HumanLayer, 2026-06)
+
+Les LLM biaisent leur attention vers le **debut et la fin** du contexte ; le milieu decroche (« lost in the middle »). Les regles **non-negociables** (push ≠ deploye, faux-vert RTK, anti-vendoring, preuve avant « fait ») se placent donc en **tete ou en queue** de fichier — jamais noyees au centre d'un long pave. Une regle critique au milieu d'un CLAUDE.md de 180 lignes est la plus a risque d'etre ignoree precisement quand elle compte.
 
 ## 4. Anti-patterns
 

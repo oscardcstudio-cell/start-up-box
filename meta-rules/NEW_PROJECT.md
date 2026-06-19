@@ -45,6 +45,8 @@ git -C "~/projets/<bucket>/<nom>" remote add origin https://github.com/<user>/<n
 - `llms.txt` — inventaire des fichiers/dossiers critiques
 - `README.md` — pitch court du projet
 
+> **Filet de sécurité automatique** : le hook `project-init-guard.js` (SessionStart user-level) auto-crée `llms.txt` et `MEMORY.md` squelettes dès le premier open si absents — mais ils restent à remplir. Ne pas compter dessus pour remplacer l'init propre.
+
 **Selon nature du projet** :
 
 | Fichier/Dossier | Quand l'ajouter |
@@ -102,6 +104,6 @@ Avant de clore l'init :
 - **Junction Windows** vers un repo physique ailleurs → inutile, casse l'intuition, fait perdre du temps. Garder le repo dans son bucket.
 - **Init git dans un sous-dossier d'un repo parent existant** sans vérifier — si le bucket est lui-même un repo git, le nouveau projet sera un repo imbriqué non-tracké. Vérifier `git -C <bucket> rev-parse --is-inside-work-tree` avant.
 - **`gh repo create` sans `gh auth switch`** → repo créé sur le mauvais compte, douleur garantie.
-- **Skipper `MEMORY.md`** → perte de mémoire cumulée entre sessions.
+- **Skipper `MEMORY.md` / `llms.txt`** → perte de mémoire cumulée + doc-auditor alerte toutes les semaines. Le hook `project-init-guard.js` crée des squelettes, mais ils restent vides jusqu'à remplissage manuel.
 - **Créer un module qui existe déjà dans `packages/`** → doublon silencieux qui diverge et coûte cher à maintenir.
 - **Créer un dashboard sans checker `DASHBOARDS.md`** → duplication de travail cross-projet.

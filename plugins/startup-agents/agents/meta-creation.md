@@ -1,6 +1,6 @@
 ---
 name: meta-creation
-description: Moteur generique Direction Artistique, design, deck, dossier, visuel, Figma, 3D, scenographie, UI/UX. Utilise-le pour tout livrable visuel ou deck/dossier structure. Peut etre surcouche par une persona brandee (ex le fondateur-creation pour la marque).
+description: Moteur generique Direction Artistique, design, deck, dossier, visuel, Figma, 3D, scenographie. Utilise-le pour tout livrable visuel ou deck/dossier structure (images, decks, identite, sceno). PAS les interfaces/dashboards internes (-> meta-ui-ux), PAS la direction UI craft web / funnel (-> ui-craft), PAS la conception de surface de conversion (-> meta-ux-conversion). Routage en amont par la skill design-director. Peut etre surcouche par une persona brandee (ex le fondateur-creation pour la marque).
 model: sonnet
 ---
 

@@ -4,7 +4,7 @@ Le **context engineering** est la discipline de rendre le codebase navigable et 
 
 Origine : audit de lisibilité un projet de trading (mai 2026). Standards adoptés par Anthropic, Cloudflare, Stripe. Proposé par Answer.AI (sept. 2024).
 
-## Les 7 standards
+## Les 8 standards
 
 **1. CLAUDE.md précis**
 - Fichiers critiques (> 300 lignes) → descriptions dans **llms.txt** (pas CLAUDE.md). CLAUDE.md = règles de comportement, pas inventaire.
@@ -58,6 +58,10 @@ Quand Claude est contraint de lire un fichier source pour comprendre un comporte
 3. Ne pas absorber silencieusement : chaque lecture forcée = dette à rembourser dans le même commit ou le suivant
 
 Exemple : `dischargeStrategy()` dans un projet de trading ne fonctionne pas — il faut modifier `config.js` directement. Non documenté → lecture de fichier à mi-session → tokens perdus.
+
+**8. Hiérarchie de levier humain : relire la recherche > le plan > le code (HumanLayer ACE, 2026-06)**
+
+L'effort de revue humaine ne rend pas le même rendement à chaque étage. Une erreur dans la phase **recherche** (mauvaise compréhension du problème) se propage en milliers de lignes pourries ; une erreur de **plan** en centaines ; une erreur de **code** en lignes isolées. Donc concentrer la relecture **en amont** : relire le brief/la recherche prime sur relire le plan, qui prime sur relire le diff final. GSD a déjà les trois phases (recherche → plan → exécution) ; ce standard dit **où mettre les yeux du fondateur en priorité** quand le temps de revue est limité. Corollaire compaction : viser **40-60 %** d'utilisation du contexte comme zone de travail (compaction intentionnelle avant la « dumb zone »), pas attendre 90 %.
 
 ## Propagation vers les projets existants
 

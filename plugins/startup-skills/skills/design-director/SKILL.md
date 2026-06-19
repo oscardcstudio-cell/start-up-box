@@ -35,6 +35,20 @@ Decide this first; it changes every downstream call.
 
 When in doubt, infer from the surface. Store the choice in the project memory (see end). For the full divergent rule-set, load `references/registers.md`.
 
+### Routage vers les moteurs spécialistes (design-director = porte d'entrée unique)
+
+design-director cadre la direction (read → register → dials → extreme), puis **exécute lui-même** OU délègue au moteur qui possède le périmètre. Ne jamais invoquer ces agents en doublon de design-director — c'est lui qui route :
+
+| Surface / besoin | Moteur propriétaire | Quand |
+|---|---|---|
+| Images, decks, dossiers, identité, Figma, 3D, scéno | **`meta-creation`** (agent) | livrable visuel "brand", génératif |
+| Dashboards & interfaces internes (data-dense, Tufte/Few/Nielsen) | **`meta-ui-ux`** (agent) | register Product / outil interne |
+| Craft web UI : landing/funnel, design system, revue Before/After | **`ui-craft`** (agent) | register Brand web, exécution craft |
+| Surface de conversion (funnel, pricing, onboarding) — stratégie | **`meta-ux-conversion`** (agent) | décision de conversion, pas juste l'esthétique |
+| Motion macro (timeline, scroll, GSAP, chorégraphie) | **`meta-motion`** (agent) | animation au-delà de la micro-transition CSS |
+
+Micro-motion CSS d'un composant isolé (`:active`, transition d'un bouton) : design-director le fait inline (réf `emil`), pas besoin de meta-motion. WebGL/shader/GPU = hors périmètre de tous ces agents.
+
 ---
 
 ## Move 1 — Read the Room
