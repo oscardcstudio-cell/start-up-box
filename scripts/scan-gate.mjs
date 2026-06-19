@@ -40,6 +40,25 @@ const RULES = [
   { re: /\/Users\/[a-z]/i, why: 'chemin local macOS du mainteneur' },
 ]
 
+// Caractères invisibles dangereux (ASCII smuggling / bidi / zero-width). Check AUTONOME
+// (pas de dépendance → tourne en CI GitHub, qui ne peut pas atteindre le repo meta), même
+// posture que security-scan --smuggling-only : on EXCLUT les sélecteurs de variation BMP
+// (FE00–FE0F, bénins car pairés aux emojis) et on garde les vrais vecteurs. Doublon
+// volontaire du package meta — comme les RULES, scan-gate se ré-implémente pour être portable.
+function isSmugglingCodePoint(cp) {
+  return (
+    (cp >= 0x200B && cp <= 0x200F) || cp === 0x061C ||   // zero-width + LRM/RLM + ALM
+    (cp >= 0x2060 && cp <= 0x2064) ||                    // word joiner + invisibles math
+    (cp >= 0x202A && cp <= 0x202E) ||                    // bidi embeddings/overrides
+    (cp >= 0x2066 && cp <= 0x2069) ||                    // bidi isolates
+    cp === 0xFEFF || cp === 0x180E ||                    // BOM/ZWNBSP, Mongolian vowel sep
+    cp === 0x00AD || cp === 0x034F ||                    // soft hyphen, combining grapheme joiner
+    cp === 0x115F || cp === 0x1160 || cp === 0x3164 ||   // Hangul fillers
+    (cp >= 0xE0000 && cp <= 0xE007F) ||                  // tag block — ASCII smuggling
+    (cp >= 0xE0100 && cp <= 0xE01EF)                     // variation selectors supplément (smuggling)
+  )
+}
+
 const TEXT_EXT = new Set(['.md', '.txt', '.json', '.mjs', '.js', '.ts', '.yml', '.yaml', '.html', '.css', ''])
 const isText = (f) => { const d = f.lastIndexOf('.'); const e = d >= 0 ? f.slice(d) : ''; return (e === '' && /^[A-Z]/.test(f)) || TEXT_EXT.has(e) }
 
@@ -82,6 +101,17 @@ for (const p of files) {
       console.error(`✗ ${relative(ROOT, p).split('\\').join('/')}:${line} — "${m[0]}" (${why})`)
       leaks++
     }
+  }
+  // Caractères invisibles dangereux (smuggling) — itère par code point (gère les surrogates).
+  let idx = 0
+  for (const ch of txt) {
+    const cp = ch.codePointAt(0)
+    if (isSmugglingCodePoint(cp)) {
+      const line = txt.slice(0, idx).split('\n').length
+      console.error(`✗ ${relative(ROOT, p).split('\\').join('/')}:${line} — U+${cp.toString(16).toUpperCase()} (caractère invisible / smuggling)`)
+      leaks++
+    }
+    idx += ch.length
   }
 }
 
