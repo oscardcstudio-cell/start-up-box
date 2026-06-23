@@ -73,15 +73,20 @@ git -C "~/projets/<bucket>/<nom>" push -u origin main
 
 Ajouter une ligne au tableau `## Projets` du `CLAUDE.md` du bucket (`une marque\CLAUDE.md` ou `oscardcstudio\CLAUDE.md`), commit + push ce CLAUDE.md.
 
-## 8. Lancer GSD pour les projets avec roadmap
+## 8. GSD — outil d'AMORÇAGE, pas d'itération (auto-PROPOSE, jamais imposer)
 
-Si le projet a une complexité réelle (plusieurs phases, features distinctes, architecture à poser) :
+GSD paie la structure **d'avance** contre l'incertitude. Rentable seulement quand l'espace du problème est large/inconnu ET qu'une erreur d'archi amont coûte cher. Après l'amorçage, dès qu'le fondateur avance par **petits pas validés un à un**, le plan upfront a une valeur **négative** (périmé à la 1re itération, coût de maintien > rendement → cimetière de phases mortes). À ce stade : ne PAS le nourrir, l'itération EST le plan, l'état vit dans STATE/MASTER + notes taguées (§notes-pipeline).
 
-```
-/gsd:new-project
-```
+**Règle de jugement — proposer `/gsd:new-project` (1 ligne, jamais auto-exécuter) si :**
 
-Génère `PROJECT.md`, la roadmap et le répertoire `.planning/` avec les phases. À lancer après l'init git, dans la même session ou la suivante.
+| Lancer GSD | Rester petit-pas (défaut) |
+|---|---|
+| Nouveau projet / boîte / service — forme inconnue | Itération sur un existant déjà cadré |
+| Erreur d'archi amont = refonte coûteuse | le fondateur valide chaque résultat avant le suivant |
+| Plusieurs sous-chantiers interdépendants à séquencer | Direction qui s'ajuste à chaque pas |
+| Délégable en parallèle (phases → agents), horizon > qq jours | Le plan serait périmé dès la 1re itération |
+
+Une ligne : **incertitude haute + coût d'erreur élevé → GSD ; sinon l'itération est le plan.** `/gsd:new-project` génère `PROJECT.md` + roadmap + `.planning/`. À lancer après l'init git. Piège du mode petit-pas à surveiller : dérive vers un optimum local — le garde-fou n'est pas GSD mais que **MASTER.md porte un vrai cap** (vision/décisions), pas une todo déguisée.
 
 **Convention notes** : les projets GSD accumulent des items dans `.planning/notes/`. Obligation : marquer `✅ RÉSOLU [AAAA-MM-JJ]` dès qu'un item est implémenté (voir section [Convention RÉSOLU](CLAUDE.md#convention-résolu--notes-planningnotes-cross-projet) dans le meta CLAUDE.md). Ne jamais marquer RÉSOLU sans vérifier dans le code réel.
 
@@ -97,7 +102,7 @@ Avant de clore l'init :
 - [ ] `MEMORY.md` présent à la racine, même si squelette (Index / Décisions / Gotchas / Sessions)
 - [ ] Pas de fichier > 300 lignes non documenté dans `llms.txt`
 - [ ] `.gitignore` adapté (au minimum : secrets, dépendances, build, OS)
-- [ ] Si projet complexe : `/gsd:new-project` lancé et `PROJECT.md` présent
+- [ ] Si amorçage à forte incertitude (cf. §8) : `/gsd:new-project` proposé ; sinon mode petit-pas, pas de GSD
 
 ## Anti-patterns à ne pas répéter
 
