@@ -28,13 +28,10 @@ No traffic needed. No A/B test infrastructure. Minutes instead of weeks.
 ## Quick Start
 
 ```bash
-# 1. Install dependencies
-pip install -r requirements.txt
+# 1. (Backend par défaut = CLI abonnement `claude -p`, rien à installer si `claude` est sur le PATH)
+#    Pour forcer l'API payante : pip install -r requirements.txt + export AUTORESEARCH_BACKEND=api ANTHROPIC_API_KEY=...
 
-# 2. Set your API key
-export ANTHROPIC_API_KEY="your-api-key-here"
-
-# 3. Run the optimizer
+# 2. Run the optimizer
 python3 autoresearch.py --input landing-page.html --type landing_page --min-score 85
 
 # 4. Check results
@@ -84,8 +81,8 @@ Concept inspired by [Andrej Karpathy's autoresearch](https://github.com/karpathy
 ## Requirements
 
 - Python 3.10+
-- Anthropic API key (`$ANTHROPIC_API_KEY`)
-- See `requirements.txt` for Python dependencies
+- CLI `claude` sur le PATH (backend par défaut, abonnement) — OU `ANTHROPIC_API_KEY` + `pip install -r requirements.txt` pour le backend API payant
+- Backend sélectionnable via `AUTORESEARCH_BACKEND=cli|api` (défaut : cli local, api en prod)
 
 ---
 

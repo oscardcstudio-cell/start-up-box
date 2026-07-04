@@ -30,7 +30,9 @@ const leaksIn = (s) => LEAK_RULES.filter(r => r.re.test(s)).map(r => r.why);
 function listRel(dir) {
   if (!existsSync(dir)) return [];
   return readdirSync(dir).flatMap(f => {
-    if (f === '.git' || f === 'node_modules') return [];
+    // Junk jamais publié : VCS, deps, et artefacts Python compilés (__pycache__/*.pyc)
+    if (f === '.git' || f === 'node_modules' || f === '__pycache__') return [];
+    if (f.endsWith('.pyc')) return [];
     const p = join(dir, f);
     return statSync(p).isDirectory() ? listRel(p).map(r => join(f, r)) : [f];
   });

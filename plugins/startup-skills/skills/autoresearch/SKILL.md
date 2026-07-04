@@ -141,11 +141,17 @@ Found 5 elements to optimize:
 Optimizing: all | Variants per round: 10 | Min score: 80
 ```
 
-### Step 2: Get API Key
+### Step 2: Backend LLM
 
-Check for Anthropic API key: `$ANTHROPIC_API_KEY` environment variable.
+Par défaut le script tourne sur le **CLI abonnement** (`claude -p`, coût marginal nul) — rien à configurer si `claude` est sur le PATH.
+
+- `AUTORESEARCH_BACKEND=cli` (défaut local) → CLI abonnement.
+- `AUTORESEARCH_BACKEND=api` ou `NODE_ENV=production` → SDK Anthropic payant (nécessite `pip install anthropic` + `ANTHROPIC_API_KEY`).
+- Fallback auto : si le CLI est absent ou échoue (ex. session limit) **et** qu'`ANTHROPIC_API_KEY` est présente, bascule sur l'API.
 
 ```bash
+# Forcer l'API payante (optionnel) :
+export AUTORESEARCH_BACKEND=api
 export ANTHROPIC_API_KEY="your-api-key-here"
 ```
 

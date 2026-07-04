@@ -14,16 +14,19 @@ Usage:
 import argparse
 import json
 import os
+import shutil
+import subprocess
 import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-try:
-    import anthropic
-except ImportError:
-    print("Missing dependency: pip install anthropic", file=sys.stderr)
-    sys.exit(1)
+# Backend LLM : CLI abonnement `claude -p` par défaut (coût marginal nul sur ton
+# ordi), SDK Anthropic payant en fallback/prod. Le SDK anthropic est importé
+# paresseusement (uniquement si le backend API est utilisé) → pas de dépendance
+# dure pour le chemin CLI.
+_CLAUDE_BIN = shutil.which("claude")
+_anthropic_client = None
 
 # ── Content type configurations ──
 
@@ -55,13 +58,98 @@ EXPERT_PANEL = [
 ]
 
 
-def get_client():
-    """Initialize Anthropic client from environment."""
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        print("ERROR: Set ANTHROPIC_API_KEY environment variable.", file=sys.stderr)
-        sys.exit(1)
-    return anthropic.Anthropic(api_key=api_key)
+def resolve_backend():
+    """'cli' (abonnement, défaut local) | 'api' (SDK Anthropic payant).
+    AUTORESEARCH_BACKEND force le choix ; sinon prod (NODE_ENV=production) → api,
+    local → cli (auto via NODE_ENV, convention cross-repo)."""
+    b = os.environ.get("AUTORESEARCH_BACKEND", "").lower()
+    if b in ("cli", "api"):
+        return b
+    if os.environ.get("NODE_ENV") == "production":
+        return "api"
+    return "cli"
+
+
+def _cli_model(model):
+    """Mappe un id de modèle (alias ou snapshot complet) vers l'alias attendu par le CLI."""
+    m = (model or "").lower()
+    if "haiku" in m:
+        return "haiku"
+    if "opus" in m:
+        return "opus"
+    return "sonnet"
+
+
+def _call_cli(prompt, model):
+    """Appel via le CLI `claude -p` (abonnement). Prompt sur stdin (évite les
+    limites d'argv et le bug stdin+--system-prompt-file : on ne passe PAS de
+    --system-prompt-file, le system est inliné dans le prompt utilisateur)."""
+    proc = subprocess.run(
+        [_CLAUDE_BIN, "-p", "--model", _cli_model(model), "--output-format", "text"],
+        input=prompt,
+        capture_output=True,
+        text=True,
+        timeout=240,
+        env={**os.environ, "CLAUDE_INVOKED_BY": "autoresearch"},
+    )
+    out = (proc.stdout or "").strip()
+    # Session limit atteinte → message sur stdout avec rc≠0 ; traité comme échec
+    # pour déclencher le fallback API.
+    if proc.returncode != 0 or not out or out.lower().startswith("you've hit your session limit"):
+        raise RuntimeError(
+            f"claude CLI rc={proc.returncode}: {(out or proc.stderr or '')[:160]}"
+        )
+    return out
+
+
+def _call_api(prompt, model, max_tokens):
+    """Fallback / prod : SDK Anthropic (payant), import paresseux."""
+    global _anthropic_client
+    if _anthropic_client is None:
+        try:
+            import anthropic
+        except ImportError:
+            raise RuntimeError("Backend API : pip install anthropic requis")
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise RuntimeError("Backend API : ANTHROPIC_API_KEY requise")
+        _anthropic_client = anthropic.Anthropic(api_key=api_key)
+    resp = _anthropic_client.messages.create(
+        model=model,
+        max_tokens=max_tokens,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return resp.content[0].text.strip()
+
+
+def call_llm(prompt, model, max_tokens=4096):
+    """Point d'entrée unique. CLI abonnement d'abord, fallback API si le CLI est
+    absent ou échoue (session limit, offline) et qu'une clé API est dispo."""
+    backend = resolve_backend()
+    if backend == "cli":
+        if not _CLAUDE_BIN:
+            return _call_api(prompt, model, max_tokens)
+        try:
+            return _call_cli(prompt, model)
+        except Exception as e:
+            if os.environ.get("ANTHROPIC_API_KEY"):
+                print(f"    [llm] CLI indisponible ({e}) → fallback API.", file=sys.stderr)
+                return _call_api(prompt, model, max_tokens)
+            raise
+    return _call_api(prompt, model, max_tokens)
+
+
+def preflight_backend():
+    """Vérifie qu'au moins un backend est utilisable, sinon sort proprement."""
+    backend = resolve_backend()
+    if backend == "cli" and _CLAUDE_BIN:
+        print("Backend LLM : CLI abonnement (claude -p)", file=sys.stderr)
+        return
+    if os.environ.get("ANTHROPIC_API_KEY"):
+        print(f"Backend LLM : API Anthropic ({'forcé' if backend == 'api' else 'CLI absent → fallback'})", file=sys.stderr)
+        return
+    print("ERROR: aucun backend LLM dispo (CLI `claude` introuvable ET ANTHROPIC_API_KEY absente).", file=sys.stderr)
+    sys.exit(1)
 
 
 def detect_content_type(filepath: str) -> str:
@@ -98,7 +186,7 @@ def extract_elements(content: str, content_type: str) -> dict[str, str]:
     return {k: v for k, v in elements.items() if v}
 
 
-def generate_variants(client, element_name: str, current_text: str,
+def generate_variants(element_name: str, current_text: str,
                        content_type: str, num_variants: int,
                        evolution_notes: str = "", model: str = "claude-sonnet-4-5-20250514") -> list[str]:
     """Generate N variants of a content element."""
@@ -123,12 +211,7 @@ Rules:
 Return ONLY a JSON array of {num_variants} strings. No explanation, no markdown formatting.
 Example: ["Variant 1 text", "Variant 2 text", ...]"""
 
-    response = client.messages.create(
-        model=model,
-        max_tokens=4096,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    text = response.content[0].text.strip()
+    text = call_llm(prompt, model, max_tokens=4096)
     # Parse JSON from response
     if text.startswith("```"):
         text = text.split("```")[1]
@@ -144,7 +227,7 @@ Example: ["Variant 1 text", "Variant 2 text", ...]"""
     return [line.strip().strip('"').strip("- ") for line in text.split("\n") if line.strip()][:num_variants]
 
 
-def score_variants(client, variants: list[str], element_name: str,
+def score_variants(variants: list[str], element_name: str,
                     content_type: str, model: str = "claude-sonnet-4-5-20250514") -> list[dict]:
     """Score all variants with the expert panel in a single API call."""
     config = CONTENT_TYPES[content_type]
@@ -186,12 +269,7 @@ Return ONLY valid JSON (no markdown) in this exact format:
   ...
 ]"""
 
-    response = client.messages.create(
-        model=model,
-        max_tokens=8192,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    text = response.content[0].text.strip()
+    text = call_llm(prompt, model, max_tokens=8192)
     if text.startswith("```"):
         text = text.split("```")[1]
         if text.startswith("json"):
@@ -206,7 +284,7 @@ Return ONLY valid JSON (no markdown) in this exact format:
     return [{"variant_id": i+1, "text": v, "avg_score": 0} for i, v in enumerate(variants)]
 
 
-def run_optimization(client, element_name: str, current_text: str,
+def run_optimization(element_name: str, current_text: str,
                       content_type: str, num_variants: int = 10,
                       max_rounds: int = 3, min_score: int = 80,
                       model: str = "claude-sonnet-4-5-20250514") -> dict:
@@ -221,7 +299,7 @@ def run_optimization(client, element_name: str, current_text: str,
 
         # Generate variants
         variants = generate_variants(
-            client, element_name, current_text, content_type,
+            element_name, current_text, content_type,
             num_variants, evolution_notes, model
         )
 
@@ -229,8 +307,8 @@ def run_optimization(client, element_name: str, current_text: str,
             print(f"    No variants generated, stopping.", file=sys.stderr)
             break
 
-        # Score all variants (single API call)
-        scored = score_variants(client, variants, element_name, content_type, model)
+        # Score all variants (single LLM call)
+        scored = score_variants(variants, element_name, content_type, model)
 
         # Sort by score
         scored.sort(key=lambda x: x.get("avg_score", 0), reverse=True)
@@ -275,7 +353,7 @@ def run_optimization(client, element_name: str, current_text: str,
     }
 
 
-def cross_breed(client, element_winners: dict[str, dict],
+def cross_breed(element_winners: dict[str, dict],
                 content_type: str, model: str = "claude-sonnet-4-5-20250514") -> dict:
     """Cross-breed winning elements into complete units."""
     elements_desc = "\n".join(
@@ -298,12 +376,7 @@ Return JSON array of 5 objects, each with all element keys and a brief rationale
   ...
 ]"""
 
-    response = client.messages.create(
-        model=model,
-        max_tokens=8192,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    text = response.content[0].text.strip()
+    text = call_llm(prompt, model, max_tokens=8192)
     if text.startswith("```"):
         text = text.split("```")[1]
         if text.startswith("json"):
@@ -388,15 +461,15 @@ def main():
 
     print(f"Elements to optimize: {list(elements.keys())}", file=sys.stderr)
 
-    # Initialize client
-    client = get_client()
+    # Vérifier qu'un backend LLM est dispo (CLI abonnement ou API)
+    preflight_backend()
 
     # Run optimization for each element
     element_results = {}
     for elem_name, elem_text in elements.items():
         print(f"\n  Optimizing: {elem_name}", file=sys.stderr)
         result = run_optimization(
-            client, elem_name, elem_text, content_type,
+            elem_name, elem_text, content_type,
             args.variants, args.rounds, args.min_score, args.model
         )
         element_results[elem_name] = result
@@ -404,7 +477,7 @@ def main():
     # Cross-breed if multiple elements
     if len(element_results) > 1:
         print(f"\n  Cross-breeding winners...", file=sys.stderr)
-        combined = cross_breed(client, element_results, content_type, args.model)
+        combined = cross_breed(element_results, content_type, args.model)
         # Update winners with cross-bred versions if available
         for elem_name in element_results:
             if elem_name in combined:
