@@ -3,6 +3,7 @@
 ## Priorité 1 — architecture
 
 - INSTALL.md : prompt-installeur (le SEUL chemin d'install — clone + copie + hook auto-update)
+- ROADMAP.md : décisions de conception + briques externes candidates (versionné ; BACKLOG.md est local/gitignoré)
 
 ## Priorité 2 — agents packagés
 
