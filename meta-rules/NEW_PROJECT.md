@@ -65,7 +65,7 @@ git -C "~/projets/<bucket>/<nom>" remote add origin https://github.com/<user>/<n
 git -C "~/projets/<bucket>/<nom>" add -A
 git -C "~/projets/<bucket>/<nom>" commit -m "feat: init <nom> — <description>
 
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+Co-Authored-By: Claude <noreply@anthropic.com>"
 git -C "~/projets/<bucket>/<nom>" push -u origin main
 ```
 
@@ -88,7 +88,7 @@ GSD paie la structure **d'avance** contre l'incertitude. Rentable seulement quan
 
 Une ligne : **incertitude haute + coût d'erreur élevé → GSD ; sinon l'itération est le plan.** `/gsd:new-project` génère `PROJECT.md` + roadmap + `.planning/`. À lancer après l'init git. Piège du mode petit-pas à surveiller : dérive vers un optimum local — le garde-fou n'est pas GSD mais que **MASTER.md porte un vrai cap** (vision/décisions), pas une todo déguisée.
 
-**Convention notes** : les projets GSD accumulent des items dans `.planning/notes/`. Obligation : marquer `✅ RÉSOLU [AAAA-MM-JJ]` dès qu'un item est implémenté (voir section [Convention RÉSOLU](CLAUDE.md#convention-résolu--notes-planningnotes-cross-projet) dans le meta CLAUDE.md). Ne jamais marquer RÉSOLU sans vérifier dans le code réel.
+**Convention notes** : les projets GSD accumulent des items dans `.planning/notes/`. Obligation : marquer `✅ RÉSOLU [AAAA-MM-JJ]` dès qu'un item est implémenté (voir section [Convention RÉSOLU](META_INFRA.md#convention-résolu--notes-planningnotes-cross-projet) dans META_INFRA.md). Ne jamais marquer RÉSOLU sans vérifier dans le code réel.
 
 ## 9. Avant de créer un dashboard dans le projet
 

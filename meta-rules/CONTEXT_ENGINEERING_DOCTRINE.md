@@ -49,7 +49,7 @@ Avant d'écrire quoi que ce soit dans un CLAUDE.md projet, classer d'abord :
 
 Test final : *"Si je supprime cette ligne, Claude ferait-il des erreurs sur des tâches routinières ?"* Si non → ça n'appartient pas au CLAUDE.md.
 
-Règles techniques : CLAUDE.md < 200 lignes. Hook PreToolUse rappelle ce framework à chaque édition. Hook PostToolUse bloque si dépassement. `@import` n'est PAS du chargement conditionnel (même coût token qu'inline, chargé au lancement, max 4 hops — confirmé doc Anthropic). Vraiment à la demande : **skills** (`.claude/skills/`), **`.claude/rules/` path-scopés** (frontmatter `paths:`), **CLAUDE.md de sous-dossier**. Détail + correction dans `CLAUDE_HEALTH_RULES.md` §3.
+Règles techniques : CLAUDE.md < 200 lignes (référence dans `CLAUDE_HEALTH_RULES.md` §2 pour seuils et enforcement). `@import` n'est PAS du chargement conditionnel (même coût token qu'inline, chargé au lancement, max 4 hops — confirmé doc Anthropic). Vraiment à la demande : **skills** (`.claude/skills/`), **`.claude/rules/` path-scopés** (frontmatter `paths:`), **CLAUDE.md de sous-dossier**. Détail + correction dans `CLAUDE_HEALTH_RULES.md` §3.
 
 **7. Signal de dette documentaire en session**
 Quand Claude est contraint de lire un fichier source pour comprendre un comportement qui aurait dû être documenté, il doit :

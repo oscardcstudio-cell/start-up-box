@@ -8,7 +8,7 @@ Reference depuis `~/projets\CLAUDE.md` (meta racine).
 
 Chaque `CLAUDE.md` est charge **a chaque message** (pas une fois par session). Bloat = tokens crames a vie + place perdue dans le context window. Le cache prompt baisse le cout en `$` mais **n'enleve pas** le poids dans la fenetre de contexte.
 
-Stack actuelle : `user (5K) + meta (6K) + bucket (2K) + projet (8K cible)` = ~21 KB ~5K tokens. Au-dela de 30 KB cumule on est en zone rouge.
+Ordre de grandeur type : `user (~5K) + meta (~6K) + bucket (~2K) + projet (~6K cible)` — viser < 20 KB cumulés (seuil Warn ci-dessous) ; au-delà de 30 KB on est en zone rouge. Mesure réelle : `node ~/projets/packages/doc-auditor/src/cli.mjs <repo> --stack`.
 
 ## 2. Seuils chiffres
 
