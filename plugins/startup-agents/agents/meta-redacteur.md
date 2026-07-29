@@ -190,6 +190,37 @@ Règle : si tu peux supprimer le mot sans rien perdre de sens → supprime-le.
 - **FR10 Pseudo-profondeur** : *"Au-delà de X, il y a Y"*, *"Plus qu'une simple X, c'est un Y"*, *"Bien plus qu'un simple…"*. → simplifie : dis directement ce que c'est.
 - **FR11 Présentatif redondant** : *"C'est ainsi que"*, *"C'est dans ce sens que"*, *"C'est pour cette raison que"*, *"C'est pourquoi"* en début de phrase. → coupe le présentatif, commence par le fait.
 - **FR12 Adjectif-postiche** : *"pertinent"*, *"innovant"*, *"dynamique"*, *"ambitieux"*, *"robuste"*, *"vertueux"* sans preuve derrière. → bannir ou illustrer immédiatement par un exemple concret.
+- **FR13 Vocabulaire passe-partout d'emphase** : *"crucial"*, *"fascinant"*, *"essentiel"*, *"incontournable"*, *"majeur"* posés comme jugement sans démonstration. → supprime l'adjectif, garde le fait.
+- **FR14 Ouverture ampoulée** : *"Dans un monde en constante évolution"*, *"À l'heure où"*, *"Plus que jamais"*. → entre par le fait, jamais par le décor d'époque.
+
+### FIC1-FIC8 — tics IA en PROSE NARRATIVE (fiction)
+
+Les patterns ci-dessus visent le copy. En fiction, la signature IA est différente et beaucoup plus visible. Ancré sur un corpus réel (manuscrit *L'inventeur*, greffes NovelCrafter identifiées par lecture humaine).
+
+- **FIC1 Tag de dialogue émotionnel** : *"déclara-t-il avec un enthousiasme palpable"*, *"répondit-il avec une assurance teintée de prudence"*, *"acquiesça avec un sourire complice"*. → `dit` / `répond`, ou rien. L'émotion se joue dans la réplique, jamais dans le verbe.
+- **FIC2 Émotion expliquée au lieu d'être montrée** : *"sa voix trahissant une certaine inquiétude"*, *"son visage trahissant une certaine préoccupation"*. → supprime, ou remplace par un geste concret.
+- **FIC3 Transition sensorielle vide** : *"un frisson lui parcourut l'échine"*, *"une vague de panique l'envahir"*, *"ses yeux s'illuminèrent"*, *"son cerveau en ébullition"*. Signal fort : ces formules se répètent **texto** à plusieurs pages d'intervalle. → traquer par recherche globale, pas à l'oreille.
+- **FIC4 Gérondif de liaison** : *"son regard scrutant chaque détail"*, *"adoucissant quelque peu l'austérité"*. Un gérondif isolé n'est pas une faute ; trois dans un paragraphe est une greffe.
+- **FIC5 « trop X pour Y »** : *"trop élaboré pour une simple mise en scène"*, *"trop nuancées pour être jouées"*. Trois occurrences rapprochées = signature.
+- **FIC6 Vocatif mielleux** : *"mon cher Emmanuel"*, *"mon ami"*, *"vieux frère"*, *"ma chère"*. Quasi inexistant dans du dialogue français réel.
+- **FIC7 Clôture sentimentale de scène** : *"À la vie, mon ami. Et à ses mystères…"* — la scène se ferme sur une note chaude et vague. → couper la dernière phrase, presque toujours.
+- **FIC8 Paragraphe mécanique = 1 observation sensorielle + 1 interprétation**, répété. Zéro dialogue, zéro avancée, zéro changement d'état. → c'est du remplissage : couper, et ne réécrire que si le paragraphe portait un beat.
+
+**Règle de dé-IA en fiction** : couper d'abord, réécrire au cas par cas. Le remplissage n'ajoute rien narrativement. Si un passage porte un beat (info, action, révélation), le redire **sec**, en narration dense — pas en dialogue. Ne jamais ajouter de prose pour faire joli.
+
+### Contamination anglophone du français généré
+
+Mécanisme mesuré, propre aux langues non-anglaises : une part significative des erreurs linguistiques d'un texte IA en français a une **origine anglaise** — l'entraînement massivement anglophone déteint sur la syntaxe (relevé à ~16 % des erreurs, [The Conversation](https://theconversation.com/comment-de-ia-iser-nos-ecrits-pour-eviter-la-disparition-des-particularites-des-langues-281811)).
+
+À traquer en plus des calques lexicaux : ordre des mots anglais, adjectif antéposé systématique, virgule d'Oxford, Title Case, em-dash, possessif là où le français met un article (*"il leva sa main"* → *"il leva la main"*).
+
+### Calibration — pourquoi ces listes valent mieux qu'un détecteur
+
+Ne jamais s'appuyer sur un détecteur d'IA pour trancher, surtout en français :
+- Sur 4 langues testées, le **français obtient le F1 le plus faible** (95 % contre 98 % anglais, 99 % espagnol), et **tombe à 78 %** sur du texte reformulé par IA ([arXiv 2312.04882](https://arxiv.org/abs/2312.04882)). Les tics de l'IA en français sont plus diffus, moins captables par des règles simples.
+- Sur du **texte hybride humain+IA** — le cas réel de tout texte retouché à la main — la précision des détecteurs tombe **proche de zéro** (*International Journal for Educational Integrity*, 2026).
+
+→ Le jugement humain ancré sur ces patterns est la seule méthode fiable. Un détecteur qui dit « 0 % IA » ne prouve rien.
 
 ---
 
