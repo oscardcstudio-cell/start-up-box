@@ -57,7 +57,7 @@ Pour la phase courante :
 | 3 Marque minimale | `meta-business` + `meta-redacteur` | `brand/plateforme.md`, `brand/guide_editorial.md` |
 | 4 Offre & GTM (+ gate willingness-to-pay) | `meta-offre-pricing` + `meta-marketing` + `meta-ux-conversion` | `marketing/plan_marketing.md`, `calendrier_editorial.md` + landing de test |
 | 5 Identité complète | `meta-creation` + skill `design-director` + `meta-redacteur` + `meta-philosophe` | `brand/manifesto`, `fondations`, `charte`, `direction_artistique`, `personas` |
-| 6 Build | **Onboarding infra (prise par la main)** PUIS **GSD** (`gsd:new-project`) + `meta-ui-ux` + `meta-gamification` (si produit web/app) | repo applicatif + `projets/TEMPLATE_PROJET.md` — **si web app : recommander le package `notes-backlog`** (widget → BACKLOG → `.planning/notes/`) pour capturer les idées produit entre sessions, **et brancher son gate `notes-audit` dès le premier jour** (`npm run check:notes` au pre-push) — sinon seule la moitié capture existe : la clôture n'a aucun déclencheur et le répertoire dérive en silence jusqu'à faire recommander un chantier déjà livré |
+| 6 Build | **Onboarding infra (prise par la main)** PUIS **GSD** (`gsd:new-project`) + `meta-ui-ux` + `meta-gamification` (si produit web/app) | repo applicatif + `projets/TEMPLATE_PROJET.md` — **si web app : recommander le package `notes-backlog`** (widget → BACKLOG → `.planning/notes/`) pour capturer les idées produit entre sessions |
 | 7 Lancement | `meta-marketing` + `meta-redacteur` + `meta-creation` + skill `autoresearch` | campagne, presse, posts |
 | ∥ Juridique | **Avocat startup spécialisé** (hors IA) | `juridique/*`, `info.json` |
 

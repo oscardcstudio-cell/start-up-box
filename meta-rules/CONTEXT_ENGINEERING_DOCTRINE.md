@@ -63,6 +63,12 @@ Exemple : `dischargeStrategy()` dans un projet de trading ne fonctionne pas — 
 
 L'effort de revue humaine ne rend pas le même rendement à chaque étage. Une erreur dans la phase **recherche** (mauvaise compréhension du problème) se propage en milliers de lignes pourries ; une erreur de **plan** en centaines ; une erreur de **code** en lignes isolées. Donc concentrer la relecture **en amont** : relire le brief/la recherche prime sur relire le plan, qui prime sur relire le diff final. GSD a déjà les trois phases (recherche → plan → exécution) ; ce standard dit **où mettre les yeux du fondateur en priorité** quand le temps de revue est limité. Corollaire compaction : viser **40-60 %** d'utilisation du contexte comme zone de travail (compaction intentionnelle avant la « dumb zone »), pas attendre 90 %.
 
+**9. Glossaire de domaine `CONTEXT.md` (langage partagé — anti-verbosité)**
+
+Repris de Matt Pocock (`mattpocock/skills`). Un agent qui débarque sur un projet **n'a pas le jargon métier** : il écrit 20 mots là où l'équipe en dit 1, navigue de façon incohérente, brûle des tokens. Remède : un `CONTEXT.md` à la racine du repo qui fige le **langage partagé** — chaque terme du domaine défini une fois, avec ses synonymes _à éviter_ (« Avoid: … ») et les relations entre termes.
+
+Ce n'est PAS un `llms.txt` (carte des fichiers) ni un `CLAUDE.md` (règles de comportement) : c'est le **dictionnaire du domaine métier**. Structure recommandée : `## Language` (terme → définition + « Avoid »), `## Relationships` (un X a plusieurs Y…), `## Flagged ambiguities` (termes ambigus tranchés, avec la résolution). À poser sur un projet à jargon dense (métier, multi-contexte) ; inutile sur un throwaway. Alimenté/raffiné par le skill `/domain-modeling` (voir `.agents/skills/domain-modeling`), qui produit aussi les ADR. **Créer/étendre le `CONTEXT.md` d'un projet quand un terme métier revient ≥ 3 fois avec des formulations différentes.**
+
 ## Propagation vers les projets existants
 
 Niveau 1 (llms.txt) automatisable sans contexte projet — lancer : "crée le llms.txt pour le projet X".
