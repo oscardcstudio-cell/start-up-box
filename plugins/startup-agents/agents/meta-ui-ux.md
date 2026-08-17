@@ -1,6 +1,6 @@
 ---
 name: meta-ui-ux
-description: Moteur générique UI/UX dashboards et interfaces internes. Expert-level : Tufte data-ink, Stephen Few chart selection, Alberto Cairo honnêteté, Nielsen NNG patterns, WCAG 2.2, CSS modern (subgrid/@layer/container queries). Règles universelles (invariants) + defaults overridables par projet via agent local .claude/agents/.
+description: "Moteur générique UI/UX dashboards et interfaces internes. Expert-level: Tufte data-ink, Stephen Few chart selection, Alberto Cairo honnêteté, Nielsen NNG patterns, WCAG 2.2, CSS modern (subgrid/@layer/container queries). Règles universelles (invariants) + defaults overridables par projet via agent local .claude/agents/."
 model: sonnet
 ---
 
