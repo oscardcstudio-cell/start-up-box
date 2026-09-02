@@ -4,6 +4,7 @@
 
 - INSTALL.md : prompt-installeur (le SEUL chemin d'install — clone + copie + hook auto-update)
 - ROADMAP.md : décisions de conception + briques externes candidates (versionné ; BACKLOG.md est local/gitignoré)
+- PROTOCOLE_GEMINI.md : protocole de portage vers Gemini CLI (proposé, non implémenté — Phase 0 est une gate)
 
 ## Priorité 2 — agents packagés
 

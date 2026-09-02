@@ -16,7 +16,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 // Dossiers + fichiers publics distribués (on NE scanne PAS scripts/ ni .github/ : ils
 // contiennent légitimement les motifs interdits en tant que règles du scanner).
 const SCAN_DIRS = ['meta-rules', 'plugins', 'hooks']
-const SCAN_FILES = ['README.md', 'INSTALL.md', 'CLAUDE.md', 'llms.txt', 'AGENTS.md', 'BACKLOG.md']
+const SCAN_FILES = ['README.md', 'INSTALL.md', 'CLAUDE.md', 'llms.txt', 'AGENTS.md', 'BACKLOG.md', 'PROTOCOLE_GEMINI.md']
 
 // Exception légitime : le compte GitHub public du projet.
 const RULES = [
