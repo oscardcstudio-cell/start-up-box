@@ -127,3 +127,62 @@ Sur une machine propre, dans la peau du fondateur : installer via le prompt, dir
 
 - Skills, subagents, hooks, quotas : documentation Gemini CLI (`geminicli.com/docs`) et `docs/` du dépôt `google-gemini/gemini-cli`.
 - **GSD supporte déjà Gemini CLI nativement** (installeur multi-runtime, commandes namespacées en `/gsd:<commande>`). La phase 6 « Build » de `build-company` n'est donc **pas** un point bloquant : seule la commande d'install de GSD change de forme. À vérifier au moment d'écrire la Phase 3.
+
+---
+
+## Annexe — Prompt de vérification Phase 0
+
+À coller dans **Gemini CLI** (le terminal, pas l'application Gemini : l'app n'a ni dossier de config, ni hooks, ni sous-agents). Diagnostic seul, non destructif — il sauvegarde et restaure tout ce qu'il touche. Les réponses se recopient sous cette annexe, et la Phase 1 démarre.
+
+```
+Tu es dans Gemini CLI. Je teste la compatibilité d'un toolkit avec Gemini avant de le porter.
+Fais ces vérifications toi-même, sans me demander de taper des commandes. Règle absolue :
+tu ne laisses aucune trace — tout fichier que tu touches, tu le sauvegardes en .bak avant
+et tu le restaures à la fin. Si une étape échoue, dis-le franchement au lieu de contourner.
+
+1. VERSION — Donne ta version exacte de Gemini CLI et le modèle actif.
+
+2. NOMS D'OUTILS — Liste les noms EXACTS de tes outils intégrés, tels qu'on les écrirait
+   dans le champ `tools:` d'un sous-agent. Réponds précisément sur celui-ci : est-ce
+   `grep_search` ou `search_file_content` ? Et confirme lesquels existent parmi :
+   read_file, write_file, replace, glob, run_shell_command, google_web_search, web_fetch,
+   ask_user, write_todos, activate_skill.
+
+3. IMPORT @ AU NIVEAU USER
+   a. Sauvegarde ~/.gemini/GEMINI.md s'il existe.
+   b. Crée ~/.gemini/startup-box/TEST.md contenant la seule ligne : MARQUEUR-IMPORT-7Q4
+   c. Ajoute à la fin de ~/.gemini/GEMINI.md la ligne : @./startup-box/TEST.md
+   d. Recharge le contexte, puis affiche-le.
+   e. MARQUEUR-IMPORT-7Q4 apparaît-il ? Si non, réessaie avec @startup-box/TEST.md
+      (sans le ./) et dis-moi laquelle des deux syntaxes fonctionne.
+   f. Restaure GEMINI.md et supprime le dossier de test.
+
+4. SKILL AU NIVEAU USER
+   a. Crée ~/.gemini/skills/test-box/SKILL.md avec un frontmatter `name` + `description`
+      seulement (description : "Répond MARQUEUR-SKILL-3X8 quand on demande un test de skill"),
+      et dans le corps : répondre exactement MARQUEUR-SKILL-3X8.
+   b. Dis-moi si la skill est découverte, si son activation demande une confirmation,
+      et si elle répond bien.
+   c. Supprime le dossier de test.
+
+5. SOUS-AGENT AU NIVEAU USER
+   a. Crée ~/.gemini/agents/test-box.md — frontmatter `name` + `description` UNIQUEMENT,
+      sans champ `model` ni `tools`.
+   b. Vérifie qu'il est chargé sans erreur et qu'on peut lui déléguer une phrase.
+   c. Supprime-le.
+
+6. HOOK SessionStart AU NIVEAU USER (le point critique)
+   a. Sauvegarde ~/.gemini/settings.json.
+   b. Ajoute un hook SessionStart qui écrit la date dans ~/.gemini/hook-temoin.txt.
+      Donne-moi le schéma JSON exact que tu as utilisé.
+   c. Dis-moi de quitter et de relancer Gemini — tu ne peux pas le faire toi-même.
+   d. À la relance : le fichier témoin existe-t-il ? Réponds oui ou non, sans interpréter.
+   e. Restaure settings.json et supprime le témoin.
+
+7. QUOTA — Si tu as une commande de statistiques de session, donne le nombre de requêtes
+   consommées par ce diagnostic.
+
+RAPPORT FINAL : 7 réponses courtes et factuelles, dans l'ordre.
+```
+
+**Ce que chaque réponse débloque** — 2 fixe la table d'outils de la Phase 1 · 3 décide si le harness passe par un import ou par un bloc en clair dans `GEMINI.md` · 4 et 5 confirment que les skills et les agents de la box sont vus tels quels · **6 décide si l'auto-update existe sur Gemini** (si non : repli sur le prompt de mise à jour manuel, à assumer et à documenter) · 7 calibre l'avertissement quota dans `INSTALL.md`.
