@@ -7,6 +7,20 @@ Décisions de conception et pistes d'évolution de la box, **versionnées** (don
 
 ---
 
+## Portage multi-runtime
+
+### Gemini CLI — support d'un fondateur sans Claude Code
+
+**État** : protocole écrit (2026-09-02), **non implémenté**. Détail complet → [`PROTOCOLE_GEMINI.md`](PROTOCOLE_GEMINI.md).
+
+**Pourquoi** : la box exige aujourd'hui Claude Code + un abonnement payant. Gemini CLI est gratuit (1 000 requêtes/jour avec un compte Google) et a repris la même architecture — agents en md + frontmatter, `SKILL.md`, hooks avec le même payload, fichier de contexte hiérarchique avec imports.
+
+**Décision structurante** : la conversion vit **dans le pipeline**, jamais dans les fichiers — une conversion posée à la main serait écrasée au prochain passage du gate hebdo. Une source commitée (Claude), une table de conversion, deux cibles générées.
+
+**Trois décisions en attente** (cf. le protocole) : mode d'approbation (`auto_edit` recommandé), support officiel vs best-effort, et l'arbitrage du double-writer `meta-rules/` — à trancher en premier.
+
+---
+
 ## Briques externes candidates
 
 ### `claude-seo` — brique SEO (Phase 7 Lancement, mobilisable Phase 4 GTM)

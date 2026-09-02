@@ -1,6 +1,13 @@
 # Prompt-installeur start-up-box
 
-**Prérequis immédiats** (avant de lancer le prompt) :
+La box s'installe sur **Claude Code** ou sur **Gemini CLI** — même agents, mêmes compétences, même parcours. Choisis ton assistant :
+
+- **Claude Code** (abonnement Max) → prérequis + prompt ci-dessous.
+- **Gemini CLI** (gratuit, compte Google) → [aller directement à la section Gemini](#installer-sur-gemini-cli-gratuit).
+
+---
+
+**Prérequis immédiats — Claude Code** (avant de lancer le prompt) :
 - **Git** → https://git-scm.com/downloads (`git --version` pour vérifier)
 - **Claude Code** → https://claude.ai/download
 - **Abonnement Max** → https://claude.ai/upgrade
@@ -16,7 +23,7 @@
 
 ---
 
-## Le prompt à copier-coller
+## Le prompt à copier-coller (Claude Code)
 
 Ouvre Claude Code (dans n'importe quel dossier), copie le bloc ci-dessous et colle-le :
 
@@ -78,7 +85,76 @@ Le reste, Claude l'enchaîne tout seul : s'il manque le dossier `company/`, il l
 
 ---
 
-## Mettre à jour (une seule fois, ensuite c'est automatique)
+## Installer sur Gemini CLI (gratuit)
+
+**Prérequis** :
+- **Git** → https://git-scm.com/downloads
+- **Node.js ≥18** → https://nodejs.org
+- **Gemini CLI** → dans un terminal : `npm install -g @google/gemini-cli`, puis lancer `gemini` et se connecter avec un compte Google.
+
+Pas d'abonnement payant : le palier gratuit donne 60 requêtes/minute et 1 000 par jour, Gemini 3 Pro inclus. Attention, **une** demande consomme plusieurs requêtes — sur une grosse journée de travail tu peux atteindre le plafond, il se réinitialise le lendemain.
+
+Ouvre `gemini` (dans n'importe quel dossier), copie le bloc ci-dessous et colle-le :
+
+<!-- GEMINI_PROMPT:START — la page d'onboarding peut lire ce bloc depuis ce fichier (source unique) -->
+```
+Installe start-up-box sur cette machine. C'est un toolkit IA pour créer une startup de A à Z. Je ne suis pas développeur : fais TOUT toi-même, ne me demande aucune commande, et ne me montre pas de détails techniques — dis-moi juste où tu en es en français normal.
+
+1. Repère mon système (Mac/Linux ou Windows) et dis-le-moi en une ligne. Les commandes ci-dessous sont en syntaxe Unix ; sur Windows, exécute-les depuis Git Bash et bascule sur l'équivalent natif si l'une échoue. Tu détectes et tu adaptes.
+
+2. Récupère la box :
+   git clone https://github.com/oscardcstudio-cell/start-up-box.git ~/.start-up-box
+   (si le dossier existe déjà : git -C ~/.start-up-box pull --ff-only)
+
+3. Installe-la, convertie pour toi. La box est écrite pour un autre assistant ; ce script la traduit vers tes formats à toi (noms d'outils, événements de hook, fichier de contexte) et l'installe dans ~/.gemini :
+   node ~/.start-up-box/scripts/to-gemini.mjs --install
+
+   Il installe : les 9 agents dans ~/.gemini/agents, les compétences dans ~/.gemini/skills, la couche meta dans ~/.gemini/startup-box, le harness branché dans ~/.gemini/GEMINI.md, et deux hooks dans ~/.gemini/settings.json (mise à jour automatique + garde-fou sur les ports).
+
+4. VÉRIFIE TOI-MÊME QUE LA TRADUCTION COLLE À TA VERSION (important — ne saute pas cette étape) :
+
+   a. Outils : ouvre ~/.gemini/agents/meta-gamification.md et ~/.gemini/agents/meta-offre-pricing.md, regarde leur ligne "tools:". Compare chaque nom à TES outils réels. Si l'un n'existe pas chez toi (le cas connu : "grep_search" peut s'appeler "search_file_content" selon la version), corrige-le dans les deux fichiers ET dans ~/.start-up-box/scripts/gemini-map.mjs (dictionnaire TOOL_MAP), pour que la correction survive aux mises à jour. Dis-moi en une ligne si tu as dû corriger quelque chose.
+
+   b. Harness : recharge ton contexte puis affiche-le. Tu dois y voir un texte qui commence par "Harness fondateur". Si tu ne le vois pas, l'import n'a pas fonctionné sur ta version : relance
+      node ~/.start-up-box/scripts/to-gemini.mjs --install --inline-harness
+      (ça écrit le texte directement dans GEMINI.md au lieu de l'importer), puis revérifie.
+
+   c. Mise à jour automatique : confirme que ~/.gemini/settings.json contient bien un hook SessionStart pointant sur startup-box-update.js. Préviens-moi que si un jour la box ne se met plus à jour toute seule, il me suffira de te dire "mets à jour la box".
+
+5. Vérifie que ces fichiers existent : ~/.gemini/agents/meta-business.md, ~/.gemini/skills/build-company/SKILL.md, ~/.gemini/startup-box/HARNESS.md, ~/.gemini/hooks/startup-box-update.js.
+
+6. Dis-moi "Installation terminée ✓" et résume en 3 lignes ce que tu sais faire maintenant. Puis propose de démarrer tout de suite : dès que je réponds (oui / "je veux lancer ma boîte" / etc.), lance toi-même la compétence build-company (phase 0 : cadrage). Je n'ai aucune commande à taper — si le dossier company/ manque, tu le crées tout seul avant de continuer.
+```
+<!-- GEMINI_PROMPT:END -->
+
+Ensuite, comme sur Claude Code : ouvre `gemini` **dans le dossier de ton projet** et dis simplement _« je veux lancer ma boîte »_. Tout le reste s'enchaîne.
+
+### Mettre à jour sur Gemini
+
+Normalement rien à faire — le hook installé à l'étape 3 met la box à jour à chaque conversation. Si ça ne se fait pas, colle ceci :
+
+<!-- GEMINI_UPDATE_PROMPT:START -->
+```
+Mets à jour start-up-box. Je ne suis pas développeur : fais tout toi-même.
+1. git -C ~/.start-up-box pull --ff-only (si le dossier n'existe pas, clone https://github.com/oscardcstudio-cell/start-up-box.git dans ~/.start-up-box)
+2. node ~/.start-up-box/scripts/to-gemini.mjs --install
+3. Vérifie que le harness est bien chargé dans ton contexte, et dis-moi "Mise à jour terminée ✓" avec un résumé de ce qui a changé.
+```
+<!-- GEMINI_UPDATE_PROMPT:END -->
+
+### Désinstaller (Claude Code) (Gemini)
+
+```bash
+rm -rf ~/.start-up-box
+rm -f ~/.gemini/agents/meta-*.md
+rm -rf ~/.gemini/skills/build-company ~/.gemini/skills/create-company ~/.gemini/skills/design-director ~/.gemini/skills/autoresearch
+rm -rf ~/.gemini/startup-box ~/.gemini/hooks/startup-box-update.js ~/.gemini/hooks/port-guard.js
+```
+(puis retirer le bloc `startup-box` de `~/.gemini/GEMINI.md` et les hooks de `~/.gemini/settings.json`)
+
+---
+
+## Mettre à jour sur Claude Code (une seule fois, ensuite c'est automatique)
 
 Si tu as installé la box **avant** que la mise à jour automatique existe, fais cette mise à jour **une fois** : elle installe le mécanisme qui fera toutes les suivantes tout seul, à chaque conversation.
 

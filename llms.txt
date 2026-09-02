@@ -4,6 +4,9 @@
 
 - INSTALL.md : prompt-installeur (le SEUL chemin d'install — clone + copie + hook auto-update)
 - ROADMAP.md : décisions de conception + briques externes candidates (versionné ; BACKLOG.md est local/gitignoré)
+- PROTOCOLE_GEMINI.md : protocole de portage vers Gemini CLI (implémenté)
+- scripts/gemini-map.mjs : table de conversion Claude → Gemini (livrée dans le clone, tourne chez le fondateur)
+- scripts/to-gemini.mjs : convertisseur + installeur Gemini (--install / --check / --dry-run)
 
 ## Priorité 2 — agents packagés
 
