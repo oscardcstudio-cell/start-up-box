@@ -1,6 +1,6 @@
 # start-up-box
 
-Toolkit IA open-source pour créer une startup de A à Z depuis Claude Code.
+Toolkit IA open-source pour créer une startup de A à Z — depuis **Claude Code** ou **Gemini CLI**.
 
 Un prompt, un `/build-company`, et les meilleurs agents de stratégie/marque/pricing/rédaction pilotent ton projet phase par phase — avec une gate humaine à chaque étape.
 
@@ -13,7 +13,11 @@ Un prompt, un `/build-company`, et les meilleurs agents de stratégie/marque/pri
 
 ## Installation (30 secondes)
 
-**Prérequis** : [Claude Code](https://claude.ai/download) + abonnement [Max](https://claude.ai/upgrade). Git en option (mais recommandé).
+**Prérequis** — au choix :
+- [Claude Code](https://claude.ai/download) + abonnement [Max](https://claude.ai/upgrade)
+- ou **Gemini CLI** (gratuit) : `npm install -g @google/gemini-cli` + un compte Google
+
+Git dans les deux cas.
 
 Copie le bloc dans `INSTALL.md` et colle-le dans une session Claude Code :
 
@@ -27,7 +31,7 @@ Copie le bloc dans `INSTALL.md` et colle-le dans une session Claude Code :
 start-up-box/
 ├── INSTALL.md                  ← prompt-installeur à copier-coller (le seul chemin)
 ├── plugins/
-│   ├── startup-agents/agents/  ← 9 méta-agents Claude Code
+│   ├── startup-agents/agents/  ← 9 méta-agents (convertis à la volée pour Gemini)
 │   └── startup-skills/skills/  ← 4 skills (build-company, create-company, design-director, autoresearch)
 ├── meta-rules/                 ← harness fondateur + doctrines (couche meta installée chez l'user)
 └── hooks/                      ← mise à jour automatique (SessionStart)

@@ -1,7 +1,13 @@
 # Protocole — support Gemini CLI
 
-> **Statut : proposé (2026-09-02), non implémenté.** Phase 0 est une gate : rien ne se code avant.
+> **Statut : implémenté (2026-09-02).** Phases 1 à 5 livrées : table de conversion, convertisseur,
+> prompt d'install, auto-update bi-cible, CI. Reste la recette sur machine réelle (Phase 6).
 > Objet : rendre la box installable et utilisable par un fondateur qui n'a pas Claude Code.
+>
+> **Phase 0 (vérification terrain) n'a pas été exécutée séparément : elle est intégrée au prompt
+> d'install**, qui fait vérifier par Gemini lui-même ses noms d'outils réels et la résolution de
+> l'import du harness, avec repli automatique. C'est plus robuste qu'un diagnostic préalable —
+> la vérification tourne sur CHAQUE machine, pas une seule fois sur celle du mainteneur.
 
 ## Décision structurante
 
