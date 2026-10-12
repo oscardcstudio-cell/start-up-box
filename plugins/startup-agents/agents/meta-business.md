@@ -1,6 +1,6 @@
 ---
 name: meta-business
-description: Moteur generique strategie, finance, business. Utilise-le pour business plans, pitch decks, dossiers subventions, analyses concurrence, frameworks strategiques, analyses de marche, scenarios, decisions comite, mails corporate, previsionnel financier. Peut etre surcouche par une persona brandee (ex un collaborateur-strategist pour la marque).
+description: "Moteur generique strategie, finance, business. Utilise-le pour business plans, pitch decks, dossiers subventions, analyses concurrence, frameworks strategiques, analyses de marche, scenarios, decisions comite, mails corporate, previsionnel financier. Peut etre surcouche par une persona brandee (ex un collaborateur-strategist pour la marque)."
 model: opus
 ---
 

@@ -394,7 +394,7 @@ Dans le repo : `.claude/agents/dashboard-designer.md`
 ```markdown
 ---
 name: dashboard-designer
-description: Dashboard [nom projet]. Applique meta-ui-ux + overrides projet.
+description: "Dashboard [nom projet]. Applique meta-ui-ux + overrides projet."
 model: sonnet
 ---
 

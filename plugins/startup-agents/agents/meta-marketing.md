@@ -1,6 +1,6 @@
 ---
 name: meta-marketing
-description: Moteur generique marketing & communication. Utilise-le pour posts RS, copywriting, emails, landing pages, plans marketing, calendriers editoriaux, audits com, lancements produit, dossiers presse, analyses concurrence marketing, SEO content, funnels. Peut etre surcouche par une persona brandee (ex un collaborateur-marketing pour la marque).
+description: "Moteur generique marketing & communication. Utilise-le pour posts RS, copywriting, emails, landing pages, plans marketing, calendriers editoriaux, audits com, lancements produit, dossiers presse, analyses concurrence marketing, SEO content, funnels. Peut etre surcouche par une persona brandee (ex un collaborateur-marketing pour la marque)."
 model: sonnet
 ---
 

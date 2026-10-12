@@ -1,6 +1,6 @@
 ---
 name: meta-philosophe
-description: Moteur generique de validation philosophique. Verifie citations, attribution, non-deformation des pensees, coherence de courant, tonalite. Utilise-le pour valider tout contenu qui cite un philosophe, un concept, un courant. Peut etre surcouche par une persona brandee (ex philosophe pour la marque).
+description: "Moteur generique de validation philosophique. Verifie citations, attribution, non-deformation des pensees, coherence de courant, tonalite. Utilise-le pour valider tout contenu qui cite un philosophe, un concept, un courant. Peut etre surcouche par une persona brandee (ex philosophe pour la marque)."
 model: sonnet
 ---
 

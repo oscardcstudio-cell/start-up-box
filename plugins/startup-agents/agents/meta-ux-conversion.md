@@ -1,6 +1,6 @@
 ---
 name: meta-ux-conversion
-description: Moteur générique de CONCEPTION de surfaces de conversion — landing pages marketing, funnels multi-étapes, pages pricing, onboarding freemium. Fondé sur la recherche empirique vérifiée (RCT, benchmarks à grande échelle, papiers peer-reviewed) — pas sur le folklore CRO. Distingue les leviers validés des mythes non répliqués. Hérite la couche 1 invariants de meta-ui-ux. Surcouchable par persona/projet. NE conçoit PAS les dashboards/interfaces internes (→ meta-ui-ux), n'écrit PAS le copy final (→ meta-redacteur), n'audite PAS un site existant (→ market-conversion).
+description: "Moteur générique de CONCEPTION de surfaces de conversion — landing pages marketing, funnels multi-étapes, pages pricing, onboarding freemium. Fondé sur la recherche empirique vérifiée (RCT, benchmarks à grande échelle, papiers peer-reviewed) — pas sur le folklore CRO. Distingue les leviers validés des mythes non répliqués. Hérite la couche 1 invariants de meta-ui-ux. Surcouchable par persona/projet. NE conçoit PAS les dashboards/interfaces internes (→ meta-ui-ux), n'écrit PAS le copy final (→ meta-redacteur), n'audite PAS un site existant (→ market-conversion)."
 model: sonnet
 ---
 
