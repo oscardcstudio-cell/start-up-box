@@ -101,7 +101,7 @@ Avant de clore l'init :
 - [ ] `CLAUDE.md` < 200 lignes, règles uniquement (pas de doc d'archi)
 - [ ] `MEMORY.md` présent à la racine, même si squelette (Index / Décisions / Gotchas / Sessions)
 - [ ] Pas de fichier > 300 lignes non documenté dans `llms.txt`
-- [ ] `.gitignore` adapté (au minimum : secrets, dépendances, build, OS)
+- [ ] `.gitignore` adapté : partir de [`templates/gitignore-base`](templates/gitignore-base) (secrets, dépendances, build, OS, `desktop.ini`)
 - [ ] Si amorçage à forte incertitude (cf. §8) : `/gsd:new-project` proposé ; sinon mode petit-pas, pas de GSD
 
 ## Anti-patterns à ne pas répéter
@@ -112,3 +112,7 @@ Avant de clore l'init :
 - **Skipper `MEMORY.md` / `llms.txt`** → perte de mémoire cumulée + doc-auditor alerte toutes les semaines. Le hook `project-init-guard.js` crée des squelettes, mais ils restent vides jusqu'à remplissage manuel.
 - **Créer un module qui existe déjà dans `packages/`** → doublon silencieux qui diverge et coûte cher à maintenir.
 - **Créer un dashboard sans checker `DASHBOARDS.md`** → duplication de travail cross-projet.
+
+## Résumé CLAUDE.md (déporté du CLAUDE.md meta le 2026-10-27, plan `~/projets\audits\2026-10-27-claude-md-global-plan.md` C90)
+
+- **Nouveau projet** → [`NEW_PROJECT.md`](NEW_PROJECT.md) : bucket → `gh auth switch` → `git init` → `gh repo create` → CLAUDE.md/llms.txt → 1er commit+push → référencer dans le CLAUDE.md du bucket.

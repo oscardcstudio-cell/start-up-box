@@ -47,3 +47,9 @@ Avant d'ajouter du code pour résoudre quoi que ce soit, descendre l'échelle et
 6. **Seulement alors** : écrire le minimum.
 
 Marquer une simplification délibérée par un commentaire `simplification:` indiquant son plafond et son chemin d'upgrade — ex. `// simplification: hardcodé, passer en config si > 3 cas`. Complète la règle d'or meta « vérifier l'existant avant de créer » côté **code**, pas seulement côté **outil**. (Source : échelle de décision ponytail.)
+
+## 0. Formulation CLAUDE.md (déporté du CLAUDE.md meta le 2026-10-27, plan `~/projets\audits\2026-10-27-claude-md-global-plan.md` C67, C68)
+
+- **Double voie sur erreur (règle d'or le fondateur 2026-07-04)** : toute erreur rencontrée en travaillant = DEUX sorties, même réponse — (1) **débloquer** : contournement minimal pour que le travail en cours continue ; (2) **soigner le système** : « qu'est-ce qui empêche que ça revienne ? » → routé vers le BACKLOG de l'outil concerné ou traité en fond. Réparer seulement l'exemple local = échec de la règle.
+- **5 Whys avant le fix** — la cause racine n'est jamais une personne. Mapping garde-fous : bug reproductible → test ; type inattendu → assertion ; config silencieuse → check health ; ordre d'opération → invariant/guard ; non-évident → commentaire + gotcha.
+- **`Root cause: <cause systémique>`** dans chaque commit bugfix. **Récurrent (≥ 2 occurrences) = garde-fou immédiat, JAMAIS backlog dormant.**

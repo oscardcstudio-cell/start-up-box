@@ -116,3 +116,7 @@ Le CLI fait le scaffold ; **rendre le reste du méta-système conscient de la no
 - **Mélanger founder-perso et brand** → `brand/founder.md` doit être pro et public. Les notes perso vivent ailleurs (mémoire utilisateur, hors git).
 - **Garder pacte_associes.md ET checklist_solo.md** → choisir un seul des deux selon la structure réelle. Doublon = confusion pour Claude plus tard.
 - **Oublier `brand/guide_editorial.md`** → c'est le fichier le plus chargé en pratique. Sans lui, tout texte est générique.
+
+## Résumé CLAUDE.md (déporté du CLAUDE.md meta le 2026-10-27, plan `~/projets\audits\2026-10-27-claude-md-global-plan.md` C90)
+
+- **Nouvelle boîte** → [`NEW_COMPANY.md`](NEW_COMPANY.md) + `company/COMPANY_PLAYBOOK.md` (skill `/build-company`) ; un agent métier dispatché reçoit les fichiers `company/` amont (détail → [`META_INFRA.md`](META_INFRA.md) §détail-déporté).

@@ -80,3 +80,7 @@ Niveau 2 (audit complet CLAUDE.md vs code réel) → ouvrir le projet et dire "a
 - [ ] Fichiers > 2000 lignes avec index de sections en tête
 - [ ] Blocs désactivés commentés
 - [ ] Routine d'audit schedulée (si projet actif avec commits réguliers)
+
+## Résumé CLAUDE.md (déporté du CLAUDE.md meta le 2026-10-27, plan `~/projets\audits\2026-10-27-claude-md-global-plan.md` C89)
+
+8 standards (détail dans le fichier dédié). Essentiel : llms.txt à la racine ; **CLAUDE.md = règles only**, compter les **instructions cumulées** sur la chaîne (pas les lignes), **non-négociables en tête/queue, jamais au centre** ; index si > 2000 lignes ; blocs désactivés commentés avec raison ; corriger la dette doc en session.
