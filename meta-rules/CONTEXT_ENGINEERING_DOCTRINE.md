@@ -22,7 +22,7 @@ Template minimal :
 - [CLAUDE.md](CLAUDE.md): Instructions complètes pour Claude Code
 
 ## Fichiers critiques
-- [src/xxx.js](src/xxx.js): Rôle précis du fichier
+- src/xxx.js: Rôle précis du fichier
 
 ## Points non-évidents (gotchas)
 - Invariant à connaître avant de toucher au code

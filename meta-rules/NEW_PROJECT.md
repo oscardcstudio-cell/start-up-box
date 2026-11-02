@@ -53,11 +53,11 @@ git -C "~/projets/<bucket>/<nom>" remote add origin https://github.com/<user>/<n
 |---|---|
 | `BACKLOG.md` | Tout projet actif avec des tâches à tracker |
 | `.claude/settings.json` | Permissions ou hooks spécifiques au projet |
-| `company/` | Projet avec composante business — voir [`NEW_COMPANY.md`](NEW_COMPANY.md) et le package [`packages/create-company`](packages/create-company/) |
+| `company/` | Projet avec composante business — voir `NEW_COMPANY.md` et le package `packages/create-company` |
 | `wiki/` | Projets complexes (pattern Karpathy : index/entities/decisions/gotchas/patterns) |
 | Dossiers métier | Selon domaine (`src/`, `tests/`, `script/`, `production/`, etc.) avec `.gitkeep` si vides |
 
-**Avant de créer un nouveau module/package** : vérifier [`packages/`](packages/) en premier — si quelque chose couvre le besoin, l'utiliser ou l'étendre plutôt que rebâtir.
+**Avant de créer un nouveau module/package** : vérifier `packages/` en premier — si quelque chose couvre le besoin, l'utiliser ou l'étendre plutôt que rebâtir.
 
 ## 6. Premier commit + push
 
@@ -88,7 +88,7 @@ GSD paie la structure **d'avance** contre l'incertitude. Rentable seulement quan
 
 Une ligne : **incertitude haute + coût d'erreur élevé → GSD ; sinon l'itération est le plan.** `/gsd:new-project` génère `PROJECT.md` + roadmap + `.planning/`. À lancer après l'init git. Piège du mode petit-pas à surveiller : dérive vers un optimum local — le garde-fou n'est pas GSD mais que **MASTER.md porte un vrai cap** (vision/décisions), pas une todo déguisée.
 
-**Convention notes** : les projets GSD accumulent des items dans `.planning/notes/`. Obligation : marquer `✅ RÉSOLU [AAAA-MM-JJ]` dès qu'un item est implémenté (voir section [Convention RÉSOLU](META_INFRA.md#convention-résolu--notes-planningnotes-cross-projet) dans META_INFRA.md). Ne jamais marquer RÉSOLU sans vérifier dans le code réel.
+**Convention notes** : les projets GSD accumulent des items dans `.planning/notes/`. Obligation : marquer `✅ RÉSOLU [AAAA-MM-JJ]` dès qu'un item est implémenté (voir section Convention RÉSOLU dans META_INFRA.md). Ne jamais marquer RÉSOLU sans vérifier dans le code réel.
 
 ## 9. Avant de créer un dashboard dans le projet
 
@@ -101,7 +101,7 @@ Avant de clore l'init :
 - [ ] `CLAUDE.md` < 200 lignes, règles uniquement (pas de doc d'archi)
 - [ ] `MEMORY.md` présent à la racine, même si squelette (Index / Décisions / Gotchas / Sessions)
 - [ ] Pas de fichier > 300 lignes non documenté dans `llms.txt`
-- [ ] `.gitignore` adapté : partir de [`templates/gitignore-base`](templates/gitignore-base) (secrets, dépendances, build, OS, `desktop.ini`)
+- [ ] `.gitignore` adapté : partir de `templates/gitignore-base` (secrets, dépendances, build, OS, `desktop.ini`)
 - [ ] Si amorçage à forte incertitude (cf. §8) : `/gsd:new-project` proposé ; sinon mode petit-pas, pas de GSD
 
 ## Anti-patterns à ne pas répéter
@@ -115,4 +115,4 @@ Avant de clore l'init :
 
 ## Résumé CLAUDE.md (déporté du CLAUDE.md meta le 2026-10-27, plan `~/projets\audits\2026-10-27-claude-md-global-plan.md` C90)
 
-- **Nouveau projet** → [`NEW_PROJECT.md`](NEW_PROJECT.md) : bucket → `gh auth switch` → `git init` → `gh repo create` → CLAUDE.md/llms.txt → 1er commit+push → référencer dans le CLAUDE.md du bucket.
+- **Nouveau projet** → `NEW_PROJECT.md` : bucket → `gh auth switch` → `git init` → `gh repo create` → CLAUDE.md/llms.txt → 1er commit+push → référencer dans le CLAUDE.md du bucket.

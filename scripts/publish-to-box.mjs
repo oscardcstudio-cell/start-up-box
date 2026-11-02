@@ -26,6 +26,20 @@ const C = { r:'\x1b[31m', g:'\x1b[32m', y:'\x1b[33m', b:'\x1b[34m', d:'\x1b[2m',
 const neutralize = (s) => NEUTRALIZE.reduce((t,[re,rep]) => t.replace(re, rep), s);
 const leaksIn = (s) => LEAK_RULES.filter(r => r.re.test(s)).map(r => r.why);
 
+// Supprime les liens markdown dont la cible n'existe pas dans la box (ex : META_INFRA.md,
+// packages/, templates/) — fichiers présents dans l'infra d'Oscar mais non distribués.
+// Couvre aussi les chemins absolus qui auraient échappé à NEUTRALIZE.
+function stripBrokenBoxLinks(content, boxRoot) {
+  return content.replace(/\[([^\]]*)\]\(([^)]+)\)/g, (match, text, href) => {
+    if (/^https?:\/\/|^mailto:|^#/.test(href)) return match; // URL ou ancre pure → intact
+    if (/^[A-Za-z]:[\\/]|^\//.test(href)) return text || href; // chemin absolu → plain text
+    const target = href.split('#')[0]; // strip ancre
+    if (!target) return match; // ancre pure (#section)
+    if (existsSync(join(boxRoot, target))) return match; // cible présente → intact
+    return text || target; // cible absente dans la box → plain text
+  });
+}
+
 // Liste récursive des fichiers d'un dossier (chemins relatifs au dossier).
 function listRel(dir) {
   if (!existsSync(dir)) return [];
@@ -57,7 +71,7 @@ let nLeak = 0, nChanged = 0, nNew = 0, nMissing = 0, nSame = 0, hookChanged = fa
 for (const u of units) {
   if (u.missing || !existsSync(u.srcAbs)) { rows.push({ ...u, status:'missing' }); nMissing++; continue; }
   const raw = readFileSync(u.srcAbs, 'utf8');
-  const clean = neutralize(raw);
+  const clean = stripBrokenBoxLinks(neutralize(raw), BOX);
   const residual = leaksIn(clean);
   const cur = existsSync(u.destAbs) ? readFileSync(u.destAbs, 'utf8') : null;
   let status;

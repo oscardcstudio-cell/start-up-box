@@ -2,7 +2,7 @@
 
 Procédure pour initialiser le **contexte entreprise** (`company/`) d'une nouvelle boîte. À utiliser quand le fondateur lance une activité commerciale distincte (SAS, SASU, EI, side-project monétisé).
 
-> **Différence avec [`NEW_PROJECT.md`](NEW_PROJECT.md)** : `NEW_PROJECT.md` initialise un **repo applicatif** (code + git + Claude rules). `NEW_COMPANY.md` initialise le **contexte business** (brand, stratégie, marketing, juridique) — un dossier `company/` qui peut vivre seul OU se greffer à un repo applicatif existant.
+> **Différence avec `NEW_PROJECT.md`** : `NEW_PROJECT.md` initialise un **repo applicatif** (code + git + Claude rules). `NEW_COMPANY.md` initialise le **contexte business** (brand, stratégie, marketing, juridique) — un dossier `company/` qui peut vivre seul OU se greffer à un repo applicatif existant.
 
 ## 1. Choisir l'emplacement
 
@@ -119,4 +119,4 @@ Le CLI fait le scaffold ; **rendre le reste du méta-système conscient de la no
 
 ## Résumé CLAUDE.md (déporté du CLAUDE.md meta le 2026-10-27, plan `~/projets\audits\2026-10-27-claude-md-global-plan.md` C90)
 
-- **Nouvelle boîte** → [`NEW_COMPANY.md`](NEW_COMPANY.md) + `company/COMPANY_PLAYBOOK.md` (skill `/build-company`) ; un agent métier dispatché reçoit les fichiers `company/` amont (détail → [`META_INFRA.md`](META_INFRA.md) §détail-déporté).
+- **Nouvelle boîte** → `NEW_COMPANY.md` + `company/COMPANY_PLAYBOOK.md` (skill `/build-company`) ; un agent métier dispatché reçoit les fichiers `company/` amont (détail → `META_INFRA.md` §détail-déporté).
