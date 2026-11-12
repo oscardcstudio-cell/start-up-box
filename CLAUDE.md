@@ -33,3 +33,6 @@ Filet : le workflow **`.github/workflows/scan-gate.yml`** (`scripts/scan-gate.mj
 ## llms.txt
 
 Fichiers critiques à lire en priorité : voir [llms.txt](llms.txt). Script npm : `npm run drain` (rapatrie les notes du widget `notes-backlog` dans BACKLOG.md, épinglé `#v1.6.0` : ne pas changer le tag sans le publier d'abord).
+
+## Tâches = Beads
+Les tâches restantes vivent dans Beads (`bd ready`, `bd list`), pas dans un fichier de notes. Une tâche finie : `bd close <id>`.
