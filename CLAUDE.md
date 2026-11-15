@@ -13,18 +13,18 @@ Il ne s'applique PAS au projet startup de l'utilisateur final — celui-ci a son
 La box livre **3 choses** chez le fondateur : les agents, les skills, et la **couche meta** (`meta-rules/`).
 
 - `meta-rules/HARNESS.md` — **harness fondateur** (mode non-technique : zéro jargon, Claude fait le technique lui-même, raccourci `ctv`). Installé en `~/.claude/startup-box/HARNESS.md`, branché via un `@import` dans le `~/.claude/CLAUDE.md` du fondateur → c'est **le meta au-dessus de tous ses projets**. **Authoré ici** (box-only).
-- `meta-rules/{CONTEXT_ENGINEERING,CLAUDE_HEALTH_RULES,CLAUDE_BUG_DOCTRINE,NEW_PROJECT,NEW_COMPANY}.md` — doctrines. **NE PAS les éditer ici** : elles sont synchronisées (neutralisées) depuis l'infra du mainteneur par `scripts/publish-to-box.mjs` (dry-run par défaut → `--write`). Toute édition ici sera écrasée à la prochaine sync. Allowlist + table de neutralisation : `scripts/publish-manifest.mjs`.
+- `meta-rules/{CONTEXT_ENGINEERING_DOCTRINE,CLAUDE_HEALTH_RULES,CLAUDE_BUG_DOCTRINE,NEW_PROJECT,NEW_COMPANY}.md` — doctrines. **NE PAS les éditer ici** : elles sont synchronisées (neutralisées) depuis l'infra du mainteneur par `scripts/publish-to-box.mjs` (dry-run par défaut → `--write`). Toute édition ici sera écrasée à la prochaine sync. Allowlist + table de neutralisation : `scripts/publish-manifest.mjs`.
 - `hooks/startup-box-update.js` — hook SessionStart installé chez le fondateur : `git pull` de la box + resync à chaque conversation. **Sûr** : ff-only, fail-silent, contenu `.md` auto, hooks exécutables mis à jour SEULEMENT si `hooks/VERSION` distante > installée. **Bumper `hooks/VERSION`** à chaque modif d'un hook, sinon les fondateurs ne le reçoivent pas.
 
 ## Mise à jour à distance (sans poste de dev)
 
-Le repo est public et les fondateurs le pullent à chaque conversation. Tu peux donc le mettre à jour **depuis n'importe où** (interface web/mobile GitHub) : édite un fichier de `meta-rules/` (sauf doctrines, gérées par `scripts/publish-to-box.mjs`) ou un agent/skill, commit sur `main`.
+Le repo est public et les fondateurs le pullent à chaque conversation. Tu peux donc le mettre à jour **depuis n'importe où** (interface web/mobile GitHub) : édite un fichier de `meta-rules/` (sauf doctrines, gérées par `scripts/publish-to-box.mjs`) ou un agent/skill, commit sur `master`.
 
 Filet : le workflow **`.github/workflows/scan-gate.yml`** (`scripts/scan-gate.mjs`) tourne à chaque push et sur déclenchement manuel (bouton « Run workflow », accessible depuis le mobile GitHub). Il échoue si une fuite perso/secret est introduite → build rouge visible au téléphone, rien n'atteint les fondateurs tant que ce n'est pas corrigé.
 
 ## Règles de développement
 
-- **Ne pas modifier les agents sans tester** : chaque méta-agent packagé dans `plugins/startup-agents/agents/` est une copie de la version user-scope. Toute modification doit être testée en user-scope d'abord.
+- **Ne pas modifier les agents sans tester** : chaque méta-agent packagé dans `plugins/startup-agents/agents/` est un fork dé-brandé de la version user-scope. Toute modification doit être testée en user-scope d'abord.
 - **Sync double copy** : les agents dans `plugins/startup-agents/agents/` et les skills dans `plugins/startup-skills/skills/` sont des copies — elles ne sont pas sourced automatiquement depuis `~/.claude/`. Les mettre à jour manuellement à chaque évolution.
 - **Le fondateur ne tape jamais de commande** : aucune doc/skill ne doit dire "lance `/create-company`" ni "tape `/build-company`". Claude enchaîne les skills lui-même (outil Skill). Entrée unique = `/build-company` ou langage naturel.
 - **Pas de plugin / marketplace** : pas de `.claude-plugin/`. Un plugin ne sait pas livrer le harness (`@import`) ni l'auto-update silencieux (les marketplaces ne se mettent pas à jour seuls par défaut). Le SEUL chemin = le prompt-installeur de `INSTALL.md` (clone + copie + hook SessionStart). Ne pas réintroduire de manifest plugin.
