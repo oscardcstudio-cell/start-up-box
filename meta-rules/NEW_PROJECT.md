@@ -44,8 +44,9 @@ git -C "~/projets/<bucket>/<nom>" remote add origin https://github.com/<user>/<n
 - `MEMORY.md` — mémoire vivante du projet : index des fichiers structurants, décisions, gotchas techniques, sessions cumulées. À lire en premier par tout Claude qui entre dans le projet, à mettre à jour à la fin de chaque session significative. **Obligatoire dès l'init**, même squelette vide (sections : Index, Décisions structurelles, Gotchas, Sessions).
 - `llms.txt` — inventaire des fichiers/dossiers critiques
 - `README.md` — pitch court du projet
+- **Beads (`bd`)** — les tâches du projet vivent dans Beads, dès l'init : `bash ~/projets/scripts/beads-ensure.sh <racine>` (bd init, hook `bd prime`, section « Tâches = Beads » du CLAUDE.md, commit + push). Provenance : `#beads-partout`.
 
-> **Filet de sécurité automatique** : le hook `project-init-guard.js` (SessionStart user-level) auto-crée `llms.txt` et `MEMORY.md` squelettes dès le premier open si absents — mais ils restent à remplir. Ne pas compter dessus pour remplacer l'init propre.
+> **Filet de sécurité automatique** : le hook `project-init-guard.js` (SessionStart user-level) auto-crée `llms.txt` et `MEMORY.md` squelettes dès le premier open si absents, et lance `beads-ensure.sh` en fond si `.beads/` manque — mais ils restent à remplir. Ne pas compter dessus pour remplacer l'init propre.
 
 **Selon nature du projet** :
 
