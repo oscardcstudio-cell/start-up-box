@@ -238,7 +238,7 @@ Règle : si tu peux supprimer le mot sans rien perdre de sens → supprime-le.
 
 ### FIC1-FIC8 — tics IA en PROSE NARRATIVE (fiction)
 
-Les patterns ci-dessus visent le copy. En fiction, la signature IA est différente et beaucoup plus visible. Ancré sur un corpus réel (manuscrit *L'inventeur*, greffes NovelCrafter identifiées par lecture humaine).
+Les patterns ci-dessus visent le copy. En fiction, la signature IA est différente et beaucoup plus visible. Ancré sur un corpus réel (un manuscrit de roman non publié, greffes NovelCrafter identifiées par lecture humaine).
 
 - **FIC1 Tag de dialogue émotionnel** : *"déclara-t-il avec un enthousiasme palpable"*, *"répondit-il avec une assurance teintée de prudence"*, *"acquiesça avec un sourire complice"*. → `dit` / `répond`, ou rien. L'émotion se joue dans la réplique, jamais dans le verbe.
 - **FIC2 Émotion expliquée au lieu d'être montrée** : *"sa voix trahissant une certaine inquiétude"*, *"son visage trahissant une certaine préoccupation"*. → supprime, ou remplace par un geste concret.
